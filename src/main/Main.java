@@ -13,6 +13,7 @@ public class Main {
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
+        //window.setContentPane(new JLabel((Icon) gamePanel.backgroundImage));
 
         window.pack();
 

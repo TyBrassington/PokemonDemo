@@ -2,8 +2,11 @@ package main;
 
 import entity.Player;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -17,23 +20,25 @@ public class GamePanel extends JPanel implements Runnable{
     final int screenHeight = tileSize * maxScreenRow;
 
     int FPS = 60;
-
+    BufferedImage backgroundImage;
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
 
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
 
     public GamePanel(){
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        /*try {
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/frame/playerHomeBkgTest.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        this.setOpaque(true);
+        this.setBackground(Color.green);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
 
     }
 
