@@ -24,6 +24,12 @@ public class Player extends Entity {
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize);
 
+        solidArea = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,17*gp.scale);
+        /*solidArea.x = 3*3;
+        solidArea.y = 8*3;
+        solidArea.width = 17*3;
+        solidArea.height = 25*3;*/
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -32,7 +38,7 @@ public class Player extends Entity {
 
         worldX = ((gp.tileSize * 24)+(gp.tileSize * 25))/2;
         worldY = ((gp.tileSize * 24)+(gp.tileSize * 25))/2;
-        speed = 3;
+        speed = 1*gp.scale;
         direction = "down";
     }
 
@@ -60,17 +66,29 @@ public class Player extends Entity {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
                 direction = "up";
-                worldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                worldY += speed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-                worldX -= speed;
             } else if (keyH.rightPressed) {
                 direction = "right";
-                worldX += speed;
             }
+            collisionOn = false;
+            gp.cc.checkTile(this);
+
+            if(!collisionOn){
+                switch (direction) {
+                    case "up": worldY -= speed;
+                        break;
+                    case "down": worldY += speed;
+                        break;
+                    case "left": worldX -= speed;
+                        break;
+                    case "right": worldX += speed;
+                        break;
+                }
+            }
+
             spriteCounter++;
 
             if (spriteCounter > 12) {
@@ -83,20 +101,31 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2d) {
         BufferedImage image = null;
-        switch (direction) {
-            case "up":
-                image = spriteNum == 0 ? up0 : spriteNum == 1 ? up1 : up2;
-                break;
-            case "down":
-                image = spriteNum == 0 ? down0 : spriteNum == 1 ? down1 : down2;
-                break;
-            case "left":
-                image = spriteNum == 0 ? left0 : spriteNum == 1 ? left1 : left2;
-                break;
-            case "right":
-                image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
-                break;
+        if (!collisionOn) {
+            switch (direction) {
+                case "up":
+                    image = spriteNum == 0 ? up0 : spriteNum == 1 ? up1 : up2;
+                    break;
+                case "down":
+                    image = spriteNum == 0 ? down0 : spriteNum == 1 ? down1 : down2;
+                    break;
+                case "left":
+                    image = spriteNum == 0 ? left0 : spriteNum == 1 ? left1 : left2;
+                    break;
+                case "right":
+                    image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
+                    break;
+            }
         }
-        g2d.drawImage(image, screenX, screenY, 17 * 3, 25 * 3, null);
+        g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
+
+        //DRAW PLAYER HITBOX
+        g2d.setColor(new Color(255, 0,0,120));
+        int solidAreaX = screenX + solidArea.x;
+        int solidAreaY = screenY + solidArea.y;
+        int solidAreaWidth = solidArea.width;
+        int solidAreaHeight = solidArea.height;
+        g2d.fillRect(solidAreaX, solidAreaY, solidAreaWidth, solidAreaHeight);
+        //
     }
 }

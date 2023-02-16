@@ -13,8 +13,8 @@ import java.util.Arrays;
 public class TileManager {
 
     private final GamePanel gp;
-    private final Tile[] tiles;
-    private final int[][] mapTileNum;
+    public final Tile[] tiles;
+    public final int[][] mapTileNum;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -28,9 +28,13 @@ public class TileManager {
     public void getTileImage() {
         try {
             tiles[0] = new Tile();
-            tiles[1] = new Tile();
             tiles[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass2.png"));
-            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/placeholder.png"));
+            tiles[1] = new Tile();
+            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/treePlaceholder.png"));
+            tiles[1].collision = true;
+            tiles[2] = new Tile();
+            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/placeholder.png"));
+            tiles[2].collision = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,9 +66,9 @@ public class TileManager {
         }
     }*/
 
-    public void draw(Graphics2D g2d){
-        for(int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++){
-            for(int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++){
+    public void draw(Graphics2D g2d) {
+        for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {
+            for (int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
 
                 int tileNum = mapTileNum[worldCol][worldRow];
                 int worldX = worldCol * gp.tileSize;
@@ -76,7 +80,8 @@ public class TileManager {
                 boolean isTileWithinYBounds = worldY + gp.tileSize > gp.player.worldY - gp.player.screenY && worldY - 2 * gp.tileSize < gp.player.worldY + gp.player.screenY;
 
                 if (isTileWithinXBounds && isTileWithinYBounds) {
-                    g2d.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                        g2d.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
                 }
             }
         }

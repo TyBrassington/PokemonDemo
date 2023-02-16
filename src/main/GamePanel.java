@@ -13,7 +13,7 @@ import java.io.IOException;
 public class GamePanel extends JPanel implements Runnable{
 
     final int originalTileSize = 16;
-    final int scale = 3;
+    public final int scale = 2;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileManager = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    public CollisionScanner cc = new CollisionScanner(this);
     public Player player = new Player(this, keyH);
 
 
