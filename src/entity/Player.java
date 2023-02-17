@@ -24,11 +24,12 @@ public class Player extends Entity {
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize);
 
-        solidArea = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,17*gp.scale);
-        /*solidArea.x = 3*3;
-        solidArea.y = 8*3;
-        solidArea.width = 17*3;
-        solidArea.height = 25*3;*/
+        hitBoxArea = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,16*gp.scale);
+        hitBoxArea1 = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,15*gp.scale);
+        /*hitBoxArea.x = 3*3;
+        hitBoxArea.y = 8*3;
+        hitBoxArea.width = 17*3;
+        hitBoxArea.height = 25*3;*/
 
         setDefaultValues();
         getPlayerImage();
@@ -101,7 +102,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2d) {
         BufferedImage image = null;
-        if (!collisionOn) {
+
             switch (direction) {
                 case "up":
                     image = spriteNum == 0 ? up0 : spriteNum == 1 ? up1 : up2;
@@ -116,16 +117,21 @@ public class Player extends Entity {
                     image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
                     break;
             }
-        }
         g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
         //DRAW PLAYER HITBOX
-        g2d.setColor(new Color(255, 0,0,120));
-        int solidAreaX = screenX + solidArea.x;
-        int solidAreaY = screenY + solidArea.y;
-        int solidAreaWidth = solidArea.width;
-        int solidAreaHeight = solidArea.height;
+       /* g2d.setColor(new Color(255, 0,0,120));
+        int solidAreaX = screenX + hitBoxArea.x;
+        int solidAreaY = screenY + hitBoxArea.y;
+        int solidAreaWidth = hitBoxArea.width;
+        int solidAreaHeight = hitBoxArea.height;
         g2d.fillRect(solidAreaX, solidAreaY, solidAreaWidth, solidAreaHeight);
+        g2d.setColor(new Color(0, 21, 255,120));
+        int solidAreaX1 = screenX + hitBoxArea1.x;
+        int solidAreaY1 = screenY + hitBoxArea1.y;
+        int solidAreaWidth1 = hitBoxArea1.width;
+        int solidAreaHeight1 = hitBoxArea1.height;
+        g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);*/
         //
     }
 }

@@ -3,12 +3,16 @@ package tile;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.Duration;
 import java.util.Arrays;
+
 
 public class TileManager {
 
@@ -23,6 +27,7 @@ public class TileManager {
 
         getTileImage();
         loadMap();
+        play("/audio/TwinLeafDay_EXT.wav");
     }
 
     public void getTileImage() {
@@ -57,15 +62,6 @@ public class TileManager {
         }
     }
 
-    /*public void draw(Graphics2D g2d) {
-        for (int worldRow = 0, worldY = worldRow * gp.tileSize; worldRow < gp.maxWorldRow; worldRow++, worldY += gp.tileSize) {
-            for (int worldCol = 0, worldX = worldCol * gp.tileSize; worldCol < gp.maxWorldCol; worldCol++, worldX += gp.tileSize) {
-                int tileNum = mapTileNum[worldCol][worldRow];
-                g2d.drawImage(tiles[tileNum].image, worldX, worldY, gp.tileSize, gp.tileSize, null);
-            }
-        }
-    }*/
-
     public void draw(Graphics2D g2d) {
         for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {
             for (int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
@@ -84,6 +80,18 @@ public class TileManager {
 
                 }
             }
+        }
+    }
+    public void play(String audioFilePath) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(audioFilePath));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-40.0f);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
         }
     }
 }

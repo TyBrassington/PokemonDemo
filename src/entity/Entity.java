@@ -10,6 +10,6 @@ public class Entity {
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
-    public Rectangle solidArea;
+    public Rectangle hitBoxArea, hitBoxArea1;
     public boolean collisionOn = false;
 }

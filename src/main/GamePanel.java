@@ -13,7 +13,7 @@ import java.io.IOException;
 public class GamePanel extends JPanel implements Runnable{
 
     final int originalTileSize = 16;
-    public final int scale = 2;
+    public final int scale = 3;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
             e.printStackTrace();
         }*/
         this.setOpaque(true);
-        this.setBackground(Color.green);
+        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
         long lastTime = System.nanoTime();
         long curTime;
         long timer = 0;
-        int drawCount = 0;
+        int redrawCount = 0;
 
         while (gameThread != null) {
             curTime = System.nanoTime();
@@ -75,15 +75,16 @@ public class GamePanel extends JPanel implements Runnable{
                 update();
                 repaint();
                 delta--;
-                drawCount++;
+                redrawCount++;
             }
 
             if(timer >= 1000000000){
                 //Check FPS of game
-                if (drawCount<=59) {
+                if (redrawCount<=59) {
                     //System.out.println("FPS has dropped");
                 }
-                drawCount  = 0;
+                System.out.println("FPS:"+redrawCount);
+                redrawCount  = 0;
                 timer = 0;
             }
         }
