@@ -26,10 +26,8 @@ public class Player extends Entity {
 
         hitBoxArea = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,16*gp.scale);
         hitBoxArea1 = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,15*gp.scale);
-        /*hitBoxArea.x = 3*3;
-        hitBoxArea.y = 8*3;
-        hitBoxArea.width = 17*3;
-        hitBoxArea.height = 25*3;*/
+        hitBoxAreaDefaultX = hitBoxArea.x;
+        hitBoxAreaDefaultY = hitBoxArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -77,6 +75,8 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cc.checkTile(this);
 
+            gp.cc.checkObject(this, true);
+
             if(!collisionOn){
                 switch (direction) {
                     case "up": worldY -= speed;
@@ -120,7 +120,7 @@ public class Player extends Entity {
         g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
         //DRAW PLAYER HITBOX
-       /* g2d.setColor(new Color(255, 0,0,120));
+       g2d.setColor(new Color(255, 0,0,120));
         int solidAreaX = screenX + hitBoxArea.x;
         int solidAreaY = screenY + hitBoxArea.y;
         int solidAreaWidth = hitBoxArea.width;
@@ -131,7 +131,8 @@ public class Player extends Entity {
         int solidAreaY1 = screenY + hitBoxArea1.y;
         int solidAreaWidth1 = hitBoxArea1.width;
         int solidAreaHeight1 = hitBoxArea1.height;
-        g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);*/
-        //
+        g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);
+
+
     }
 }

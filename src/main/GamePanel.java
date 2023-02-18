@@ -1,14 +1,12 @@
 package main;
 
 import entity.Player;
-import tile.Tile;
+import object.SuperObject;
 import tile.TileManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -32,7 +30,9 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionScanner cc = new CollisionScanner(this);
+    public AssetSetter aSet = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+    public SuperObject obj[] = new SuperObject[50];
 
 
     public GamePanel(){
@@ -51,6 +51,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
+    public void setupGame(){
+        aSet.setObjectFromFile();
+    }
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
@@ -99,7 +102,15 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
         tileManager.draw(g2d);
+
+
         player.draw(g2d);
+        for (SuperObject superObject : obj) {
+            if (superObject != null) {
+                superObject.draw(g2d, this);
+            }
+        }
+
         g2d.dispose();
     }
 }

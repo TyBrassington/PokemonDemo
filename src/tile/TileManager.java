@@ -3,15 +3,12 @@ package tile;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
-import javax.print.attribute.standard.Media;
 import javax.sound.sampled.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.time.Duration;
-import java.util.Arrays;
 
 
 public class TileManager {
@@ -27,7 +24,10 @@ public class TileManager {
 
         getTileImage();
         loadMap();
-        play("/audio/TwinLeafDay_EXT.wav");
+        boolean playMusic = false;
+        if (playMusic) {
+            play("/audio/TwinLeafDay_EXT.wav");
+        }
     }
 
     public void getTileImage() {
