@@ -55,6 +55,10 @@ public class CollisionScanner {
 
         for (int row : rows) {
             for (int col : cols) {
+                if (col < 0 || col >= gp.tileManager.mapTileNum.length || row < 0 || row >= gp.tileManager.mapTileNum[col].length) {
+                    entity.collisionOn = true;
+                    return;
+                }
                 int tileNum = gp.tileManager.mapTileNum[col][row];
                 if (gp.tileManager.tiles[tileNum].collision) {
                     entity.collisionOn = true;

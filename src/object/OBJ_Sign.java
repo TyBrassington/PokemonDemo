@@ -24,5 +24,6 @@ public class OBJ_Sign extends SuperObject{
         hitBoxAreaDefaultY = hitBoxArea.y;
         hitBoxArea.width = (image.getWidth()*gp.scale)-(2*gp.scale);
         hitBoxArea.height = image.getHeight()* gp.scale;
+        collision = true;
     }
 }
