@@ -17,12 +17,11 @@ public class OBJ_Tree2 extends SuperObject{
             e.printStackTrace();
         }
         hitBoxArea = new Rectangle();
-        hitBoxArea.x = 1*gp.scale;
-        hitBoxArea.y = 10*gp.scale;
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = (image.getWidth()*gp.scale)-(2*gp.scale);
+        hitBoxArea.width = (image.getWidth()*gp.scale);
         hitBoxArea.height = image.getHeight()* gp.scale;
+        collision = true;
         collision = true;
     }
 }

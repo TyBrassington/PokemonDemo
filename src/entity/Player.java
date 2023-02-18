@@ -120,7 +120,7 @@ public class Player extends Entity {
         g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
         //DRAW PLAYER HITBOX
-       g2d.setColor(new Color(255, 0,0,120));
+      /* g2d.setColor(new Color(255, 0,0,120));
         int solidAreaX = screenX + hitBoxArea.x;
         int solidAreaY = screenY + hitBoxArea.y;
         int solidAreaWidth = hitBoxArea.width;
@@ -132,7 +132,7 @@ public class Player extends Entity {
         int solidAreaWidth1 = hitBoxArea1.width;
         int solidAreaHeight1 = hitBoxArea1.height;
         g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);
-
+*/
 
     }
 }

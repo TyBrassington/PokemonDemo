@@ -20,8 +20,8 @@ public class AssetSetter {
             String line = scanner.nextLine();
             String[] parts = line.split(" ");
             String objName = parts[0];
-            int worldX = Integer.parseInt(parts[1]) * gp.tileSize;
-            int worldY = Integer.parseInt(parts[2]) * gp.tileSize;
+            int worldX = Integer.parseInt(parts[1])*gp.scale;
+            int worldY = Integer.parseInt(parts[2])*gp.scale;
             setObject(i, objName, worldX, worldY);
             i++;
         }

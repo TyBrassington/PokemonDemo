@@ -19,7 +19,7 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tiles = new Tile[10];
+        tiles = new Tile[50];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
@@ -33,13 +33,41 @@ public class TileManager {
     public void getTileImage() {
         try {
             tiles[0] = new Tile();
-            tiles[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass2.png"));
+            tiles[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
+
             tiles[1] = new Tile();
-            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/treePlaceholder.png"));
-            tiles[1].collision = true;
+            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathBotLeft.png"));
             tiles[2] = new Tile();
-            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/placeholder.png"));
-            tiles[2].collision = true;
+            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathBotMid.png"));
+            tiles[3] = new Tile();
+            tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathBotRight.png"));
+            tiles[4] = new Tile();
+            tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathMidLeft.png"));
+            tiles[5] = new Tile();
+            tiles[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathMidMid.png"));
+            tiles[6] = new Tile();
+            tiles[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathMidRight.png"));
+            tiles[7] = new Tile();
+            tiles[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathTopLeft.png"));
+            tiles[8] = new Tile();
+            tiles[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathTopMid.png"));
+            tiles[9] = new Tile();
+            tiles[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathTopRight.png"));
+            tiles[10] = new Tile();
+            tiles[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathTLC.png"));
+            tiles[11] = new Tile();
+            tiles[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathTRC.png"));
+            tiles[12] = new Tile();
+            tiles[12].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathBLC.png"));
+            tiles[13] = new Tile();
+            tiles[13].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pathBRC.png"));
+
+            tiles[20] = new Tile();
+            tiles[20].image = ImageIO.read(getClass().getResourceAsStream("/tiles/treePlaceholder.png"));
+            tiles[20].collision = true;
+            tiles[21] = new Tile();
+            tiles[21].image = ImageIO.read(getClass().getResourceAsStream("/tiles/placeholder.png"));
+            tiles[21].collision = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +75,7 @@ public class TileManager {
 
 
     public void loadMap() {
-        try (InputStream is = getClass().getResourceAsStream("/maps/map01.txt");
+        try (InputStream is = getClass().getResourceAsStream("/maps/map02.txt");
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             for (int row = 0; row < gp.maxWorldRow; row++) {
                 String line = br.readLine();

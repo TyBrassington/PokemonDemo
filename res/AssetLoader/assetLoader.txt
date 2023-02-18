@@ -1,7 +1,7 @@
-House 27 27
-Sign 20 20
-LargeHouse 20 30
-Tree 30 18
-Tree2 30 20
-Tree 32 18
-Mailbox 22 20
+House 432 293
+Sign 399 384
+LargeHouse 267 271
+Tree 580 288
+Tree2 580 320
+Tree 612 288
+Mailbox 351 346
