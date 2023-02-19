@@ -18,12 +18,14 @@ public class AssetSetter {
         int i = 0;
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String[] parts = line.split(" ");
-            String objName = parts[0];
-            int worldX = Integer.parseInt(parts[1])*gp.scale;
-            int worldY = Integer.parseInt(parts[2])*gp.scale;
-            setObject(i, objName, worldX, worldY);
-            i++;
+            if (!line.trim().isEmpty()) {
+                String[] parts = line.split(" ");
+                String objName = parts[0];
+                int worldX = Integer.parseInt(parts[1]) * gp.scale;
+                int worldY = Integer.parseInt(parts[2]) * gp.scale;
+                setObject(i, objName, worldX, worldY);
+                i++;
+            }
         }
         scanner.close();
         System.out.println("Objects successfully loaded.");

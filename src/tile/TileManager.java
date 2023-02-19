@@ -28,6 +28,7 @@ public class TileManager {
         boolean playMusic = false;
         if (playMusic) {
             play("/audio/TwinLeafDay_EXT.wav");
+            System.out.println("Game music successfully loaded.");
         }
     }
 
@@ -39,7 +40,7 @@ public class TileManager {
         scanner.nextLine();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (!line.trim().isEmpty()) {
+            if(!line.trim().isEmpty()) {
                 String[] parts = line.split(" ");
                 i = Integer.parseInt(parts[0]);
                 fileName = parts[1] + ".png";

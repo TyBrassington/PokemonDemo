@@ -49,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
+
     }
 
     public void setupGame(){
