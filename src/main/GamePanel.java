@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
                 if (redrawCount<=59) {
                     //System.out.println("FPS has dropped");
                 }
-                System.out.println("FPS:"+redrawCount);
+                //System.out.println("FPS:"+redrawCount);
                 redrawCount  = 0;
                 timer = 0;
             }

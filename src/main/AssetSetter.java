@@ -14,7 +14,7 @@ public class AssetSetter {
 
     public void setObjectFromFile() {
 
-        Scanner scanner = new Scanner(getClass().getResourceAsStream("/AssetLoader/assetLoader.txt"));
+        Scanner scanner = new Scanner(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt"));
         int i = 0;
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -26,6 +26,7 @@ public class AssetSetter {
             i++;
         }
         scanner.close();
+        System.out.println("Objects successfully loaded.");
     }
 
     private void setObject(int index, String objName, int worldX, int worldY) {

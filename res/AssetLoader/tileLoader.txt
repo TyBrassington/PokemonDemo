@@ -1,0 +1,27 @@
+Index | Name | Collision
+
+0 Grass
+1 pathBotLeft
+2 pathBotMid
+3 pathBotRight
+4 pathMidLeft
+5 pathMidMid
+6 pathMidRight
+7 pathTopLeft
+8 pathTopMid
+9 pathTopRight
+10 pathTLC
+11 pathTRC
+12 pathBLC
+13 pathBRC
+14 WaterBotLeft true
+15 WaterBotMid true
+16 WaterBotRight true
+17 WaterMidLeft true
+18 WaterMidMid true
+19 WaterMidRight true
+20 WaterTopLeft true
+21 WaterTopMid true
+22 WaterTopRight true
+23 placeholder
+24 treePlaceholder
