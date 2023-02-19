@@ -24,8 +24,6 @@ public class OBJ_Sign extends SuperObject{
         hitBoxAreaDefaultY = hitBoxArea.y;
         hitBoxArea.width = 22;
         hitBoxArea.height = 36;
-        System.out.println(hitBoxArea.width);
-        System.out.println(hitBoxArea.height);
         collision = true;
     }
 }

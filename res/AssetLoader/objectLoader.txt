@@ -1,11 +1,11 @@
 House 449 289
-Sign 399 384
-Mailbox 352 332
-LargeHouse 268 265
+Sign 393 384
+Mailbox 336 332
+LargeHouse 252 265
 Tree 580 288
 Tree2 580 320
 Tree 612 288
 
 Mailbox 431 461
 LargeHouse 443 392
-House 287 416
+House 271 416

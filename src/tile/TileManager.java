@@ -62,7 +62,7 @@ public class TileManager {
 
 
     public void loadMap() {
-        try (InputStream is = getClass().getResourceAsStream("/maps/map03.txt");
+        try (InputStream is = getClass().getResourceAsStream("/maps/map04.txt");
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             for (int row = 0; row < gp.maxWorldRow; row++) {
                 String line = br.readLine();
