@@ -59,6 +59,7 @@ public class Player extends Entity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Player successfully loaded.");
     }
 
     public void update() {
