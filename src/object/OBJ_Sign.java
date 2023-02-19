@@ -18,12 +18,14 @@ public class OBJ_Sign extends SuperObject{
             e.printStackTrace();
         }
         hitBoxArea = new Rectangle();
-        hitBoxArea.x = 1*gp.scale;
-        hitBoxArea.y = 10*gp.scale;
+        hitBoxArea.x =  6*gp.scale;
+        hitBoxArea.y = 12*gp.scale;
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = (image.getWidth()*gp.scale)-(2*gp.scale);
-        hitBoxArea.height = image.getHeight()* gp.scale;
+        hitBoxArea.width = 22;
+        hitBoxArea.height = 36;
+        System.out.println(hitBoxArea.width);
+        System.out.println(hitBoxArea.height);
         collision = true;
     }
 }

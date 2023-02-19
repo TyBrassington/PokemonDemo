@@ -26,7 +26,7 @@ public class SuperObject {
         //if(isTileWithinXBounds && isTileWithinYBounds) {
            g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
 
-            /*g2d.setColor(new Color(255, 0,0,120));
+           /* g2d.setColor(new Color(255, 0,0,120));
             int solidAreaX = screenX + hitBoxArea.x;
             int solidAreaY = screenY + hitBoxArea.y;
             int solidAreaWidth = hitBoxArea.width;

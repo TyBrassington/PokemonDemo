@@ -23,5 +23,4 @@ Index | Name | Collision
 20 WaterTopLeft true
 21 WaterTopMid true
 22 WaterTopRight true
-23 placeholder
-24 treePlaceholder
+23 placeholder true
