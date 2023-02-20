@@ -1,3 +1,5 @@
+# Town
+
 House 449 289
 Sign 399 384
 Mailbox 352 332
@@ -7,7 +9,7 @@ Mailbox 431 461
 LargeHouse 443 392
 House 287 416
 
-# Row 18
+# Row 18 (from top)
 
 Tree 109 76
 Tree 141 76
