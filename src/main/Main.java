@@ -21,11 +21,12 @@ public class Main {
         window.add(gamePanel);
 
         window.pack();
+        //Load objects before setting window to visible
+        gamePanel.setupGame();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        gamePanel.setupGame();
         gamePanel.startGameThread();
     }
 }
