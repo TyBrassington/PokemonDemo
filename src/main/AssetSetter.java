@@ -18,7 +18,7 @@ public class AssetSetter {
         int i = 0;
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (!line.trim().isEmpty()) {
+            if (!line.trim().isEmpty() && !line.trim().startsWith("#")) {
                 String[] parts = line.split(" ");
                 String objName = parts[0];
                 int worldX = Integer.parseInt(parts[1]) * gp.scale;

@@ -24,14 +24,15 @@ public class SuperObject {
         boolean isTileWithinYBounds = worldY + image.getHeight() *gp.scale> gp.player.worldY - gp.player.screenY && worldY - image.getHeight()*gp.scale < gp.player.worldY + gp.player.screenY;
 
         //if(isTileWithinXBounds && isTileWithinYBounds) {
-           g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
-
-           /* g2d.setColor(new Color(255, 0,0,120));
-            int solidAreaX = screenX + hitBoxArea.x;
-            int solidAreaY = screenY + hitBoxArea.y;
-            int solidAreaWidth = hitBoxArea.width;
-            int solidAreaHeight = hitBoxArea.height;
-            g2d.fillRect(solidAreaX, solidAreaY, solidAreaWidth, solidAreaHeight);*/
+        g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
+/*
+        g2d.setColor(new Color(255, 0,0,120));
+        int solidAreaX = screenX + hitBoxArea.x;
+        int solidAreaY = screenY + hitBoxArea.y;
+        int solidAreaWidth = hitBoxArea.width;
+        int solidAreaHeight = hitBoxArea.height;
+        g2d.fillRect(solidAreaX, solidAreaY, solidAreaWidth, solidAreaHeight);
+*/
         //}
 
     }

@@ -104,24 +104,24 @@ public class Player extends Entity {
     public void draw(Graphics2D g2d) {
         BufferedImage image = null;
 
-            switch (direction) {
-                case "up":
-                    image = spriteNum == 0 ? up0 : spriteNum == 1 ? up1 : up2;
-                    break;
-                case "down":
-                    image = spriteNum == 0 ? down0 : spriteNum == 1 ? down1 : down2;
-                    break;
-                case "left":
-                    image = spriteNum == 0 ? left0 : spriteNum == 1 ? left1 : left2;
-                    break;
-                case "right":
-                    image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
-                    break;
-            }
+        switch (direction) {
+            case "up":
+                image = spriteNum == 0 ? up0 : spriteNum == 1 ? up1 : up2;
+                break;
+            case "down":
+                image = spriteNum == 0 ? down0 : spriteNum == 1 ? down1 : down2;
+                break;
+            case "left":
+                image = spriteNum == 0 ? left0 : spriteNum == 1 ? left1 : left2;
+                break;
+            case "right":
+                image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
+                break;
+        }
         g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
         //DRAW PLAYER HITBOX
-      /* g2d.setColor(new Color(255, 0,0,120));
+/*        g2d.setColor(new Color(255, 0,0,120));
         int solidAreaX = screenX + hitBoxArea.x;
         int solidAreaY = screenY + hitBoxArea.y;
         int solidAreaWidth = hitBoxArea.width;
@@ -134,6 +134,7 @@ public class Player extends Entity {
         int solidAreaHeight1 = hitBoxArea1.height;
         g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);
 */
+
 
     }
 }

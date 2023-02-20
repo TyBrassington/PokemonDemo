@@ -1,11 +1,276 @@
 House 449 289
-Sign 393 384
-Mailbox 336 332
-LargeHouse 251 265
-Tree 580 288
-Tree2 580 320
-Tree 612 288
+Sign 399 384
+Mailbox 352 332
+LargeHouse 268 265
 
 Mailbox 431 461
 LargeHouse 443 392
-House 271 416
+House 287 416
+
+# Row 18
+
+Tree 109 76
+Tree 141 76
+Tree 173 76
+Tree 205 76
+Tree 237 76
+Tree 269 76
+Tree 301 76
+
+Tree 333 76
+
+Tree 429 76
+
+Tree 461 76
+Tree 493 76
+Tree 525 76
+Tree 557 76
+Tree 589 76
+Tree 621 76
+Tree 653 76
+
+# Row 17
+
+Tree 109 108
+Tree 141 108
+Tree 173 108
+Tree 205 108
+Tree 237 108
+Tree 269 108
+Tree 301 108
+
+Tree 333 108
+
+Tree 429 108
+
+Tree 461 108
+Tree 493 108
+Tree 525 108
+Tree 557 108
+Tree 589 108
+Tree 621 108
+Tree 653 108
+
+# Row 16
+
+Tree 109 140
+Tree 141 140
+Tree 173 140
+Tree 205 140
+Tree 237 140
+Tree 269 140
+Tree 301 140
+
+Tree 333 140
+
+Tree 429 140
+
+Tree 461 140
+Tree 493 140
+Tree 525 140
+Tree 557 140
+Tree 589 140
+Tree 621 140
+Tree 653 140
+
+# Row 15
+
+Tree 109 172
+Tree 141 172
+Tree 173 172
+Tree 205 172
+
+Tree 557 172
+Tree 589 172
+Tree 621 172
+Tree 653 172
+
+# Row 14
+
+Tree 109 204
+Tree 141 204
+Tree 173 204
+Tree 205 204
+
+Tree 557 204
+Tree 589 204
+Tree 621 204
+Tree 653 204
+
+# Row 13
+
+Tree 109 236
+Tree 141 236
+Tree 173 236
+Tree 205 236
+
+Tree 557 236
+Tree 589 236
+Tree 621 236
+Tree 653 236
+
+# Row 12
+Tree 109 268
+Tree 141 268
+Tree 173 268
+Tree 205 268
+
+Tree 557 268
+Tree 589 268
+Tree 621 268
+Tree 653 268
+
+# Row 11
+
+Tree 109 300
+Tree 141 300
+Tree 173 300
+Tree 205 300
+
+Tree 557 300
+Tree 589 300
+Tree 621 300
+Tree 653 300
+
+# Row 10
+
+Tree 109 332
+Tree 141 332
+Tree 173 332
+Tree 205 332
+
+Tree 557 332
+Tree 589 332
+Tree 621 332
+Tree 653 332
+
+# Row 9
+
+Tree 109 364
+Tree 141 364
+Tree 173 364
+Tree 205 364
+
+Tree 557 364
+Tree 589 364
+Tree 621 364
+Tree 653 364
+
+# Row 8
+
+Tree 109 396
+Tree 141 396
+Tree 173 396
+Tree 205 396
+
+Tree 557 396
+Tree 589 396
+Tree 621 396
+Tree 653 396
+
+# Row 7
+
+Tree 109 428
+Tree 141 428
+Tree 173 428
+Tree 205 428
+
+Tree 557 428
+Tree 589 428
+Tree 621 428
+Tree 653 428
+
+# Row 6
+
+Tree 109 460
+Tree 141 460
+Tree 173 460
+Tree 205 460
+
+Tree 557 460
+Tree 589 460
+Tree 621 460
+Tree 653 460
+
+# Row 5
+
+Tree 109 492
+Tree 141 492
+Tree 173 492
+Tree 205 492
+
+Tree 557 492
+Tree 589 492
+Tree 621 492
+Tree 653 492
+
+# Row 4
+
+Tree 109 524
+Tree 141 524
+Tree 173 524
+Tree 205 524
+
+Tree 557 524
+Tree 589 524
+Tree 621 524
+Tree 653 524
+
+# Row 3
+
+Tree 109 556
+Tree 141 556
+Tree 173 556
+Tree 205 556
+Tree 237 556
+Tree 269 556
+Tree 301 556
+
+Tree 461 556
+Tree 493 556
+Tree 525 556
+Tree 557 556
+Tree 589 556
+Tree 621 556
+Tree 653 556
+
+# Row 2
+
+Tree 109 588
+Tree 141 588
+Tree 173 588
+Tree 205 588
+Tree 237 588
+Tree 269 588
+Tree 301 588
+
+Tree 461 588
+Tree 493 588
+Tree 525 588
+Tree 557 588
+Tree 589 588
+Tree 621 588
+Tree 653 588
+
+# Row 1 (from bottom)
+
+Tree 109 620
+Tree 141 620
+Tree 173 620
+Tree 205 620
+Tree 237 620
+Tree 269 620
+Tree 301 620
+
+Tree 333 620
+Tree 365 620
+Tree 397 620
+Tree 429 620
+
+Tree 461 620
+Tree 493 620
+Tree 525 620
+Tree 557 620
+Tree 589 620
+Tree 621 620
+Tree 653 620
