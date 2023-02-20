@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSet = new AssetSetter(this);
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[200];
+    private final SoundManager soundManager = new SoundManager();
 
 
     public GamePanel(){
@@ -48,8 +49,11 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
-
+        boolean playMusic = true;
+        if (playMusic) {
+            soundManager.play("/audio/TwinLeafDay_EXT.wav");
+            System.out.println("Game music successfully loaded.");
+        }
     }
 
     public void setupGame(){
@@ -113,5 +117,9 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         g2d.dispose();
+    }
+
+    public void stopMusic() {
+        soundManager.stop();
     }
 }

@@ -25,11 +25,7 @@ public class TileManager {
 
         getTileImage();
         loadMap();
-        boolean playMusic = false;
-        if (playMusic) {
-            play("/audio/TwinLeafDay_EXT.wav");
-            System.out.println("Game music successfully loaded.");
-        }
+
     }
 
     public void getTileImage() {
@@ -96,18 +92,6 @@ public class TileManager {
 
                 }
             }
-        }
-    }
-    public void play(String audioFilePath) {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(audioFilePath));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-40.0f);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
         }
     }
 }
