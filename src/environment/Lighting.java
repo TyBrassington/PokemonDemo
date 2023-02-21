@@ -1,8 +1,6 @@
 package environment;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
@@ -32,6 +30,13 @@ public class Lighting {
         Graphics2D graphics2D = darknessFilter.createGraphics();
         graphics2D.setColor(new Color(0, 0, 51, 250));
         graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/pokemon-dp-pro.ttf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(customFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         graphics2D.dispose();
     }
 
@@ -69,7 +74,6 @@ public class Lighting {
     }
 
     public float getFilterAlpha() {
-        System.out.println(filterAlpha);
         return filterAlpha;
     }
 
@@ -87,7 +91,7 @@ public class Lighting {
         };
 
         graphics2D.setColor(Color.WHITE);
-        graphics2D.setFont(graphics2D.getFont().deriveFont(50f));
+        graphics2D.setFont(new Font("Pokémon DP Pro Regular", Font.PLAIN, 50));
         graphics2D.drawString(dayStateLabel, 20, 550);
     }
 }
