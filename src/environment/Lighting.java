@@ -51,8 +51,8 @@ public class Lighting {
             }
             case DUSK -> {
                 filterAlpha += 0.001f;
-                if (filterAlpha > 0.4f) {
-                    filterAlpha = 0.4f;
+                if (filterAlpha > 0.5f) {
+                    filterAlpha = 0.5f;
                     dayState = NIGHT;
                 }
             }

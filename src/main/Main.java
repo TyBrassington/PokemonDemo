@@ -13,8 +13,8 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        System.out.println("\nPokemon by Ty Brassington, version 0.7.3\n");
-        window.setTitle("Pokemon Demo Panel");
+        System.out.println("\nPokémon by Ty Brassington, version 0.7.4\n");
+        window.setTitle("Pokémon Demo Panel");
         Image icon = Toolkit.getDefaultToolkit().getImage("pokeball_icon.png");
         window.setIconImage(icon);
         GamePanel gamePanel = new GamePanel();
