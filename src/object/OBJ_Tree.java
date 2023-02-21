@@ -18,10 +18,10 @@ public class OBJ_Tree extends SuperObject{
         }
         hitBoxArea = new Rectangle();
 
-        hitBoxAreaDefaultX = hitBoxArea.x;
+        hitBoxAreaDefaultX = hitBoxArea.x+18;
         hitBoxAreaDefaultY = hitBoxArea.y+64;
-        hitBoxArea.width = (image.getWidth()*gp.scale);
-        hitBoxArea.height = image.getHeight()* gp.scale-64;
+        hitBoxArea.width = (image.getWidth()*gp.scale)-36;
+        hitBoxArea.height = image.getHeight()* gp.scale-73;
         collision = true;
     }
 }
