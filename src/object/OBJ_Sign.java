@@ -23,7 +23,7 @@ public class OBJ_Sign extends SuperObject{
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
         hitBoxArea.width = 22;
-        hitBoxArea.height = 36;
+        hitBoxArea.height = 30;
         collision = true;
     }
 }

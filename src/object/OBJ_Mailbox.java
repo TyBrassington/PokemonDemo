@@ -22,7 +22,7 @@ public class OBJ_Mailbox extends SuperObject{
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
         hitBoxArea.width = 36;
-        hitBoxArea.height = 60;
+        hitBoxArea.height = 57;
         collision = true;
     }
 }
