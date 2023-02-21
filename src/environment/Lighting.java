@@ -18,6 +18,7 @@ public class Lighting {
     private static final int NIGHT = 2;
     private static final int DAWN = 3;
     private int dayState = DAY;
+    private static final int MAX_DAY_COUNTER = 600; //10 seconds for the sake of testing
 
     public Lighting(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -43,32 +44,24 @@ public class Lighting {
     public void update() {
         switch (dayState) {
             case DAY -> {
-                dayCounter++;
-                if (dayCounter > 600) { //Keep at 600 frames (10 seconds) for now for the sake of testing
+                if (++dayCounter > MAX_DAY_COUNTER) {
                     dayState = DUSK;
                     dayCounter = 0;
                 }
             }
             case DUSK -> {
-                filterAlpha += 0.001f;
-                if (filterAlpha > 0.5f) {
-                    filterAlpha = 0.5f;
-                    dayState = NIGHT;
-                }
+                filterAlpha = Math.min(filterAlpha + 0.001f, 0.4f);
+                dayState = (filterAlpha == 0.4f) ? NIGHT : DUSK;
             }
             case NIGHT -> {
-                dayCounter++;
-                if (dayCounter > 600) {
+                if (++dayCounter > MAX_DAY_COUNTER) {
                     dayState = DAWN;
                     dayCounter = 0;
                 }
             }
             case DAWN -> {
-                filterAlpha -= 0.001f;
-                if (filterAlpha < 0f) {
-                    filterAlpha = 0f;
-                    dayState = DAY;
-                }
+                filterAlpha = Math.max(filterAlpha - 0.001f, 0f);
+                dayState = (filterAlpha == 0f) ? DAY : DAWN;
             }
         }
     }
@@ -77,10 +70,10 @@ public class Lighting {
         return filterAlpha;
     }
 
-    public void draw(Graphics2D graphics2D) {
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
-        graphics2D.drawImage(darknessFilter, 0, 0, null);
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    public void draw(Graphics2D g2d) {
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+        g2d.drawImage(darknessFilter, 0, 0, null);
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         String dayStateLabel = switch (dayState) {
             case DAY -> "Day";
@@ -90,8 +83,8 @@ public class Lighting {
             default -> "";
         };
 
-        graphics2D.setColor(Color.WHITE);
-        graphics2D.setFont(new Font("Pokémon DP Pro Regular", Font.PLAIN, 50));
-        graphics2D.drawString(dayStateLabel, 20, 550);
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(new Font("Pokémon DP Pro Regular", Font.PLAIN, 50));
+        g2d.drawString(dayStateLabel, 20, 550);
     }
 }

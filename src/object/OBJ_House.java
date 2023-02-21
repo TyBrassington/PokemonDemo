@@ -24,13 +24,13 @@ public class OBJ_House extends SuperObject {
         Lighting lighting = new Lighting(gp);
         if (lighting.getFilterAlpha() < 0.2f) {
             try {
-                image = ImageIO.read(getClass().getResourceAsStream("/objects/houseS.png"));
+                image = ImageIO.read(getClass().getResourceAsStream("/objects/house.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                image = ImageIO.read(getClass().getResourceAsStream("/objects/houseSN.png"));
+                image = ImageIO.read(getClass().getResourceAsStream("/objects/house.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -44,13 +44,13 @@ public class OBJ_House extends SuperObject {
             while (true) {
                 if (lighting.getFilterAlpha() < 0.2f) {
                     try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/objects/houseS.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/objects/house.png"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/objects/houseSN.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/objects/house.png"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

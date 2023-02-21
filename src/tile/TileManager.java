@@ -89,7 +89,6 @@ public class TileManager {
 
                 if (isTileWithinXBounds && isTileWithinYBounds) {
                         g2d.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
                 }
             }
         }

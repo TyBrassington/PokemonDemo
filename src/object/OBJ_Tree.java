@@ -12,7 +12,7 @@ public class OBJ_Tree extends SuperObject{
         name = "Tree";
 
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/tree.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/objects/treeS.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

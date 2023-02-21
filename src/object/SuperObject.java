@@ -32,6 +32,7 @@ public class SuperObject {
         int solidAreaHeight = hitBoxArea.height;
         g2d.fillRect(solidAreaX, solidAreaY, solidAreaWidth, solidAreaHeight);
 */
+
         }
 
     }

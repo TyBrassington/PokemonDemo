@@ -24,7 +24,7 @@ public class Player extends Entity {
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize);
 
-        hitBoxArea = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,16*gp.scale);
+        hitBoxArea = new Rectangle(3*gp.scale,0*gp.scale,11*gp.scale,24*gp.scale); //(3,8,11,16)
         hitBoxArea1 = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,15*gp.scale);
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
