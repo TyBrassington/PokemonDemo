@@ -53,7 +53,8 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-        boolean playMusic = false;
+
+        boolean playMusic = true;
         if (playMusic) {
             soundManager.play("/audio/TwinLeafDay_EXT.wav");
             System.out.println("Game music successfully loaded.");

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
+import object.OBJ_House;
 
 public class Lighting {
 
@@ -18,7 +19,6 @@ public class Lighting {
     private static final int DUSK = 1;
     private static final int NIGHT = 2;
     private static final int DAWN = 3;
-
     private int dayState = DAY;
 
     public Lighting(GamePanel gamePanel) {
@@ -39,7 +39,7 @@ public class Lighting {
         switch (dayState) {
             case DAY -> {
                 dayCounter++;
-                if (dayCounter > 600) {
+                if (dayCounter > 600) { //Keep at 600 frames (10 seconds) for now for the sake of testing
                     dayState = DUSK;
                     dayCounter = 0;
                 }
@@ -66,6 +66,11 @@ public class Lighting {
                 }
             }
         }
+    }
+
+    public float getFilterAlpha() {
+        System.out.println(filterAlpha);
+        return filterAlpha;
     }
 
     public void draw(Graphics2D graphics2D) {

@@ -22,7 +22,6 @@ public class SuperObject {
 
         boolean isTileWithinXBounds = worldX + image.getWidth() *gp.scale> gp.player.worldX - gp.player.screenX && worldX - image.getWidth()*gp.scale < gp.player.worldX + gp.player.screenX;
         boolean isTileWithinYBounds = worldY + image.getHeight() *gp.scale> gp.player.worldY - gp.player.screenY && worldY - image.getHeight()*gp.scale < gp.player.worldY + gp.player.screenY;
-
         if(isTileWithinXBounds && isTileWithinYBounds) {
         g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
 /*
