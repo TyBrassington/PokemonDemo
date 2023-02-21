@@ -8,7 +8,6 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -43,11 +42,6 @@ public class GamePanel extends JPanel implements Runnable{
     public GamePanel(){
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        /*try {
-            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/frame/playerHomeBkgTest.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         this.setOpaque(true);
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);

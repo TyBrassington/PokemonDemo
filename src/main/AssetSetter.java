@@ -2,6 +2,9 @@ package main;
 
 import object.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class AssetSetter {
@@ -14,21 +17,24 @@ public class AssetSetter {
 
     public void setObjectFromFile() {
 
-        Scanner scanner = new Scanner(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt"));
-        int i = 0;
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (!line.trim().isEmpty() && !line.trim().startsWith("#")) {
-                String[] parts = line.split(" ");
-                String objName = parts[0];
-                int worldX = Integer.parseInt(parts[1]) * gp.scale;
-                int worldY = Integer.parseInt(parts[2]) * gp.scale;
-                setObject(i, objName, worldX, worldY);
-                i++;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt")))){
+            int i = 0;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty() && !line.trim().startsWith("#")) {
+                    String[] parts = line.split(" ");
+                    String objName = parts[0];
+                    int worldX = Integer.parseInt(parts[1]) * gp.scale;
+                    int worldY = Integer.parseInt(parts[2]) * gp.scale;
+                    setObject(i, objName, worldX, worldY);
+                    i++;
+                }
             }
-        }
-        scanner.close();
         System.out.println("Objects successfully loaded.");
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     private void setObject(int index, String objName, int worldX, int worldY) {
