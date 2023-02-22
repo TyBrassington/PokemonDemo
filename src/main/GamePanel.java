@@ -2,7 +2,6 @@ package main;
 
 import entity.Player;
 import environment.EnvironmentManager;
-import environment.Lighting;
 import object.SuperObject;
 import tile.TileManager;
 
@@ -20,11 +19,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
-
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize*maxScreenCol;
-    public final int worldHeight = tileSize*maxScreenRow;
 
     int FPS = 60;
 
@@ -33,30 +29,28 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public CollisionScanner cc = new CollisionScanner(this);
     public AssetSetter aSet = new AssetSetter(this);
+    EnvironmentManager em = new EnvironmentManager(this);
+    SoundManager sm = new SoundManager();
+
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[200];
-    EnvironmentManager em = new EnvironmentManager(this);
-    private final SoundManager soundManager = new SoundManager();
 
 
     public GamePanel(){
-
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setOpaque(true);
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
-        boolean playMusic = true;
-        if (playMusic) {
-            soundManager.play("/audio/TwinLeafDay_EXT.wav");
-            System.out.println("Game music successfully loaded.");
-        }
     }
 
     public void setupGame(){
         aSet.setObjectFromFile();
+        if (sm.playMusic) {
+            playMusic(0);
+            System.out.println("Game music successfully loaded.");
+        }
         em.setup();
     }
     public void startGameThread(){
@@ -124,7 +118,17 @@ public class GamePanel extends JPanel implements Runnable{
         g2d.dispose();
     }
 
-    public void stopMusic() {
-        soundManager.stop();
+    public void playMusic(int i){
+        sm.setFile(i);
+        sm.play();
+        sm.loop();
+    }
+    public void stopMusic(int i){
+        sm.stop();
+    }
+
+    public void playSoundEffect(int i){
+        sm.setFile(i);
+        sm.play();
     }
 }
