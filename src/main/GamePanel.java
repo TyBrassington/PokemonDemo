@@ -7,6 +7,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
     SoundManager sm = new SoundManager();
 
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[200];
+    public SuperObject[] obj = new SuperObject[250];
 
 
     public GamePanel(){
@@ -97,22 +98,27 @@ public class GamePanel extends JPanel implements Runnable{
         // Draw the game objects
         tileManager.draw(g2d);
 
-        // Draw the sign object
-        SuperObject door = null;
+        ArrayList<SuperObject> doorLHList = new ArrayList<>();
+        ArrayList<SuperObject> doorHList = new ArrayList<>();
         for (SuperObject superObject : obj) {
-            if (superObject != null && superObject.name.equals("Door")) {
-                door = superObject;
-                break;
+            if (superObject != null && superObject.name.equals("DoorH")) {
+                doorHList.add(superObject);
+            }
+            if (superObject != null && superObject.name.equals("DoorLH")) {
+                doorLHList.add(superObject);
             }
         }
-        if (door != null) {
-            door.draw(g2d, this);
+        for (SuperObject doorLH : doorLHList) {
+            doorLH.draw(g2d, this);
+        }
+        for (SuperObject doorH : doorHList) {
+            doorH.draw(g2d, this);
         }
         player.draw(g2d);
 
         // Draw the remaining game objects
         for (SuperObject superObject : obj) {
-            if (superObject != null && !superObject.name.equals("Sign")) {
+            if (superObject != null && !superObject.name.equals("DoorLH") && !superObject.name.equals("DoorH")) {
                 superObject.draw(g2d, this);
             }
         }
@@ -122,6 +128,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         g2d.dispose();
     }
+
 
 
     public void playMusic(int i){

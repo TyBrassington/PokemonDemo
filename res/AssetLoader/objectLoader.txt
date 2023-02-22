@@ -1,13 +1,17 @@
 # Town
 
 House 449 289
+DoorH 462 343
 Sign 399 384
 Mailbox 352 332
 LargeHouse 268 265
+DoorLH 285 345
 
 Mailbox 431 461
 LargeHouse 443 392
+DoorLH 460 472
 House 287 416
+DoorH 300 470
 
 # Row 18 (from top)
 

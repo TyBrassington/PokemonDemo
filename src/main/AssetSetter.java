@@ -44,6 +44,8 @@ public class AssetSetter {
             case "Tree" -> gp.obj[index] = new OBJ_Tree(gp);
             case "Tree2" -> gp.obj[index] = new OBJ_Tree2(gp);
             case "Mailbox" -> gp.obj[index] = new OBJ_Mailbox(gp);
+            case "DoorLH" -> gp.obj[index] = new OBJ_DoorLargeHouse(gp);
+            case "DoorH" -> gp.obj[index] = new OBJ_DoorHouse(gp);
             default -> {
                 System.out.println("Unknown object type: " + objName);
                 gp.obj[index] = null;
