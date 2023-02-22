@@ -22,6 +22,8 @@ public class OBJ_Tree2 extends SuperObject{
         hitBoxArea.width = (image.getWidth()*gp.scale);
         hitBoxArea.height = image.getHeight()* gp.scale;
         collision = true;
-        collision = true;
+
+        hitBoxArea1 = new Rectangle();
+        hitBoxArea2 = new Rectangle();
     }
 }

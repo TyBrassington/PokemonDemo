@@ -18,9 +18,26 @@ public class OBJ_House extends SuperObject {
         hitBoxArea.y = 16 * gp.scale;
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = 169;
-        hitBoxArea.height = 178;
+        hitBoxArea.width = 27;
+        hitBoxArea.height = 177;
         collision = true;
+
+        hitBoxArea1 = new Rectangle();
+        hitBoxArea1.x = 13*gp.scale;
+        hitBoxArea1.y = 16*gp.scale;
+        hitBoxAreaDefaultX1 = hitBoxArea1.x;
+        hitBoxAreaDefaultY1 = hitBoxArea1.y;
+        hitBoxArea1.width = 66;
+        hitBoxArea1.height = 114;
+
+        hitBoxArea2 = new Rectangle();
+        hitBoxArea2.x = 35*gp.scale;
+        hitBoxArea2.y = 16*gp.scale;
+        hitBoxAreaDefaultX2 = hitBoxArea2.x;
+        hitBoxAreaDefaultY2 = hitBoxArea2.y;
+        hitBoxArea2.width = 75;
+        hitBoxArea2.height = 177;
+
         Lighting lighting = new Lighting(gp);
         if (lighting.getFilterAlpha() < 0.2f) {
             try {

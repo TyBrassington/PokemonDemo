@@ -25,5 +25,8 @@ public class OBJ_Sign extends SuperObject{
         hitBoxArea.width = 22;
         hitBoxArea.height = 30;
         collision = true;
+
+        hitBoxArea1 = new Rectangle();
+        hitBoxArea2 = new Rectangle();
     }
 }

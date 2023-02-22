@@ -12,7 +12,7 @@ public class SoundManager {
 
     private Clip clip;
     URL soundURL[] = new URL[30];
-    public boolean playMusic = true;
+    public boolean playMusic = false;
 
     public void setFile(int i) {
         try {

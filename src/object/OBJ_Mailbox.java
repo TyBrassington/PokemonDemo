@@ -24,5 +24,8 @@ public class OBJ_Mailbox extends SuperObject{
         hitBoxArea.width = 36;
         hitBoxArea.height = 57;
         collision = true;
+
+        hitBoxArea1 = new Rectangle();
+        hitBoxArea2 = new Rectangle();
     }
 }

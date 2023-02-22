@@ -80,10 +80,16 @@ public class CollisionScanner {
                 gp.obj[i].hitBoxArea.x = gp.obj[i].worldX + gp.obj[i].hitBoxArea.x;
                 gp.obj[i].hitBoxArea.y = gp.obj[i].worldY + gp.obj[i].hitBoxArea.y;
 
+                gp.obj[i].hitBoxArea1.x = gp.obj[i].worldX + gp.obj[i].hitBoxArea1.x;
+                gp.obj[i].hitBoxArea1.y = gp.obj[i].worldY + gp.obj[i].hitBoxArea1.y;
+
+                gp.obj[i].hitBoxArea2.x = gp.obj[i].worldX + gp.obj[i].hitBoxArea2.x;
+                gp.obj[i].hitBoxArea2.y = gp.obj[i].worldY + gp.obj[i].hitBoxArea2.y;
+
                 switch (entity.direction){
                     case "up":
                         entity.hitBoxArea.y -= entity.speed;
-                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea)){
+                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea2)){
                             if(gp.obj[i].collision){
                                 entity.collisionOn = true;
                             }
@@ -94,7 +100,7 @@ public class CollisionScanner {
                         break;
                     case "down":
                         entity.hitBoxArea.y += entity.speed;
-                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea)){
+                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea2)){
                             if(gp.obj[i].collision){
                                 entity.collisionOn = true;
                             }
@@ -105,7 +111,7 @@ public class CollisionScanner {
                         break;
                     case "left":
                         entity.hitBoxArea.x -= entity.speed;
-                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea)){
+                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea2)){
                             if(gp.obj[i].collision){
                                 entity.collisionOn = true;
                             }
@@ -116,7 +122,7 @@ public class CollisionScanner {
                         break;
                     case "right":
                         entity.hitBoxArea.x += entity.speed;
-                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea)){
+                        if (entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[i].hitBoxArea2)){
                             if(gp.obj[i].collision){
                                 entity.collisionOn = true;
                             }
@@ -130,6 +136,12 @@ public class CollisionScanner {
                 entity.hitBoxArea.y = entity.hitBoxAreaDefaultY;
                 gp.obj[i].hitBoxArea.x = gp.obj[i].hitBoxAreaDefaultX;
                 gp.obj[i].hitBoxArea.y = gp.obj[i].hitBoxAreaDefaultY;
+
+                gp.obj[i].hitBoxArea1.x = gp.obj[i].hitBoxAreaDefaultX1;
+                gp.obj[i].hitBoxArea1.y = gp.obj[i].hitBoxAreaDefaultY1;
+
+                gp.obj[i].hitBoxArea2.x = gp.obj[i].hitBoxAreaDefaultX2;
+                gp.obj[i].hitBoxArea2.y = gp.obj[i].hitBoxAreaDefaultY2;
             }
         }
         return index;
