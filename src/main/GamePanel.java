@@ -96,9 +96,23 @@ public class GamePanel extends JPanel implements Runnable{
 
         // Draw the game objects
         tileManager.draw(g2d);
-        player.draw(g2d);
+
+        // Draw the sign object
+        SuperObject door = null;
         for (SuperObject superObject : obj) {
-            if (superObject != null) {
+            if (superObject != null && superObject.name.equals("Door")) {
+                door = superObject;
+                break;
+            }
+        }
+        if (door != null) {
+            door.draw(g2d, this);
+        }
+        player.draw(g2d);
+
+        // Draw the remaining game objects
+        for (SuperObject superObject : obj) {
+            if (superObject != null && !superObject.name.equals("Sign")) {
                 superObject.draw(g2d, this);
             }
         }
@@ -108,6 +122,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         g2d.dispose();
     }
+
 
     public void playMusic(int i){
         sm.setFile(i);
