@@ -5,6 +5,7 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class OBJ_House extends SuperObject {
@@ -42,12 +43,14 @@ public class OBJ_House extends SuperObject {
         if (lighting.getFilterAlpha() < 0.2f) {
             try {
                 image = ImageIO.read(getClass().getResourceAsStream("/objects/houseDL.png"));
+                getScaledImage(image, gp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 image = ImageIO.read(getClass().getResourceAsStream("/objects/houseDL.png"));
+                getScaledImage(image, gp);
             } catch (IOException e) {
                 e.printStackTrace();
             }

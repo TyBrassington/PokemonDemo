@@ -4,6 +4,7 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class OBJ_Tree2 extends SuperObject{
@@ -13,6 +14,7 @@ public class OBJ_Tree2 extends SuperObject{
 
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/objects/tree2.png"));
+            getScaledImage(image, gp);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,6 +4,7 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class OBJ_Sign extends SuperObject{
@@ -14,6 +15,7 @@ public class OBJ_Sign extends SuperObject{
 
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/objects/sign.png"));
+            getScaledImage(image, gp);
         } catch (IOException e) {
             e.printStackTrace();
         }

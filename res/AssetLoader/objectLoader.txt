@@ -280,3 +280,26 @@ Tree 557 620
 Tree 589 620
 Tree 621 620
 Tree 653 620
+
+# Row 0 (outside screen)
+
+Tree 109 652
+Tree 141 652
+Tree 173 652
+Tree 205 652
+Tree 237 652
+Tree 269 652
+Tree 301 652
+
+Tree 333 652
+Tree 365 652
+Tree 397 652
+Tree 429 652
+
+Tree 461 652
+Tree 493 652
+Tree 525 652
+Tree 557 652
+Tree 589 652
+Tree 621 652
+Tree 653 652
