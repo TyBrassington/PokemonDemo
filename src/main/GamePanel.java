@@ -89,11 +89,17 @@ public class GamePanel extends JPanel implements Runnable{
         em.update();
     }
 
-
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        //debug
+        long drawStart = 0;
+        if (keyH.checkDrawTime) {
+            drawStart = System.nanoTime();
+        }
 
         // Draw the game objects
         tileManager.draw(g2d);
@@ -126,7 +132,15 @@ public class GamePanel extends JPanel implements Runnable{
         // Draw the environment
         em.draw(g2d);
 
+        if (keyH.checkDrawTime) {
+            long drawEnd = System.nanoTime();
+            long timeElapsed = drawEnd - drawStart;
+            g2d.drawString("Draw Time: " + timeElapsed, 20, 510);
+            System.out.println("Draw Time: " + timeElapsed);
+        }
         g2d.dispose();
+
+
     }
 
 

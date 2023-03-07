@@ -5,6 +5,7 @@ import main.GamePanel;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +43,15 @@ public class TileManager {
                 fileName = parts[1] + ".png";
                 tiles[i] = new Tile();
                 try {
-                    tiles[i].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + fileName));
+                    BufferedImage originalImage = ImageIO.read(getClass().getResourceAsStream("/tiles/" + fileName));
+                    int scaledWidth = gp.tileSize;
+                    int scaledHeight = gp.tileSize;
+                    Image scaledImage = originalImage.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_DEFAULT);
+                    tiles[i].image = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2d = tiles[i].image.createGraphics();
+                    g2d.drawImage(scaledImage, 0, 0, null);
+                    g2d.dispose();
+
                     //If nothing is written in this column, assume it collision is false
                     if (parts.length > 2 && parts[2].equalsIgnoreCase("true")) {
                         tiles[i].collision = true;
@@ -55,6 +64,7 @@ public class TileManager {
         scanner.close();
         System.out.println("Tiles successfully loaded.");
     }
+
 
 
     public void loadMap() {
@@ -88,7 +98,8 @@ public class TileManager {
                 boolean isTileWithinYBounds = worldY + gp.tileSize > gp.player.worldY - gp.player.screenY && worldY - 2 * gp.tileSize < gp.player.worldY + gp.player.screenY;
 
                 if (isTileWithinXBounds && isTileWithinYBounds) {
-                        g2d.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    g2d.drawImage(tiles[tileNum].image, screenX, screenY, null);
+
                 }
             }
         }
