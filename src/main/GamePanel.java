@@ -23,10 +23,13 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
 
+    public final int maxMap = 10;
+    public int curMap = 0;
+
     int FPS = 60;
 
     TileManager tileManager = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Thread gameThread;
     public CollisionScanner cc = new CollisionScanner(this);
     public AssetSetter aSet = new AssetSetter(this);

@@ -17,15 +17,15 @@ public class TileManager {
 
     private final GamePanel gp;
     public final Tile[] tiles;
-    public final int[][] mapTileNum;
+    public final int[][][] mapTileNum;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tiles = new Tile[50];
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap();
+        loadMap("/maps/map05.txt", 0);
 
     }
 
@@ -67,15 +67,15 @@ public class TileManager {
 
 
 
-    public void loadMap() {
-        try (InputStream is = getClass().getResourceAsStream("/maps/map05.txt");
+    public void loadMap(String filePath, int map) {
+        try (InputStream is = getClass().getResourceAsStream(filePath);
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             for (int row = 0; row < gp.maxWorldRow; row++) {
                 String line = br.readLine();
                 String[] nums = line.split(" ");
                 for (int col = 0; col < gp.maxWorldRow; col++) {
                     int num = Integer.parseInt(nums[col]);
-                    mapTileNum[col][row] = num;
+                    mapTileNum[map][col][row] = num;
                 }
             }
         } catch (IOException e) {
@@ -88,7 +88,7 @@ public class TileManager {
         for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {
             for (int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
 
-                int tileNum = mapTileNum[worldCol][worldRow];
+                int tileNum = mapTileNum[gp.curMap][worldCol][worldRow];
                 int worldX = worldCol * gp.tileSize;
                 int worldY = worldRow * gp.tileSize;
                 int screenX = worldX - gp.player.worldX + gp.player.screenX;

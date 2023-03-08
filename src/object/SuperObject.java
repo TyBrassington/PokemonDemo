@@ -43,7 +43,6 @@ public class SuperObject {
     public BufferedImage getScaledImage(BufferedImage image, GamePanel gp){
         scaledImage = new BufferedImage(image.getWidth() * gp.scale, image.getHeight() * gp.scale, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = scaledImage.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.drawImage(image, 0, 0, scaledImage.getWidth(), scaledImage.getHeight(), null);
         g2d.dispose();
         return scaledImage;

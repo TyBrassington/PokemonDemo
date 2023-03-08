@@ -5,9 +5,13 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
+    GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, keyPressed;
     boolean checkDrawTime;
 
+    public KeyHandler(GamePanel gp){
+        this.gp = gp;
+    }
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -31,6 +35,12 @@ public class KeyHandler implements KeyListener {
         keyPressed = true;
         if (code == KeyEvent.VK_T && e.isShiftDown()) {
             checkDrawTime = !checkDrawTime;
+        }
+        if (code == KeyEvent.VK_R){
+            switch (gp.curMap){
+                case 0:    gp.tileManager.loadMap("/maps/map05.txt", 0); break;
+                case 1:    gp.tileManager.loadMap("/maps/map01.txt", 0); break;
+            }
         }
     }
 
