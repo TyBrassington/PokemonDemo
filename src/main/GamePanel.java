@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldRow = 50;
 
     public final int maxMap = 10;
-    public int curMap = 0;
+    public int curMap = 0; //0 -> Twinleaf Exterior | 1 -> Test
 
     int FPS = 60;
 
@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     SoundManager sm = new SoundManager();
 
     public Player player = new Player(this, keyH);
-    public SuperObject[] obj = new SuperObject[250];
+    public SuperObject[][] obj = new SuperObject[maxMap][250];
 
 
     public GamePanel(){
@@ -109,12 +109,16 @@ public class GamePanel extends JPanel implements Runnable{
 
         ArrayList<SuperObject> doorLHList = new ArrayList<>();
         ArrayList<SuperObject> doorHList = new ArrayList<>();
-        for (SuperObject superObject : obj) {
-            if (superObject != null && superObject.name.equals("DoorH")) {
-                doorHList.add(superObject);
-            }
-            if (superObject != null && superObject.name.equals("DoorLH")) {
-                doorLHList.add(superObject);
+        for (SuperObject[] superObjects : obj) {
+            if (superObjects != null && superObjects.length > 0) {
+                for (SuperObject superObject : superObjects) {
+                    if (superObject != null && superObject.name.equals("DoorH")) {
+                        doorHList.add(superObject);
+                    }
+                    if (superObject != null && superObject.name.equals("DoorLH")) {
+                        doorLHList.add(superObject);
+                    }
+                }
             }
         }
         for (SuperObject doorLH : doorLHList) {
@@ -126,9 +130,13 @@ public class GamePanel extends JPanel implements Runnable{
         player.draw(g2d);
 
         // Draw the remaining game objects
-        for (SuperObject superObject : obj) {
-            if (superObject != null && !superObject.name.equals("DoorLH") && !superObject.name.equals("DoorH")) {
-                superObject.draw(g2d, this);
+        for (SuperObject[] superObjects : obj) {
+            if (superObjects != null && superObjects.length > 0) {
+                for (SuperObject superObject : superObjects) { // iterate over each element in superObjects
+                    if (superObject != null && !superObject.name.equals("DoorLH") && !superObject.name.equals("DoorH")) {
+                        superObject.draw(g2d, this);
+                    }
+                }
             }
         }
 

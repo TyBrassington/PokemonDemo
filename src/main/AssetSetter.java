@@ -38,20 +38,22 @@ public class AssetSetter {
 
     private void setObject(int index, String objName, int worldX, int worldY) {
         switch (objName) {
-            case "House" -> gp.obj[index] = new OBJ_House(gp);
-            case "Sign" -> gp.obj[index] = new OBJ_Sign(gp);
-            case "LargeHouse" -> gp.obj[index] = new OBJ_LargeHouse(gp);
-            case "Tree" -> gp.obj[index] = new OBJ_Tree(gp);
-            case "Tree2" -> gp.obj[index] = new OBJ_Tree2(gp);
-            case "Mailbox" -> gp.obj[index] = new OBJ_Mailbox(gp);
-            case "DoorLH" -> gp.obj[index] = new OBJ_DoorLargeHouse(gp);
-            case "DoorH" -> gp.obj[index] = new OBJ_DoorHouse(gp);
-            default -> {
-                System.out.println("Unknown object type: " + objName);
-                gp.obj[index] = null;
-            }
+            case "House" -> gp.obj[0][index] = new OBJ_House(gp);
+            case "Sign" -> gp.obj[0][index] = new OBJ_Sign(gp);
+            case "LargeHouse" -> gp.obj[0][index] = new OBJ_LargeHouse(gp);
+            case "Tree" -> gp.obj[0][index] = new OBJ_Tree(gp);
+            case "Tree2" -> gp.obj[0][index] = new OBJ_Tree2(gp);
+            case "Mailbox" -> gp.obj[0][index] = new OBJ_Mailbox(gp);
+            case "DoorLH" -> gp.obj[0][index] = new OBJ_DoorLargeHouse(gp);
+            case "DoorH" -> gp.obj[0][index] = new OBJ_DoorHouse(gp);
+
         }
-        gp.obj[index].worldX = worldX;
-        gp.obj[index].worldY = worldY;
+        if (gp.obj[gp.curMap][index] != null) {
+            gp.obj[gp.curMap][index].worldX = worldX;
+            gp.obj[gp.curMap][index].worldY = worldY;
+        } else{
+            //Handle the case where gp.obj[gp.curMap][index] is null
+            //System.out.println("Unknown object type: " + objName);
+        }
     }
 }
