@@ -1,6 +1,9 @@
 package main;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EventHandler {
 
@@ -8,13 +11,15 @@ public class EventHandler {
     EventRect eventRect[][][];
     int prevEventX, prevEventY;
     boolean canTouchEvent = true;
+    int map, x, y;
 
     public EventHandler(GamePanel gp){
         this.gp = gp;
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol* gp.tileSize][gp.maxWorldRow*gp.tileSize];
-        int map = 0;
-        int x = 0;
-        int y = 0;
+
+        map = 0;
+        x = 0;
+        y = 0;
         while (map < gp.maxMap && x < gp.maxWorldCol*gp.tileSize && y < gp.maxWorldRow*gp.tileSize){
             eventRect[map][x][y] = new EventRect();
             eventRect[map][x][y].x = 0;
@@ -35,8 +40,8 @@ public class EventHandler {
                 }
             }
         }
-
     }
+
 
     public void checkEvent(){
         int xDistance = Math.abs(gp.player.worldX - prevEventX);
@@ -47,10 +52,34 @@ public class EventHandler {
         }
 
         if (canTouchEvent){
-            if (hit(0, 0, 0, "any")){
-                teleport(1,24,20);
-            } else if (hit(1, 0, 0, "any")){
-                teleport(0,24,20);
+            if (hit(0, 460, 471, "any")){
+                teleport(1,80,116); //twinleafEXT to playerhouseDS
+                gp.playSoundEffect(1);
+                Timer timer = new Timer(400, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        gp.playSoundEffect(2);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+            } else if (hit(1, 140, 80, "any")){
+                teleport(0,460,481); //playhouseDS to twinleafEXT
+                gp.playSoundEffect(3);
+                Timer timer1 = new Timer(1000, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        gp.playSoundEffect(1);
+                    }
+                });
+                Timer timer2 = new Timer(1400, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        gp.playSoundEffect(2);
+                    }
+                });
+
+                timer1.setRepeats(false);
+                timer1.start();
+                timer2.setRepeats(false);
+                timer2.start();
             }
         }
     }
@@ -62,8 +91,8 @@ public class EventHandler {
             gp.player.hitBoxArea.x = gp.player.worldX + gp.player.hitBoxArea.x;
             gp.player.hitBoxArea.y = gp.player.worldY + gp.player.hitBoxArea.y;
 
-            eventRect[map][eventX][eventY].x = eventY + eventRect[map][eventX][eventY].x;
-            eventRect[map][eventX][eventY].y = eventX + eventRect[map][eventX][eventY].y;
+            eventRect[map][eventX][eventY].x = eventY*gp.scale + eventRect[map][eventX][eventY].x;
+            eventRect[map][eventX][eventY].y = eventX*gp.scale + eventRect[map][eventX][eventY].y;
 
             if (gp.player.hitBoxArea.intersects(eventRect[map][eventX][eventY])){
                 if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")){
@@ -83,13 +112,24 @@ public class EventHandler {
 
     }
 
-    public void teleport(int map, int col, int row){
+    public void teleport(int map, int x, int y){
 
         gp.curMap = map;
-        gp.player.worldX = gp.tileSize*col;
-        gp.player.worldY = gp.tileSize*row;
+        gp.player.worldX = x*gp.scale;
+        gp.player.worldY = y*gp.scale   ;
         prevEventX = gp.player.worldX;
         prevEventY = gp.player.worldY;
         canTouchEvent = false;
     }
+
+    public EventRect[][][] getEventRect() {
+        return eventRect;
+    }
+
+    public void draw(Graphics2D g2d) {
+        g2d.setColor(Color.RED);
+        g2d.fillRect(eventRect[map][x][y].x, eventRect[map][x][y].y, eventRect[map][x][y].width, eventRect[map][x][y].height);
+    }
+
+
 }

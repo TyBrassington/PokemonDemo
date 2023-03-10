@@ -34,7 +34,6 @@ public class AssetSetter {
                         setObject(i, objName, worldX, worldY, currentMapNum);
                         i++;
                     }
-                    System.out.println(currentMapNum);
                 }
             }
             System.out.println("Objects successfully loaded.");

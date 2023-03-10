@@ -1,1 +1,4 @@
 0 TwinLeafDay_EXT
+1 door_enter
+2 door_close
+3 door_exit

@@ -24,8 +24,8 @@ public class TileManager {
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/map05.txt", 0);
-        loadMap("/maps/map06.txt", 1);
+        loadMap("/maps/twinleafTownEXT.txt", 0);
+        loadMap("/maps/playerHouseDS.txt", 1);
     }
 
     public void getTileImage() {
@@ -65,23 +65,30 @@ public class TileManager {
     }
 
 
-
     public void loadMap(String filePath, int map) {
         try (InputStream is = getClass().getResourceAsStream(filePath);
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             for (int row = 0; row < gp.maxWorldRow; row++) {
                 String line = br.readLine();
+                if (line == null || line.trim().isEmpty()) {
+                    // set num to 23 for all columns in empty row
+                    for (int col = 0; col < gp.maxWorldCol; col++) {
+                        mapTileNum[map][col][row] = 23;
+                    }
+                    continue;
+                }
                 String[] nums = line.split(" ");
-                for (int col = 0; col < gp.maxWorldRow; col++) {
-                    int num = Integer.parseInt(nums[col]);
+                for (int col = 0; col < gp.maxWorldCol; col++) {
+                    int num = col < nums.length ? Integer.parseInt(nums[col]) : 23;
                     mapTileNum[map][col][row] = num;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Map successfully loaded.");
+        System.out.println("Map "+filePath+" successfully loaded.");
     }
+
 
     public void draw(Graphics2D g2d) {
         for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {

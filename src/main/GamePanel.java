@@ -26,6 +26,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxMap = 10;
     public int curMap = 0; //0 -> Twinleaf Exterior | 1 -> Test
 
+    boolean paused;
+
     int FPS = 60;
 
     TileManager tileManager = new TileManager(this);
@@ -90,8 +92,10 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update(){
-        player.update();
-        em.update();
+        if(!paused) {
+            player.update();
+            em.update();
+        }
     }
 
     @Override
@@ -143,7 +147,9 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         // Draw the environment
-        em.draw(g2d);
+        if(curMap == 0) {
+            em.draw(g2d);
+        }
 
         if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
@@ -163,12 +169,17 @@ public class GamePanel extends JPanel implements Runnable{
         sm.play();
         sm.loop();
     }
+
     public void stopMusic(int i){
         sm.stop();
     }
 
-    public void playSoundEffect(int i){
+    public synchronized void playSoundEffect(int i){
         sm.setFile(i);
-        sm.play();
+        if (i != 0) {
+            sm.setSEVolume(-20.0f);
+            sm.play();
+        }
+
     }
 }

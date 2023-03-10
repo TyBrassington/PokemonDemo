@@ -23,9 +23,104 @@ Index | Name | Collision
 20 WaterTopLeft true
 21 WaterTopMid true
 22 WaterTopRight true
-23 placeholder true
-
-
-
-
-
+23 black true
+24 img1
+25 img2
+26 img3
+27 img4
+28 img5
+29 img6
+30 img7
+31 img8
+32 img9
+33 img10
+34 img11
+35 img12
+36 img13
+37 img14
+38 img15
+39 img16
+40 img17
+41 img18
+42 img19
+43 img20
+44 img21
+45 img22
+46 img23
+47 img24
+48 img25
+49 img26
+50 img27
+51 img28
+52 img29
+53 img30
+54 img31
+55 img32
+56 img33
+57 img34
+58 img35
+59 img36
+60 img37
+61 img38
+62 img39
+63 img40
+64 img41
+65 img42
+66 img43
+67 img44
+68 img45
+69 img46
+70 img47
+71 img48
+72 img49
+73 img50
+74 img51
+75 img52
+76 img53
+77 img54
+78 img55
+79 img56
+80 img57
+81 img58
+82 img59
+83 img60
+84 img61
+85 img62
+86 img63
+87 img64
+88 img65
+89 img66
+90 img67
+91 img68
+92 img69
+93 img70
+94 img71
+95 img72
+96 img73
+97 img74
+98 img75
+99 img76
+100 img77
+101 img78
+102 img79
+103 img80
+104 img81
+105 img82
+106 img83
+107 img84
+108 img85
+109 img86
+110 img87
+111 img88
+112 img89
+113 img90
+114 img91
+115 img92
+116 img93
+117 img94
+118 img95
+119 img96
+120 img97
+121 img98
+122 img99
+123 placeholder true

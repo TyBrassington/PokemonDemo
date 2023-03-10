@@ -44,6 +44,9 @@ public class KeyHandler implements KeyListener {
                 break;
             }
         }
+        if (code == KeyEvent.VK_ESCAPE){
+            gp.paused = !gp.paused;
+        }
     }
 
     @Override
