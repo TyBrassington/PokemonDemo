@@ -37,7 +37,7 @@ public class Player extends Entity {
 
         worldX = ((gp.tileSize * 23));
         worldY = ((gp.tileSize * 24)+(gp.tileSize * 25))/2;
-        speed = 1*gp.scale;
+        speed = 3*gp.scale; //temp usually 1*gp.scale
         direction = "down";
     }
 
@@ -77,6 +77,8 @@ public class Player extends Entity {
             gp.cc.checkTile(this);
 
             gp.cc.checkObject(this, true);
+
+            gp.eHandler.checkEvent();
 
             if(!collisionOn){
                 switch (direction) {

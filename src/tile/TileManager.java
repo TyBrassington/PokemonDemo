@@ -3,7 +3,6 @@ package tile;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -21,12 +20,12 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tiles = new Tile[50];
+        tiles = new Tile[200];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
         loadMap("/maps/map05.txt", 0);
-
+        loadMap("/maps/map06.txt", 1);
     }
 
     public void getTileImage() {
@@ -87,7 +86,6 @@ public class TileManager {
     public void draw(Graphics2D g2d) {
         for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {
             for (int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
-
                 int tileNum = mapTileNum[gp.curMap][worldCol][worldRow];
                 int worldX = worldCol * gp.tileSize;
                 int worldY = worldRow * gp.tileSize;

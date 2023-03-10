@@ -12,20 +12,23 @@ public class SuperObject {
 
     public String name;
     public boolean collision = false;
+    public int mapNum;
+
     public int worldX, worldY;
     public Rectangle hitBoxArea, hitBoxArea1, hitBoxArea2;
     public int hitBoxAreaDefaultX, hitBoxAreaDefaultX1, hitBoxAreaDefaultX2;
     public int hitBoxAreaDefaultY, hitBoxAreaDefaultY1, hitBoxAreaDefaultY2;
 
     public void draw(Graphics2D g2d, GamePanel gp){
+        mapNum = gp.curMap;
+        if (gp.aSet.currentMapNum == gp.curMap && mapNum == gp.curMap) {
+            int screenX = worldX - gp.player.worldX + gp.player.screenX;
+            int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        int screenX = worldX - gp.player.worldX + gp.player.screenX;
-        int screenY = worldY - gp.player.worldY + gp.player.screenY;
-
-        boolean isTileWithinXBounds = worldX + image.getWidth() *gp.scale+60> gp.player.worldX - gp.player.screenX && worldX - image.getWidth()*gp.scale-60< gp.player.worldX + gp.player.screenX;
-        boolean isTileWithinYBounds = worldY + image.getHeight() *gp.scale+60> gp.player.worldY - gp.player.screenY && worldY - image.getHeight()*gp.scale-60 < gp.player.worldY + gp.player.screenY;
-        if(isTileWithinXBounds && isTileWithinYBounds) {
-            g2d.drawImage(scaledImage, screenX, screenY, null);
+            boolean isTileWithinXBounds = worldX + image.getWidth() * gp.scale + 60 > gp.player.worldX - gp.player.screenX && worldX - image.getWidth() * gp.scale - 60 < gp.player.worldX + gp.player.screenX;
+            boolean isTileWithinYBounds = worldY + image.getHeight() * gp.scale + 60 > gp.player.worldY - gp.player.screenY && worldY - image.getHeight() * gp.scale - 60 < gp.player.worldY + gp.player.screenY;
+            if (isTileWithinXBounds && isTileWithinYBounds) {
+                g2d.drawImage(scaledImage, screenX, screenY, null);
 /*
             g2d.setColor(new Color(255, 0,0,120));
             g2d.fillRect(screenX + hitBoxArea.x, screenY + hitBoxArea.y, hitBoxArea.width, hitBoxArea.height);
@@ -36,8 +39,8 @@ public class SuperObject {
             g2d.setColor(new Color(8, 255, 0,120));
             g2d.fillRect(screenX + hitBoxArea2.x, screenY + hitBoxArea2.y, hitBoxArea2.width, hitBoxArea2.height);
 */
+            }
         }
-
     }
 
     public BufferedImage getScaledImage(BufferedImage image, GamePanel gp){

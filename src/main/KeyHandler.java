@@ -38,8 +38,10 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_R){
             switch (gp.curMap){
-                case 0:    gp.tileManager.loadMap("/maps/map05.txt", 0); break;
-                case 1:    gp.tileManager.loadMap("/maps/map01.txt", 0); break;
+                case 0:    gp.tileManager.loadMap("/maps/map01.txt", 0); break;
+                case 1:    
+                    gp.tileManager.loadMap("/maps/map02.txt", 0);
+                break;
             }
         }
     }

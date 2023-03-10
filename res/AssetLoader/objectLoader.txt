@@ -1,3 +1,5 @@
+mapNum 0
+
 # Town
 
 House 449 289
