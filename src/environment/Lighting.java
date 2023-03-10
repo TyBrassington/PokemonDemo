@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
-import object.OBJ_House;
 
 public class Lighting {
 

@@ -12,9 +12,9 @@ public class SoundManager {
 
     public Clip clip;
     URL soundURL[] = new URL[30];
-    public boolean playMusic = true;
+    public boolean playMusic = false;
     public float volume = -40.0f;
-    public boolean isSE = false;
+    public boolean isSE;
 
     public void setFile(int i) {
         try {
@@ -25,7 +25,7 @@ public class SoundManager {
                 String[] parts = line.split(" ");
                 int index = Integer.parseInt(parts[0]);
                 if (index == i) {
-                    if(index !=0){
+                    if (index != 0) {
                         isSE = true;
                     } else isSE = false;
                     String fileName = parts[1] + ".wav";
@@ -44,21 +44,22 @@ public class SoundManager {
         }
     }
 
-    public void play(){
+    public void play() {
         clip.start();
     }
 
-    public void loop(){
+    public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void stop(){
+    public void stop() {
         if (clip != null) {
             clip.stop();
         }
     }
+
     public void setSEVolume(float seVolume) {
-        if(isSE) {
+        if (isSE) {
             this.volume = seVolume;
             if (clip != null) {
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);

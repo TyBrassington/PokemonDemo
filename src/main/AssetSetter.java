@@ -11,12 +11,13 @@ public class AssetSetter {
     GamePanel gp;
     public int mapNum;
     public int currentMapNum;
-    public AssetSetter(GamePanel gp){
+
+    public AssetSetter(GamePanel gp) {
         this.gp = gp;
     }
 
     public void setObjectFromFile() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt")))){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt")))) {
             int i = 0;
             String line;
             currentMapNum = 0;
@@ -37,13 +38,11 @@ public class AssetSetter {
                 }
             }
             System.out.println("Objects successfully loaded.");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
-
-
 
 
     private void setObject(int index, String objName, int worldX, int worldY, int mapNum) {
@@ -62,7 +61,7 @@ public class AssetSetter {
             gp.obj[mapNum][index].worldX = worldX;
             gp.obj[mapNum][index].worldY = worldY;
             gp.obj[mapNum][index].mapNum = mapNum;
-        } else{
+        } else {
             //Handle the case where gp.obj[mapNum][index] is null
             //System.out.println("Unknown object type: " + objName);
         }

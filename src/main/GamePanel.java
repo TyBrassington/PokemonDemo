@@ -7,9 +7,12 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
 
     final int originalTileSize = 16;
     public final int scale = 3;
@@ -44,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
     public SuperObject[][] obj = new SuperObject[maxMap][250];
 
 
-    public GamePanel(){
+    public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setOpaque(true);
         this.setBackground(Color.black);
@@ -53,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
-    public void setupGame(){
+    public void setupGame() {
         aSet.setObjectFromFile();
         if (sm.playMusic) {
             playMusic(0);
@@ -61,7 +64,8 @@ public class GamePanel extends JPanel implements Runnable{
         }
         em.setup();
     }
-    public void startGameThread(){
+
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -91,17 +95,18 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void update(){
-        if(!paused) {
+    public void update() {
+        if (!paused) {
             player.update();
             em.update();
         }
+        eHandler.update(); //outside of if statements so the game freezes while transition occurs
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D)g.create();
+        Graphics2D g2d = (Graphics2D) g.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         //debug
@@ -147,8 +152,12 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         // Draw the environment
-        if(curMap == 0) {
+        if (curMap == 0) {
             em.draw(g2d);
+        }
+
+        if (eHandler.transState != 0) {
+            eHandler.draw(g2d);
         }
 
         if (keyH.checkDrawTime) {
@@ -163,18 +172,17 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
 
-
-    public void playMusic(int i){
+    public void playMusic(int i) {
         sm.setFile(i);
         sm.play();
         sm.loop();
     }
 
-    public void stopMusic(int i){
+    public void stopMusic(int i) {
         sm.stop();
     }
 
-    public synchronized void playSoundEffect(int i){
+    public synchronized void playSoundEffect(int i) {
         sm.setFile(i);
         if (i != 0) {
             sm.setSEVolume(-20.0f);

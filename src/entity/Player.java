@@ -21,11 +21,11 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
 
-        screenX = gp.screenWidth/2 - (gp.tileSize/2);
-        screenY = gp.screenHeight/2 - (gp.tileSize);
+        screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
+        screenY = gp.screenHeight / 2 - (gp.tileSize);
 
-        hitBoxArea = new Rectangle(3*gp.scale,0*gp.scale,11*gp.scale,24*gp.scale); //(3,8,11,16)
-        hitBoxArea1 = new Rectangle(3*gp.scale,8*gp.scale,11*gp.scale,15*gp.scale);
+        hitBoxArea = new Rectangle(3 * gp.scale, 0 * gp.scale, 11 * gp.scale, 24 * gp.scale); //(3,8,11,16)
+        hitBoxArea1 = new Rectangle(3 * gp.scale, 8 * gp.scale, 11 * gp.scale, 15 * gp.scale);
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
 
@@ -36,8 +36,8 @@ public class Player extends Entity {
     public void setDefaultValues() {
 
         worldX = ((gp.tileSize * 23));
-        worldY = ((gp.tileSize * 24)+(gp.tileSize * 25))/2;
-        speed = 3*gp.scale; //temp usually 1*gp.scale
+        worldY = ((gp.tileSize * 24) + (gp.tileSize * 25)) / 2;
+        speed = 1 * gp.scale; //temp usually 1*gp.scale
         direction = "down";
     }
 
@@ -80,15 +80,19 @@ public class Player extends Entity {
 
             gp.eHandler.checkEvent();
 
-            if(!collisionOn){
+            if (!collisionOn) {
                 switch (direction) {
-                    case "up": worldY -= speed;
+                    case "up":
+                        worldY -= speed;
                         break;
-                    case "down": worldY += speed;
+                    case "down":
+                        worldY += speed;
                         break;
-                    case "left": worldX -= speed;
+                    case "left":
+                        worldX -= speed;
                         break;
-                    case "right": worldX += speed;
+                    case "right":
+                        worldX += speed;
                         break;
                 }
             }
