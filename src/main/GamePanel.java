@@ -2,6 +2,7 @@ package main;
 
 import entity.Player;
 import environment.EnvironmentManager;
+import object.OBJ_House;
 import object.SuperObject;
 import tile.TileManager;
 
@@ -120,6 +121,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         ArrayList<SuperObject> doorLHList = new ArrayList<>();
         ArrayList<SuperObject> doorHList = new ArrayList<>();
+        ArrayList<SuperObject> houseList = new ArrayList<>();
+        ArrayList<SuperObject> largeHouseList = new ArrayList<>();
         for (SuperObject[] superObjects : obj) {
             if (superObjects != null && superObjects.length > 0) {
                 for (SuperObject superObject : superObjects) {
@@ -144,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable {
         for (SuperObject[] superObjects : obj) {
             if (superObjects != null && superObjects.length > 0) {
                 for (SuperObject superObject : superObjects) { // iterate over each element in superObjects
-                    if (superObject != null && !superObject.name.equals("DoorLH") && !superObject.name.equals("DoorH")) {
+                    if (superObject != null && !superObject.name.equals("DoorLH") && !superObject.name.equals("DoorH") && superObject != null) {
                         superObject.draw(g2d, this);
                     }
                 }

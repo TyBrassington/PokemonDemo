@@ -19,6 +19,7 @@ public class SuperObject {
     public int hitBoxAreaDefaultX, hitBoxAreaDefaultX1, hitBoxAreaDefaultX2;
     public int hitBoxAreaDefaultY, hitBoxAreaDefaultY1, hitBoxAreaDefaultY2;
 
+
     public void draw(Graphics2D g2d, GamePanel gp) {
         mapNum = gp.curMap;
         if (gp.aSet.currentMapNum == gp.curMap && mapNum == gp.curMap) {
