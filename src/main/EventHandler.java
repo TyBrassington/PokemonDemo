@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class EventHandler {
 
     GamePanel gp;
-    EventRect eventRect[][][];
+    EventRect eventRect[][][], eventRect1[][][];
     BufferedImage fadeToFromBlack;
     int prevEventX, prevEventY;
     boolean canTouchEvent = true;
@@ -30,6 +30,7 @@ public class EventHandler {
     public EventHandler(GamePanel gp) {
         this.gp = gp;
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
+        eventRect1 = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
         map = 0;
         x = 0;
         y = 0;
@@ -43,6 +44,13 @@ public class EventHandler {
             eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
             eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
 
+            eventRect1[map][x][y] = new EventRect();
+            eventRect1[map][x][y].x = 0;
+            eventRect1[map][x][y].y = 0;
+            eventRect1[map][x][y].width = 66;
+            eventRect1[map][x][y].height = 57;
+            eventRect1[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
+            eventRect1[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
             x++;
             if (x == gp.maxWorldCol * gp.tileSize) {
                 x = 0;
@@ -119,6 +127,26 @@ public class EventHandler {
                 timer1.start();
                 timer2.setRepeats(false);
                 timer2.start();
+            } else if (hit(0, 90,390,"any")){
+                transState = 1;
+                gp.playSoundEffect(3);
+                Timer transTimer2 = new Timer(600, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        teleport(2, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
+                    }
+                });
+                transTimer2.setRepeats(false);
+                transTimer2.start();
+            } else if (hit(2, 0,0,"any")){
+                transState = 1;
+                gp.playSoundEffect(3);
+                Timer transTimer2 = new Timer(600, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        teleport(0, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
+                    }
+                });
+                transTimer2.setRepeats(false);
+                transTimer2.start();
             }
         }
     }
