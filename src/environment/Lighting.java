@@ -49,8 +49,8 @@ public class Lighting {
                 }
             }
             case DUSK -> {
-                filterAlpha = Math.min(filterAlpha + 0.001f, 0.4f);
-                dayState = (filterAlpha == 0.4f) ? NIGHT : DUSK;
+                filterAlpha = Math.min(filterAlpha + 0.001f, 0.45f);
+                dayState = (filterAlpha == 0.45f) ? NIGHT : DUSK;
             }
             case NIGHT -> {
                 if (++dayCounter > MAX_DAY_COUNTER) {

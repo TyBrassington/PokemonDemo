@@ -51,7 +51,7 @@ public class AssetSetter {
             case "Sign" -> gp.obj[mapNum][index] = new OBJ_Sign(gp);
             case "LargeHouse" -> gp.obj[mapNum][index] = new OBJ_LargeHouse(gp);
             case "Tree" -> gp.obj[mapNum][index] = new OBJ_Tree(gp);
-            case "Tree2" -> gp.obj[mapNum][index] = new OBJ_Tree2(gp);
+            case "RouteSign" -> gp.obj[mapNum][index] = new OBJ_RouteSign(gp);
             case "Mailbox" -> gp.obj[mapNum][index] = new OBJ_Mailbox(gp);
             case "DoorLH" -> gp.obj[mapNum][index] = new OBJ_DoorLargeHouse(gp);
             case "DoorH" -> gp.obj[mapNum][index] = new OBJ_DoorHouse(gp);

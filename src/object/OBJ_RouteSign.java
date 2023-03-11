@@ -4,25 +4,26 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class OBJ_Tree2 extends SuperObject{
-    public OBJ_Tree2(GamePanel gp){
+public class OBJ_RouteSign extends SuperObject{
+    public OBJ_RouteSign(GamePanel gp){
 
-        name = "Tree 2";
+        name = "Route Sign";
 
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/tree2.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/objects/routeSign.png"));
             getScaledImage(image, gp);
         } catch (IOException e) {
             e.printStackTrace();
         }
         hitBoxArea = new Rectangle();
+        hitBoxArea.x =  6*gp.scale;
+        hitBoxArea.y = 12*gp.scale;
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = (image.getWidth()*gp.scale);
-        hitBoxArea.height = image.getHeight()* gp.scale;
+        hitBoxArea.width = 22;
+        hitBoxArea.height = 30;
         collision = true;
 
         hitBoxArea1 = new Rectangle();

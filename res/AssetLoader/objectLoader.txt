@@ -15,6 +15,24 @@ DoorLH 460 472
 House 287 416
 DoorH 300 470
 
+# Route 201 Preview
+RouteSign 350 44
+
+Tree 109 44
+Tree 141 44
+Tree 173 44
+Tree 205 44
+Tree 237 44
+
+
+Tree 461 44
+Tree 493 44
+Tree 525 44
+Tree 557 44
+Tree 589 44
+Tree 621 44
+Tree 653 44
+
 # Row 18 (from top)
 
 Tree 109 76

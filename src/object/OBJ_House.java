@@ -55,27 +55,10 @@ public class OBJ_House extends SuperObject {
                 e.printStackTrace();
             }
         }
+        System.out.println(lighting.getFilterAlpha());
 
 
     }
 
-    public void setHouseDayCycle(GamePanel gp) {
-        Lighting lighting = new Lighting(gp);
-        while (true) {
-            if (lighting.getFilterAlpha() < 0.2f) {
-                try {
-                    image = ImageIO.read(getClass().getResourceAsStream("/objects/houseDL.png"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    image = ImageIO.read(getClass().getResourceAsStream("/objects/houseDL.png"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 }
 

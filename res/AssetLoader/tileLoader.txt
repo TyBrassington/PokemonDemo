@@ -124,3 +124,5 @@ Index | Name | Collision
 121 img98
 122 img99
 123 placeholder true
+124 wildGrass
+125 wildGrassDP
