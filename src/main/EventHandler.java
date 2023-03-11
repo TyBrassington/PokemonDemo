@@ -27,8 +27,6 @@ public class EventHandler {
 
     int map, x, y;
 
-    SuperObject myObject;
-
     public EventHandler(GamePanel gp) {
         this.gp = gp;
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];

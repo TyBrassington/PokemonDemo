@@ -11,6 +11,9 @@ public class CollisionScanner {
         this.gp = gp;
     }
 
+    boolean canCollide = true;
+    int prevCollisionX, prevCollisionY;
+
     public void checkTile(Entity entity) {
         int entityLeftWorldx = entity.worldX + entity.hitBoxArea.x;
         int entityRightWorldx = entity.worldX + entity.hitBoxArea.x + entity.hitBoxArea.width;
@@ -92,6 +95,10 @@ public class CollisionScanner {
                         if (entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea2)){
                             if(gp.obj[gp.curMap][i].collision){
                                 entity.collisionOn = true;
+                                prevCollisionX = gp.player.worldX;
+                                prevCollisionY = gp.player.worldY;
+                                checkInCollision();
+                                canCollide = false;
                             }
                             if (player){
                                 index = i;
@@ -103,6 +110,10 @@ public class CollisionScanner {
                         if (entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea2)){
                             if(gp.obj[gp.curMap][i].collision){
                                 entity.collisionOn = true;
+                                prevCollisionX = gp.player.worldX;
+                                prevCollisionY = gp.player.worldY;
+                                checkInCollision();
+                                canCollide = false;
                             }
                             if (player){
                                 index = i;
@@ -114,6 +125,10 @@ public class CollisionScanner {
                         if (entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea2)){
                             if(gp.obj[gp.curMap][i].collision){
                                 entity.collisionOn = true;
+                                prevCollisionX = gp.player.worldX;
+                                prevCollisionY = gp.player.worldY;
+                                checkInCollision();
+                                canCollide = false;
                             }
                             if (player){
                                 index = i;
@@ -125,6 +140,10 @@ public class CollisionScanner {
                         if (entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea1) || entity.hitBoxArea.intersects(gp.obj[gp.curMap][i].hitBoxArea2)){
                             if(gp.obj[gp.curMap][i].collision){
                                 entity.collisionOn = true;
+                                prevCollisionX = gp.player.worldX;
+                                prevCollisionY = gp.player.worldY;
+                                canCollide = false;
+                                checkInCollision();
                             }
                             if (player){
                                 index = i;
@@ -145,6 +164,19 @@ public class CollisionScanner {
             }
         }
         return index;
+    }
+
+    public void checkInCollision(){
+        int xDistance = Math.abs(gp.player.worldX - prevCollisionX);
+        int yDistance = Math.abs(gp.player.worldY - prevCollisionY);
+        int distance = Math.max(xDistance, yDistance);
+        if (distance > gp.tileSize) {
+            canCollide = true;
+        }
+
+        if (canCollide){
+            gp.playSoundEffect(4);
+        }
     }
 }
 

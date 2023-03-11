@@ -78,6 +78,7 @@ public class Player extends Entity {
 
             gp.cc.checkObject(this, true);
 
+
             gp.eHandler.checkEvent();
 
             if (!collisionOn) {

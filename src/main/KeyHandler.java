@@ -37,16 +37,6 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_T && e.isShiftDown()) {
             checkDrawTime = !checkDrawTime;
         }
-        if (code == KeyEvent.VK_R) {
-            switch (gp.curMap) {
-                case 0:
-                    gp.tileManager.loadMap("/maps/map01.txt", 0);
-                    break;
-                case 1:
-                    gp.tileManager.loadMap("/maps/map02.txt", 0);
-                    break;
-            }
-        }
         if (code == KeyEvent.VK_ESCAPE) {
             gp.paused = !gp.paused;
         }

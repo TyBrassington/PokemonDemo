@@ -2,3 +2,4 @@
 1 door_enter
 2 door_close
 3 door_exit
+4 player_bump
