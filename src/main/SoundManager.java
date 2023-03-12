@@ -9,7 +9,7 @@ import java.net.URL;
 public class SoundManager {
 
     private Clip clip;
-    public boolean playMusic = false;
+    public boolean playMusic = true;
     public float volume = -40.0f;
     public boolean isSoundEffect;
     public boolean isBumpSound;

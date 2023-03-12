@@ -13,20 +13,20 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        System.out.println("\nPokémon by Ty Brassington, version 0.9.7\n");
+        System.out.println("\nPokémon by Ty Brassington, version 0.9.8\n");
         window.setTitle("Pokémon Demo Panel");
         Image icon = Toolkit.getDefaultToolkit().getImage("pokeball_icon.png");
         window.setIconImage(icon);
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        GamePanel gp = new GamePanel();
+        window.add(gp);
         window.pack();
 
         //Load objects before setting window to visible
-        gamePanel.setupGame();
+        gp.setupGame();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        gamePanel.startGameThread();
+        gp.startGameThread();
     }
 }

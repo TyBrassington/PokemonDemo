@@ -14,11 +14,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class EventHandler {
 
     GamePanel gp;
-    EventRect eventRect[][][], eventRect1[][][];
+    EventRect eventRect[][][], eventRect1[][][], eventRect2[][][];
     BufferedImage fadeToFromBlack;
     int prevEventX, prevEventY;
     boolean canTouchEvent = true;
-
+    boolean oneTimeEventDone = false;
     private static final int noTrans = 0;
     private static final int startTrans = 1;
     private static final int midTrans = 2;
@@ -29,6 +29,7 @@ public class EventHandler {
 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
+
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
         eventRect1 = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
         map = 0;
@@ -36,13 +37,7 @@ public class EventHandler {
         y = 0;
 
         while (map < gp.maxMap && x < gp.maxWorldCol * gp.tileSize && y < gp.maxWorldRow * gp.tileSize) {
-            eventRect[map][x][y] = new EventRect().x(0).y(0).width(66).height(57);
-            eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
-            eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
-
-            eventRect1[map][x][y] = new EventRect().x(0).y(0).width(100).height(10);
-            eventRect1[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
-            eventRect1[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
+            createEventRectangles(map, x, y);
 
             x++;
             if (x == gp.maxWorldCol * gp.tileSize) {
@@ -58,6 +53,18 @@ public class EventHandler {
         setupTransition();
         update();
     }
+
+    public void createEventRectangles(int map, int x, int y) {
+        eventRect[map][x][y] = new EventRect().x(0).y(0).width(66).height(57); //event rect for ext doors
+        eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
+        eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
+
+        eventRect1[map][x][y] = new EventRect().x(0).y(0).width(300).height(10);  //eventRect for path from twinleaf to route 201
+        eventRect1[map][x][y].eventRect1DefaultX = eventRect1[map][x][y].x;
+        eventRect1[map][x][y].eventRect1DefaultY = eventRect1[map][x][y].y;
+
+    }
+
 
     private void setupTransition() {
         fadeToFromBlack = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
@@ -76,7 +83,7 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0, 460, 471, "up")) {
+            if (hit(0, 460, 471, "up", 0)) {
 
                 transState = 1;
                 gp.playSoundEffect(1);
@@ -94,12 +101,12 @@ public class EventHandler {
                 });
                 timer.setRepeats(false);
                 timer.start();
-            } else if (hit(1, 140, 80, "down")) {
+            } else if (hit(1, 140, 80, "down", 1)) {
                 transState = 1;
                 gp.playSoundEffect(3);
                 Timer transTimer1 = new Timer(600, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        teleport(0, 460, 481); //twinleafEXT to playerhouseDS
+                        teleport(0, 460, 481); //playerhouseDS to twinleafEXT
                     }
                 });
                 transTimer1.setRepeats(false);
@@ -120,22 +127,28 @@ public class EventHandler {
                 timer1.start();
                 timer2.setRepeats(false);
                 timer2.start();
-            } else if (hit(0, 90,390,"any")){
+            } else if (hit(0, 90,350,"any",1)){
                 transState = 1;
+                gp.stopMusic(0);
                 gp.playSoundEffect(3);
                 Timer transTimer2 = new Timer(600, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         teleport(2, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
+                        gp.sm.setSEVolume(-40.0f);
+                        gp.playMusic(5);
                     }
                 });
                 transTimer2.setRepeats(false);
                 transTimer2.start();
-            } else if (hit(2, 0,0,"any")){
+            } else if (hit(2, 0,0,"any",1)){
                 transState = 1;
+                gp.stopMusic(0);
                 gp.playSoundEffect(3);
                 Timer transTimer2 = new Timer(600, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         teleport(0, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
+                        gp.sm.setSEVolume(-40.0f);
+                        gp.playMusic(0);
                     }
                 });
                 transTimer2.setRepeats(false);
@@ -144,28 +157,45 @@ public class EventHandler {
         }
     }
 
-    public boolean hit(int map, int eventX, int eventY, String reqDir) {
+    public boolean hit(int map, int eventX, int eventY, String reqDir, int eventRectNum) {
         boolean hit = false;
 
         if (map == gp.curMap) {
             gp.player.hitBoxArea.x = gp.player.worldX + gp.player.hitBoxArea.x;
             gp.player.hitBoxArea.y = gp.player.worldY + gp.player.hitBoxArea.y;
 
-            eventRect[map][eventX][eventY].x = eventY * gp.scale + eventRect[map][eventX][eventY].x;
-            eventRect[map][eventX][eventY].y = eventX * gp.scale + eventRect[map][eventX][eventY].y;
+            if (eventRectNum == 0) {
+                eventRect[map][eventX][eventY].x = eventY * gp.scale + eventRect[map][eventX][eventY].x;
+                eventRect[map][eventX][eventY].y = eventX * gp.scale + eventRect[map][eventX][eventY].y;
 
-            if (gp.player.hitBoxArea.intersects(eventRect[map][eventX][eventY])) {
-                if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
-                    hit = true;
+                if (gp.player.hitBoxArea.intersects(eventRect[map][eventX][eventY])) {
+                    if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
+                        hit = true;
 
-                    prevEventX = gp.player.worldX;
-                    prevEventY = gp.player.worldY;
+                        prevEventX = gp.player.worldX;
+                        prevEventY = gp.player.worldY;
+                    }
+                }
+            } else if (eventRectNum == 1){
+                eventRect1[map][eventX][eventY].x = eventY * gp.scale + eventRect1[map][eventX][eventY].x;
+                eventRect1[map][eventX][eventY].y = eventX * gp.scale + eventRect1[map][eventX][eventY].y;
+
+                if (gp.player.hitBoxArea.intersects(eventRect1[map][eventX][eventY])) {
+                    if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
+                        hit = true;
+
+                        prevEventX = gp.player.worldX;
+                        prevEventY = gp.player.worldY;
+                    }
                 }
             }
             gp.player.hitBoxArea.x = gp.player.hitBoxAreaDefaultX;
             gp.player.hitBoxArea.y = gp.player.hitBoxAreaDefaultY;
+
             eventRect[map][eventX][eventY].x = eventRect[map][eventX][eventY].eventRectDefaultX;
             eventRect[map][eventX][eventY].y = eventRect[map][eventX][eventY].eventRectDefaultY;
+            eventRect1[map][eventX][eventY].x = eventRect1[map][eventX][eventY].eventRect1DefaultX;
+            eventRect1[map][eventX][eventY].y = eventRect1[map][eventX][eventY].eventRect1DefaultY;
         }
 
         return hit;

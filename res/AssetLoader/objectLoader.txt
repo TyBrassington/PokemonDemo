@@ -16,7 +16,8 @@ House 287 416
 DoorH 300 470
 
 # Route 201 Preview
-RouteSign 350 44
+
+RouteSign 348 44
 
 Tree 109 44
 Tree 141 44
