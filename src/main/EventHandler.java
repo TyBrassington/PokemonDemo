@@ -36,21 +36,14 @@ public class EventHandler {
         y = 0;
 
         while (map < gp.maxMap && x < gp.maxWorldCol * gp.tileSize && y < gp.maxWorldRow * gp.tileSize) {
-            eventRect[map][x][y] = new EventRect();
-            eventRect[map][x][y].x = 0;
-            eventRect[map][x][y].y = 0;
-            eventRect[map][x][y].width = 66;
-            eventRect[map][x][y].height = 57;
+            eventRect[map][x][y] = new EventRect().x(0).y(0).width(66).height(57);
             eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
             eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
 
-            eventRect1[map][x][y] = new EventRect();
-            eventRect1[map][x][y].x = 0;
-            eventRect1[map][x][y].y = 0;
-            eventRect1[map][x][y].width = 66;
-            eventRect1[map][x][y].height = 57;
+            eventRect1[map][x][y] = new EventRect().x(0).y(0).width(100).height(10);
             eventRect1[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
             eventRect1[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
+
             x++;
             if (x == gp.maxWorldCol * gp.tileSize) {
                 x = 0;
@@ -78,7 +71,7 @@ public class EventHandler {
         int xDistance = Math.abs(gp.player.worldX - prevEventX);
         int yDistance = Math.abs(gp.player.worldY - prevEventY);
         int distance = Math.max(xDistance, yDistance);
-        if (distance > gp.tileSize) {
+        if (distance > gp.tileSize/2) {
             canTouchEvent = true;
         }
 
