@@ -130,6 +130,7 @@ public class EventHandler {
             } else if (hit(0, 90,350,"any",1)){
                 transState = 1;
                 gp.stopMusic(0);
+                gp.stopMusic(5);
                 gp.playSoundEffect(3);
                 Timer transTimer2 = new Timer(600, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -143,6 +144,7 @@ public class EventHandler {
             } else if (hit(2, 0,0,"any",1)){
                 transState = 1;
                 gp.stopMusic(0);
+                gp.stopMusic(5);
                 gp.playSoundEffect(3);
                 Timer transTimer2 = new Timer(600, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -157,45 +159,50 @@ public class EventHandler {
         }
     }
 
-    public boolean hit(int map, int eventX, int eventY, String reqDir, int eventRectNum) {
+    public boolean hit(int map, int eventY, int eventX, String reqDir, int eventRectNum) {
         boolean hit = false;
 
         if (map == gp.curMap) {
             gp.player.hitBoxArea.x = gp.player.worldX + gp.player.hitBoxArea.x;
             gp.player.hitBoxArea.y = gp.player.worldY + gp.player.hitBoxArea.y;
 
-            if (eventRectNum == 0) {
-                eventRect[map][eventX][eventY].x = eventY * gp.scale + eventRect[map][eventX][eventY].x;
-                eventRect[map][eventX][eventY].y = eventX * gp.scale + eventRect[map][eventX][eventY].y;
 
-                if (gp.player.hitBoxArea.intersects(eventRect[map][eventX][eventY])) {
-                    if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
-                        hit = true;
+            switch (eventRectNum){
+                case 0 -> {
+                    eventRect[map][eventY][eventX].x += eventX * gp.scale;
+                    eventRect[map][eventY][eventX].y += eventY * gp.scale;
 
-                        prevEventX = gp.player.worldX;
-                        prevEventY = gp.player.worldY;
+                    if (gp.player.hitBoxArea.intersects(eventRect[map][eventY][eventX])) {
+                        if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
+                            hit = true;
+
+                            prevEventX = gp.player.worldX;
+                            prevEventY = gp.player.worldY;
+                        }
                     }
                 }
-            } else if (eventRectNum == 1){
-                eventRect1[map][eventX][eventY].x = eventY * gp.scale + eventRect1[map][eventX][eventY].x;
-                eventRect1[map][eventX][eventY].y = eventX * gp.scale + eventRect1[map][eventX][eventY].y;
+                case 1 -> {
+                    eventRect1[map][eventY][eventX].x += eventX * gp.scale;
+                    eventRect1[map][eventY][eventX].y += eventY * gp.scale;
 
-                if (gp.player.hitBoxArea.intersects(eventRect1[map][eventX][eventY])) {
-                    if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
-                        hit = true;
+                    if (gp.player.hitBoxArea.intersects(eventRect1[map][eventY][eventX])) {
+                        if (gp.player.direction.contentEquals(reqDir) || reqDir.contentEquals("any")) {
+                            hit = true;
 
-                        prevEventX = gp.player.worldX;
-                        prevEventY = gp.player.worldY;
+                            prevEventX = gp.player.worldX;
+                            prevEventY = gp.player.worldY;
+                        }
                     }
                 }
             }
+
             gp.player.hitBoxArea.x = gp.player.hitBoxAreaDefaultX;
             gp.player.hitBoxArea.y = gp.player.hitBoxAreaDefaultY;
 
-            eventRect[map][eventX][eventY].x = eventRect[map][eventX][eventY].eventRectDefaultX;
-            eventRect[map][eventX][eventY].y = eventRect[map][eventX][eventY].eventRectDefaultY;
-            eventRect1[map][eventX][eventY].x = eventRect1[map][eventX][eventY].eventRect1DefaultX;
-            eventRect1[map][eventX][eventY].y = eventRect1[map][eventX][eventY].eventRect1DefaultY;
+            eventRect[map][eventY][eventX].x = eventRect[map][eventY][eventX].eventRectDefaultX;
+            eventRect[map][eventY][eventX].y = eventRect[map][eventY][eventX].eventRectDefaultY;
+            eventRect1[map][eventY][eventX].x = eventRect1[map][eventY][eventX].eventRect1DefaultX;
+            eventRect1[map][eventY][eventX].y = eventRect1[map][eventY][eventX].eventRect1DefaultY;
         }
 
         return hit;

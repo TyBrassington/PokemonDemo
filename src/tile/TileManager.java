@@ -26,7 +26,7 @@ public class TileManager {
         getTileImage();
         loadMap("/maps/twinleafTownEXT.txt", 0);
         loadMap("/maps/playerHouseDS.txt", 1);
-        loadMap("/maps/map01.txt",2); //Placeholder for Route 201
+        loadMap("/maps/route_201.txt",2); //Placeholder for Route 201
     }
 
     public void getTileImage() {

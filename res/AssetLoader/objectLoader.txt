@@ -4,7 +4,7 @@ mapNum 0
 
 House 449 289
 DoorH 462 343
-Sign 399 384
+Sign 403 384
 Mailbox 352 332
 LargeHouse 268 265
 DoorLH 285 345

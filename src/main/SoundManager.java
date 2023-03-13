@@ -9,8 +9,10 @@ import java.net.URL;
 public class SoundManager {
 
     private Clip clip;
+    private long clipTime;
     public boolean playMusic = true;
     public float volume = -40.0f;
+
     public boolean isSoundEffect;
     public boolean isBumpSound;
 
@@ -40,6 +42,20 @@ public class SoundManager {
 
     public void play() {
         clip.start();
+    }
+
+    public void pause() {
+        if (clip != null) {
+            clipTime = clip.getMicrosecondPosition();
+            clip.stop();
+        }
+    }
+
+    public void resume() {
+        if (clip != null) {
+            clip.setMicrosecondPosition(clipTime);
+            clip.start();
+        }
     }
 
     public void loop() {
