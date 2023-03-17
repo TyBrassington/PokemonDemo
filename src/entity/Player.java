@@ -17,6 +17,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     private HashMap<String, BufferedImage[]> images;
+    boolean dirKeyPressed;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -45,6 +46,19 @@ public class Player extends Entity {
         direction = "down";
     }
 
+    public void adjustPlayerHitboxes() {
+        if (!isRunning || (isRunning && !dirKeyPressed)) {
+            hitBoxArea = new Rectangle(3 * gp.scale, 0 * gp.scale, 11 * gp.scale, 24 * gp.scale); //(3,8,11,16)
+            hitBoxArea1 = new Rectangle(3 * gp.scale, 8 * gp.scale, 11 * gp.scale, 15 * gp.scale);
+        } else {
+            hitBoxArea = new Rectangle(3 * gp.scale, 0 * gp.scale, 13 * gp.scale, 24 * gp.scale); //(3,8,11,16)
+            hitBoxArea1 = new Rectangle(3 * gp.scale, 8 * gp.scale, 13 * gp.scale, 15 * gp.scale);
+        }
+        hitBoxAreaDefaultX = hitBoxArea.x;
+        hitBoxAreaDefaultY = hitBoxArea.y;
+    }
+
+
     private void loadPlayerImages() {
         String[] directions = {"up", "down", "left", "right"};
         String[] actions = {"", "Run"};
@@ -69,7 +83,9 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+        adjustPlayerHitboxes();
+        dirKeyPressed = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
+        if (dirKeyPressed) {
             if (keyH.upPressed) {
                 direction = "up";
             } else if (keyH.downPressed) {
@@ -114,31 +130,22 @@ public class Player extends Entity {
         }
     }
 
-
     public void draw(Graphics2D g2d) {
         BufferedImage image;
-        String key = (isRunning ? "Run" : "") + direction;
+        String key = (isRunning && dirKeyPressed) ? "Run" + direction : direction;
         BufferedImage[] spriteImages = images.get(key);
         image = spriteImages[spriteNum];
-        if (isRunning) {
+        if (isRunning && dirKeyPressed) {
             g2d.drawImage(image, screenX - (1 * gp.scale), screenY, 21 * gp.scale, 26 * gp.scale, null);
         } else g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
-       /* //DRAW PLAYER HITBOX
-        g2d.setColor(new Color(255, 0,0,120));
-        int solidAreaX = screenX + hitBoxArea.x;
-        int solidAreaY = screenY + hitBoxArea.y;
-        int solidAreaWidth = hitBoxArea.width;
-        int solidAreaHeight = hitBoxArea.height;
-        g2d.fillRect(solidAreaX, solidAreaY, solidAreaWidth, solidAreaHeight);
-        g2d.setColor(new Color(0, 21, 255,120));
-        int solidAreaX1 = screenX + hitBoxArea1.x;
-        int solidAreaY1 = screenY + hitBoxArea1.y;
-        int solidAreaWidth1 = hitBoxArea1.width;
-        int solidAreaHeight1 = hitBoxArea1.height;
-        g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);
+/*
+        //DRAW PLAYER HITBOX
+        g2d.setColor(new Color(255, 0, 0, 120));
+        g2d.fillRect(screenX + hitBoxArea.x, screenY + hitBoxArea.y, hitBoxArea.width, hitBoxArea.height);
+        g2d.setColor(new Color(0, 21, 255, 120));
+        g2d.fillRect(screenX + hitBoxArea1.x, screenY + hitBoxArea1.y, hitBoxArea1.width, hitBoxArea1.height);
 */
-
     }
 }
 
