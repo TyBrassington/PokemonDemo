@@ -1,7 +1,18 @@
-# Town
+mapNum 3
 
-House 449 289
-LargeHouse 268 265
+RouteSign 348 44
 
-LargeHouse 443 392
-House 287 416
+Tree 109 44
+Tree 141 44
+Tree 173 44
+Tree 205 44
+Tree 237 44
+
+
+Tree 461 44
+Tree 493 44
+Tree 525 44
+Tree 557 44
+Tree 589 44
+Tree 621 44
+Tree 653 44

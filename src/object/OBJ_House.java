@@ -14,30 +14,18 @@ public class OBJ_House extends SuperObject {
 
         name = "House";
 
-        hitBoxArea = new Rectangle();
-        hitBoxArea.x = 4 * gp.scale;
-        hitBoxArea.y = 16 * gp.scale;
+        hitBoxArea = new Rectangle(4 * gp.scale, 16 * gp.scale, 27, 177);
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = 27;
-        hitBoxArea.height = 177;
         collision = true;
 
-        hitBoxArea1 = new Rectangle();
-        hitBoxArea1.x = 13 * gp.scale;
-        hitBoxArea1.y = 16 * gp.scale;
+        hitBoxArea1 = new Rectangle(13 * gp.scale, 16 * gp.scale, 66, 114);
         hitBoxAreaDefaultX1 = hitBoxArea1.x;
         hitBoxAreaDefaultY1 = hitBoxArea1.y;
-        hitBoxArea1.width = 66;
-        hitBoxArea1.height = 114;
 
-        hitBoxArea2 = new Rectangle();
-        hitBoxArea2.x = 35 * gp.scale;
-        hitBoxArea2.y = 16 * gp.scale;
+        hitBoxArea2 = new Rectangle(35 * gp.scale, 16 * gp.scale, 75, 177);
         hitBoxAreaDefaultX2 = hitBoxArea2.x;
         hitBoxAreaDefaultY2 = hitBoxArea2.y;
-        hitBoxArea2.width = 75;
-        hitBoxArea2.height = 177;
 
         Lighting lighting = new Lighting(gp);
         if (lighting.getFilterAlpha() < 0.2f) {

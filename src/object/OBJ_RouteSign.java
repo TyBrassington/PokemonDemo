@@ -17,13 +17,9 @@ public class OBJ_RouteSign extends SuperObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        hitBoxArea = new Rectangle();
-        hitBoxArea.x =  6*gp.scale;
-        hitBoxArea.y = 12*gp.scale;
+        hitBoxArea = new Rectangle(6*gp.scale, 12*gp.scale, 22, 30);
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = 22;
-        hitBoxArea.height = 30;
         collision = true;
 
         hitBoxArea1 = new Rectangle();

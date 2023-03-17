@@ -7,7 +7,7 @@ import main.GamePanel;
 
 public class Lighting {
 
-    private GamePanel gamePanel;
+    private GamePanel gp;
     private BufferedImage darknessFilter;
     private int dayCounter;
     private float filterAlpha;
@@ -20,16 +20,16 @@ public class Lighting {
     private static final int MAX_DAY_COUNTER = 600; //10 seconds for the sake of testing
 
     public Lighting(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+        this.gp = gamePanel;
         setupLightSource();
         update();
     }
 
     private void setupLightSource() {
-        darknessFilter = new BufferedImage(gamePanel.screenWidth, gamePanel.screenHeight, BufferedImage.TYPE_INT_ARGB);
+        darknessFilter = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics2D = darknessFilter.createGraphics();
         graphics2D.setColor(new Color(0, 0, 51, 250));
-        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        graphics2D.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         try {
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/pokemon-dp-pro.ttf"));
@@ -85,5 +85,11 @@ public class Lighting {
         g2d.setColor(Color.WHITE);
         g2d.setFont(new Font("Pokémon DP Pro Regular", Font.PLAIN, 50));
         g2d.drawString(dayStateLabel, 20, 550);
+
+
+        //debug player coords
+        g2d.drawString(gp.player.worldX/3 + " " + gp.player.worldY/3, 600, 550);
+        g2d.drawString(String.valueOf(gp.curMap), 20, 475);
+
     }
 }

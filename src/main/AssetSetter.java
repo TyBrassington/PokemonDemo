@@ -17,30 +17,58 @@ public class AssetSetter {
     }
 
     public void setObjectFromFile() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt")))) {
-            int i = 0;
-            String line;
-            currentMapNum = 0;
-            while ((line = reader.readLine()) != null) {
-                if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
-                    String[] parts = line.split(" ");
-                    if (parts.length == 2 && parts[0].equals("mapNum")) {
-                        // Set the current map number to the value following the header
-                        currentMapNum = Integer.parseInt(parts[1]);
-                    } else {
-                        // Pass the current map number as a parameter to setObject()
-                        String objName = parts[0];
-                        int worldX = Integer.parseInt(parts[1]) * gp.scale;
-                        int worldY = Integer.parseInt(parts[2]) * gp.scale;
-                        setObject(i, objName, worldX, worldY, currentMapNum);
-                        i++;
+        if (gp.curMap == 0) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt")))) {
+                int i = 0;
+                String line;
+                currentMapNum = 0;
+                while ((line = reader.readLine()) != null) {
+                    if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
+                        String[] parts = line.split(" ");
+                        if (parts.length == 2 && parts[0].equals("mapNum")) {
+                            // Set the current map number to the value following the header
+                            currentMapNum = Integer.parseInt(parts[1]);
+                        } else {
+                            // Pass the current map number as a parameter to setObject()
+                            String objName = parts[0];
+                            int worldX = Integer.parseInt(parts[1]) * gp.scale;
+                            int worldY = Integer.parseInt(parts[2]) * gp.scale;
+                            setObject(i, objName, worldX, worldY, currentMapNum);
+                            i++;
+                        }
                     }
                 }
+                System.out.println("Objects successfully loaded.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
             }
-            System.out.println("Objects successfully loaded.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        } else if (gp.curMap == 3){
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoaderHouseTest.txt")))) {
+                int i = 0;
+                String line;
+                currentMapNum = 0;
+                while ((line = reader.readLine()) != null) {
+                    if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
+                        String[] parts = line.split(" ");
+                        if (parts.length == 2 && parts[0].equals("mapNum")) {
+                            // Set the current map number to the value following the header
+                            currentMapNum = Integer.parseInt(parts[1]);
+                        } else {
+                            // Pass the current map number as a parameter to setObject()
+                            String objName = parts[0];
+                            int worldX = Integer.parseInt(parts[1]) * gp.scale;
+                            int worldY = Integer.parseInt(parts[2]) * gp.scale;
+                            setObject(i, objName, worldX, worldY, currentMapNum);
+                            i++;
+                        }
+                    }
+                }
+                System.out.println("Objects successfully loaded.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
         }
     }
 

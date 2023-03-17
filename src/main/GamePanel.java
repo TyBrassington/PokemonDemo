@@ -2,16 +2,13 @@ package main;
 
 import entity.Player;
 import environment.EnvironmentManager;
-import object.OBJ_House;
 import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Arrays;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -100,8 +97,14 @@ public class GamePanel extends JPanel implements Runnable {
         if (!paused) {
             player.update();
             em.update();
+
         }
         eHandler.update(); //outside of if statements so the game freezes while transition occurs
+    }
+
+    public void switchMap(int curMap){
+        aSet.setObjectFromFile();
+
     }
 
     @Override
@@ -154,8 +157,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        // Draw the environment
-        if (curMap == 0) {
+        // Draw the environment if outdoors
+        if (Arrays.asList(0, 3).contains(curMap)) { //maps 0 and 3 are both outdoors
             em.draw(g2d);
         }
 
@@ -189,8 +192,11 @@ public class GamePanel extends JPanel implements Runnable {
         sm.resume();
     }
 
-    public void stopMusic(int i) {
-        sm.stop();
+    public void stopMusic() {
+        if (curMap != 1 || curMap != 2) {
+            sm.stop();
+            System.out.println("Music stopped");
+        }
     }
 
     public synchronized void playSoundEffect(int i) {

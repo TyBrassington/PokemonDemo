@@ -7,9 +7,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class OBJ_DoorHouse extends SuperObject{
+public class OBJ_DoorHouse extends SuperObject {
 
-    public OBJ_DoorHouse(GamePanel gp){
+    public OBJ_DoorHouse(GamePanel gp) {
 
         name = "DoorH";
 
@@ -19,9 +19,7 @@ public class OBJ_DoorHouse extends SuperObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        hitBoxArea = new Rectangle();
-        hitBoxArea.x = 0;
-        hitBoxArea.y = 0;
+        hitBoxArea = new Rectangle(0, 0, 0, 0);
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
         hitBoxArea.width = 0;//66

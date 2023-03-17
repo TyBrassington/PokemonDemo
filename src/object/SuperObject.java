@@ -34,7 +34,7 @@ public class SuperObject {
                 g2d.drawImage(scaledImage, screenX, screenY, null);
                 g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
 /*
-            g2d.setColor(new Color(255, 0,0,120));
+            g2d.setColor(new Color(255, 0,0,120+));
             g2d.fillRect(screenX + hitBoxArea.x, screenY + hitBoxArea.y, hitBoxArea.width, hitBoxArea.height);
 
             g2d.setColor(new Color(0, 4, 255,120));

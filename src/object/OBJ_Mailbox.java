@@ -7,8 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class OBJ_Mailbox extends SuperObject{
-    public OBJ_Mailbox(GamePanel gp){
+public class OBJ_Mailbox extends SuperObject {
+    public OBJ_Mailbox(GamePanel gp) {
 
         name = "Mailbox";
 
@@ -18,13 +18,9 @@ public class OBJ_Mailbox extends SuperObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        hitBoxArea = new Rectangle();
-        hitBoxArea.x = 2*gp.scale;
-        hitBoxArea.y = 10*gp.scale;
+        hitBoxArea = new Rectangle(2 * gp.scale, 10 * gp.scale, 36, 57);
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
-        hitBoxArea.width = 36;
-        hitBoxArea.height = 57;
         collision = true;
 
         hitBoxArea1 = new Rectangle();

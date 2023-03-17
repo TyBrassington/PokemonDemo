@@ -327,3 +327,4 @@ Tree 653 652
 
 # Garden
 FenceEnclosure 245 186
+FenceEnclosure 464 186

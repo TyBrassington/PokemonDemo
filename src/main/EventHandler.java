@@ -1,15 +1,8 @@
 package main;
 
-import object.SuperObject;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class EventHandler {
 
@@ -37,7 +30,7 @@ public class EventHandler {
         y = 0;
 
         while (map < gp.maxMap && x < gp.maxWorldCol * gp.tileSize && y < gp.maxWorldRow * gp.tileSize) {
-            createEventRectangles(map, x, y);
+            createEventRects(map, x, y);
 
             x++;
             if (x == gp.maxWorldCol * gp.tileSize) {
@@ -54,7 +47,7 @@ public class EventHandler {
         update();
     }
 
-    public void createEventRectangles(int map, int x, int y) {
+    public void createEventRects(int map, int x, int y) {
         eventRect[map][x][y] = new EventRect().x(0).y(0).width(66).height(57); //event rect for ext doors
         eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
         eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
@@ -78,7 +71,7 @@ public class EventHandler {
         int xDistance = Math.abs(gp.player.worldX - prevEventX);
         int yDistance = Math.abs(gp.player.worldY - prevEventY);
         int distance = Math.max(xDistance, yDistance);
-        if (distance > gp.tileSize/2) {
+        if (distance > gp.tileSize / 2) {
             canTouchEvent = true;
         }
 
@@ -86,75 +79,71 @@ public class EventHandler {
             if (hit(0, 460, 471, "up", 0)) {
 
                 transState = 1;
+                gp.stopMusic();
                 gp.playSoundEffect(1);
-                Timer transTimer = new Timer(600, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        teleport(1, 80, 116); //twinleafEXT to playerhouseDS
-                    }
+                Timer transTimer = new Timer(600, evt -> {
+                    teleport(1, 80, 116); //twinleafEXT to playerhouseDS
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
-                Timer timer = new Timer(600, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        gp.playSoundEffect(2);
-                    }
-                });
+                Timer timer = new Timer(600, evt -> gp.playSoundEffect(2));
                 timer.setRepeats(false);
                 timer.start();
             } else if (hit(1, 140, 80, "down", 1)) {
                 transState = 1;
                 gp.playSoundEffect(3);
-                Timer transTimer1 = new Timer(600, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        teleport(0, 460, 481); //playerhouseDS to twinleafEXT
-                    }
+                Timer transTimer = new Timer(600, evt -> {
+                    teleport(0, 460, 481); //playerhouseDS to twinleafEXT
                 });
-                transTimer1.setRepeats(false);
-                transTimer1.start();
+                transTimer.setRepeats(false);
+                transTimer.start();
 
-                Timer timer1 = new Timer(1000, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        gp.playSoundEffect(1);
-                    }
-                });
-                Timer timer2 = new Timer(1600, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        gp.playSoundEffect(2);
-                    }
-                });
+                Timer timer = new Timer(1000, evt -> gp.playSoundEffect(1));
+                Timer timer1 = new Timer(1600, evt -> gp.playSoundEffect(2));
 
+                timer.setRepeats(false);
+                timer.start();
                 timer1.setRepeats(false);
                 timer1.start();
-                timer2.setRepeats(false);
-                timer2.start();
-            } else if (hit(0, 90,350,"any",1)){
+            } else if (hit(0, 90, 350, "any", 1)) {
                 transState = 1;
-                gp.stopMusic(0);
-                gp.stopMusic(5);
+                gp.stopMusic();
                 gp.playSoundEffect(3);
-                Timer transTimer2 = new Timer(600, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        teleport(2, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
-                        gp.sm.setSEVolume(-40.0f);
-                        gp.playMusic(5);
-                    }
+                Timer transTimer = new Timer(600, evt -> {
+                    teleport(3, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
+                    gp.sm.setSEVolume(-40.0f);
+                    gp.playMusic(5);
                 });
-                transTimer2.setRepeats(false);
-                transTimer2.start();
-            } else if (hit(2, 0,0,"any",1)){
+                transTimer.setRepeats(false);
+                transTimer.start();
+            } else if (hit(3, 0, 0, "any", 1)) {
                 transState = 1;
-                gp.stopMusic(0);
-                gp.stopMusic(5);
+                gp.stopMusic();
                 gp.playSoundEffect(3);
-                Timer transTimer2 = new Timer(600, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        teleport(0, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
-                        gp.sm.setSEVolume(-40.0f);
-                        gp.playMusic(0);
-                    }
+                Timer transTimer = new Timer(600, evt -> {
+                    teleport(0, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
+                    gp.sm.setSEVolume(-40.0f);
+                    gp.playMusic(0);
                 });
-                transTimer2.setRepeats(false);
-                transTimer2.start();
+                transTimer.setRepeats(false);
+                transTimer.start();
+            } else if (hit(1, 25, 120, "left", 0)) {
+                transState = 1;
+                gp.playSoundEffect(3);
+                Timer transTimer = new Timer(600, evt -> {
+                    teleport(2, 110, 42); //playerhouseDS to playerHouseUS
+                });
+                transTimer.setRepeats(false);
+                transTimer.start();
+            } else if (hit(2, 42, 128, "right", 0)) {
+                transState = 1;
+                gp.playSoundEffect(3);
+                Timer transTimer = new Timer(600, evt -> {
+                    teleport(1, 143, 31); //playerhouseUS to playerHouseDS
+                    gp.sm.setSEVolume(-40.0f);
+                });
+                transTimer.setRepeats(false);
+                transTimer.start();
             }
         }
     }
@@ -167,7 +156,7 @@ public class EventHandler {
             gp.player.hitBoxArea.y = gp.player.worldY + gp.player.hitBoxArea.y;
 
 
-            switch (eventRectNum){
+            switch (eventRectNum) {
                 case 0 -> {
                     eventRect[map][eventY][eventX].x += eventX * gp.scale;
                     eventRect[map][eventY][eventX].y += eventY * gp.scale;
