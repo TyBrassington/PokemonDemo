@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Player extends Entity {
 
@@ -15,6 +16,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    private HashMap<String, BufferedImage[]> images;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -30,7 +32,8 @@ public class Player extends Entity {
         hitBoxAreaDefaultY = hitBoxArea.y;
 
         setDefaultValues();
-        getPlayerImage();
+        images = new HashMap<>(); // add this
+        loadPlayerImages(); // add this
     }
 
     public void setDefaultValues() {
@@ -38,26 +41,29 @@ public class Player extends Entity {
         worldX = ((gp.tileSize * 23));
         worldY = ((gp.tileSize * 24) + (gp.tileSize * 25)) / 2;
         speed = 1 * gp.scale; //temp usually 1*gp.scale
+        isRunning = false;
         direction = "down";
     }
 
-    public void getPlayerImage() {
+    private void loadPlayerImages() {
+        String[] directions = {"up", "down", "left", "right"};
+        String[] actions = {"", "Run"};
+        int numSprites = 3;
+        String[] extensions = {"0.png", "1.png", "2.png"};
 
-        try {
-            down0 = ImageIO.read(getClass().getResourceAsStream("/player/lucasDown0.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/lucasDown1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/lucasDown2.png"));
-            up0 = ImageIO.read(getClass().getResourceAsStream("/player/lucasUp0.png"));
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/lucasUp1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/lucasUp2.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("/player/lucasLeft0.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/lucasLeft1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/lucasLeft2.png"));
-            right0 = ImageIO.read(getClass().getResourceAsStream("/player/lucasRight0.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/lucasRight1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/lucasRight2.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (String dir : directions) {
+            for (String action : actions) {
+                BufferedImage[] spriteImages = new BufferedImage[numSprites];
+                for (int i = 0; i < numSprites; i++) {
+                    String path = "/player/lucas" + action + dir + extensions[i];
+                    try {
+                        spriteImages[i] = ImageIO.read(getClass().getResourceAsStream(path));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                images.put(action + dir, spriteImages);
+            }
         }
         System.out.println("Player successfully loaded.");
     }
@@ -98,36 +104,28 @@ public class Player extends Entity {
             }
 
             spriteCounter++;
-
-            if (spriteCounter > 12) {
+            int maxSpriteCounter = isRunning ? 10 : 12;
+            if (spriteCounter > maxSpriteCounter) {
                 spriteNum = (spriteNum + 1) % 3;
                 spriteCounter = 0;
             }
-        } else spriteNum = 0;
+        } else {
+            spriteNum = 0;
+        }
     }
 
 
     public void draw(Graphics2D g2d) {
-        BufferedImage image = null;
+        BufferedImage image;
+        String key = (isRunning ? "Run" : "") + direction;
+        BufferedImage[] spriteImages = images.get(key);
+        image = spriteImages[spriteNum];
+        if (isRunning) {
+            g2d.drawImage(image, screenX - (1 * gp.scale), screenY, 21 * gp.scale, 26 * gp.scale, null);
+        } else g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
-        switch (direction) {
-            case "up":
-                image = spriteNum == 0 ? up0 : spriteNum == 1 ? up1 : up2;
-                break;
-            case "down":
-                image = spriteNum == 0 ? down0 : spriteNum == 1 ? down1 : down2;
-                break;
-            case "left":
-                image = spriteNum == 0 ? left0 : spriteNum == 1 ? left1 : left2;
-                break;
-            case "right":
-                image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
-                break;
-        }
-        g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
-
-        //DRAW PLAYER HITBOX
-/*        g2d.setColor(new Color(255, 0,0,120));
+       /* //DRAW PLAYER HITBOX
+        g2d.setColor(new Color(255, 0,0,120));
         int solidAreaX = screenX + hitBoxArea.x;
         int solidAreaY = screenY + hitBoxArea.y;
         int solidAreaWidth = hitBoxArea.width;
@@ -141,6 +139,6 @@ public class Player extends Entity {
         g2d.fillRect(solidAreaX1, solidAreaY1, solidAreaWidth1, solidAreaHeight1);
 */
 
-
     }
 }
+

@@ -40,6 +40,12 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ESCAPE) {
             gp.paused = !gp.paused;
         }
+        if (code == KeyEvent.VK_SHIFT) {
+            gp.player.isRunning = !gp.player.isRunning;
+            if (gp.player.isRunning){
+                gp.player.speed = 2 * gp.scale;
+            } else gp.player.speed = 1 * gp.scale;
+        }
     }
 
     @Override
