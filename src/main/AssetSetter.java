@@ -55,6 +55,7 @@ public class AssetSetter {
             case "Mailbox" -> gp.obj[mapNum][index] = new OBJ_Mailbox(gp);
             case "DoorLH" -> gp.obj[mapNum][index] = new OBJ_DoorLargeHouse(gp);
             case "DoorH" -> gp.obj[mapNum][index] = new OBJ_DoorHouse(gp);
+            case "FenceEnclosure" -> gp.obj[mapNum][index] = new OBJ_FenceEnclosure(gp);
 
         }
         if (gp.obj[mapNum][index] != null) {
@@ -63,7 +64,7 @@ public class AssetSetter {
             gp.obj[mapNum][index].mapNum = mapNum;
         } else {
             //Handle the case where gp.obj[mapNum][index] is null
-            //System.out.println("Unknown object type: " + objName);
+            System.out.println("Unknown object type: " + objName);
         }
     }
 
