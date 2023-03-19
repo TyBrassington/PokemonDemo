@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, keyPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, keyPressed;
     boolean checkDrawTime;
 
     public KeyHandler(GamePanel gp) {
@@ -18,7 +18,6 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_W) {
@@ -40,8 +39,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ESCAPE) {
             gp.paused = !gp.paused;
         }
-        if (code == KeyEvent.VK_SHIFT) {
+        if (code == KeyEvent.VK_SHIFT && !shiftPressed) {
             gp.player.isRunning = !gp.player.isRunning;
+            shiftPressed = true;
             if (gp.player.isRunning){
                 gp.player.speed = 2 * gp.scale;
             } else gp.player.speed = 1 * gp.scale;
@@ -64,5 +64,8 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
         keyPressed = false;
+        if (code == KeyEvent.VK_SHIFT) {
+            shiftPressed = false;
+        }
     }
 }

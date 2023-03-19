@@ -19,6 +19,8 @@ public class Lighting {
     private int dayState = DAY;
     private static final int MAX_DAY_COUNTER = 600; //10 seconds for the sake of testing
 
+    public String dayStateLabel;
+
     public Lighting(GamePanel gamePanel) {
         this.gp = gamePanel;
         setupLightSource();
@@ -74,22 +76,12 @@ public class Lighting {
         g2d.drawImage(darknessFilter, 0, 0, null);
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-        String dayStateLabel = switch (dayState) {
+        dayStateLabel = switch (dayState) {
             case DAY -> "Day";
             case DUSK -> "Dusk";
             case NIGHT -> "Night";
             case DAWN -> "Dawn";
             default -> "";
         };
-
-        g2d.setColor(Color.WHITE);
-        g2d.setFont(new Font("Pokémon DP Pro Regular", Font.PLAIN, 50));
-        g2d.drawString(dayStateLabel, 20, 550);
-
-
-        //debug player coords
-        g2d.drawString(gp.player.worldX/3 + " " + gp.player.worldY/3, 600, 550);
-        g2d.drawString(String.valueOf(gp.curMap), 20, 475);
-
     }
 }

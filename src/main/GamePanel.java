@@ -157,10 +157,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        // Draw the environment if outdoors
-        if (Arrays.asList(0, 3).contains(curMap)) { //maps 0 and 3 are both outdoors
-            em.draw(g2d);
-        }
+        em.draw(g2d);
+
 
         if (eHandler.transState != 0) {
             eHandler.draw(g2d);
