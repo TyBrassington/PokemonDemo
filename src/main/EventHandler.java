@@ -18,6 +18,11 @@ public class EventHandler {
     private static final int endTrans = 3;
     public int transState = noTrans;
 
+    private int twinleafEXT = 0;
+    private int playersHouseDS = 1;
+    private int playersHouseUS = 2;
+    private int route201 = 3;
+
     int map, x, y;
 
     public EventHandler(GamePanel gp) {
@@ -76,24 +81,24 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0, 460, 471, "up", 0)) {
+            if (hit(twinleafEXT, 460, 471, "up", 0)) {
 
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(1);
                 Timer transTimer = new Timer(600, evt -> {
-                    teleport(1, 80, 116); //twinleafEXT to playerhouseDS
+                    teleport(playersHouseDS, 80, 116); //twinleafEXT to playerhouseDS
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
                 Timer timer = new Timer(600, evt -> gp.playSoundEffect(2));
                 timer.setRepeats(false);
                 timer.start();
-            } else if (hit(1, 140, 80, "down", 1)) {
+            } else if (hit(playersHouseDS, 140, 80, "down", 1)) {
                 transState = 1;
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
-                    teleport(0, 460, 481); //playerhouseDS to twinleafEXT
+                    teleport(twinleafEXT, 460, 481); //playerhouseDS to twinleafEXT
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
@@ -105,41 +110,41 @@ public class EventHandler {
                 timer.start();
                 timer1.setRepeats(false);
                 timer1.start();
-            } else if (hit(0, 90, 350, "any", 1)) {
+            } else if (hit(twinleafEXT, 90, 350, "any", 1)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
-                    teleport(3, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
+                    teleport(route201, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
                     gp.sm.setSEVolume(-40.0f);
                     gp.playMusic(5);
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
-            } else if (hit(3, 0, 0, "any", 1)) {
+            } else if (hit(route201, 0, 0, "any", 1)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
-                    teleport(0, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
+                    teleport(twinleafEXT, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
                     gp.sm.setSEVolume(-40.0f);
                     gp.playMusic(0);
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
-            } else if (hit(1, 25, 120, "left", 0)) {
+            } else if (hit(playersHouseDS, 25, 120, "left", 0)) {
                 transState = 1;
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
-                    teleport(2, 110, 42); //playerhouseDS to playerHouseUS
+                    teleport(playersHouseUS, 110, 42); //playerhouseDS to playerHouseUS
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
-            } else if (hit(2, 42, 128, "right", 0)) {
+            } else if (hit(playersHouseUS, 42, 128, "right", 0)) {
                 transState = 1;
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
-                    teleport(1, 143, 31); //playerhouseUS to playerHouseDS
+                    teleport(playersHouseDS, 143, 31); //playerhouseUS to playerHouseDS
                     gp.sm.setSEVolume(-40.0f);
                 });
                 transTimer.setRepeats(false);
