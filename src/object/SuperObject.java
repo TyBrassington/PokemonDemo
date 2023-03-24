@@ -22,7 +22,6 @@ public class SuperObject {
 
     public void draw(Graphics2D g2d, GamePanel gp) {
         mapNum = gp.curMap;
-        if (gp.aSet.currentMapNum == gp.curMap && mapNum == gp.curMap) {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
@@ -44,7 +43,7 @@ public class SuperObject {
             g2d.fillRect(screenX + hitBoxArea2.x, screenY + hitBoxArea2.y, hitBoxArea2.width, hitBoxArea2.height);
 */
             }
-        }
+
     }
 
     public BufferedImage getScaledImage(BufferedImage image, GamePanel gp) {

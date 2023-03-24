@@ -102,11 +102,6 @@ public class GamePanel extends JPanel implements Runnable {
         eHandler.update(); //outside of if statements so the game freezes while transition occurs
     }
 
-    public void switchMap(int curMap){
-        aSet.setObjectFromFile();
-
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -129,10 +124,11 @@ public class GamePanel extends JPanel implements Runnable {
         for (SuperObject[] superObjects : obj) {
             if (superObjects != null && superObjects.length > 0) {
                 for (SuperObject superObject : superObjects) {
-                    if (superObject != null && superObject.name.equals("DoorH")) {
+                    if (superObject != null && superObject.name.equals("DoorH") && superObject.mapNum == curMap) {
+
                         doorHList.add(superObject);
                     }
-                    if (superObject != null && superObject.name.equals("DoorLH")) {
+                    if (superObject != null && superObject.name.equals("DoorLH") && superObject.mapNum == curMap) {
                         doorLHList.add(superObject);
                     }
                 }
@@ -147,15 +143,13 @@ public class GamePanel extends JPanel implements Runnable {
         player.draw(g2d);
 
         // Draw the remaining game objects
-        for (SuperObject[] superObjects : obj) {
-            if (superObjects != null && superObjects.length > 0) {
-                for (SuperObject superObject : superObjects) { // iterate over each element in superObjects
-                    if (superObject != null && !superObject.name.equals("DoorLH") && !superObject.name.equals("DoorH") && superObject != null) {
-                        superObject.draw(g2d, this);
-                    }
-                }
+        for (SuperObject superObjects : obj[curMap]) {
+            if (superObjects != null && !superObjects.name.equals("DoorLH") && !superObjects.name.equals("DoorH") && superObjects.mapNum == curMap) {
+                superObjects.draw(g2d, this);
+                //System.out.println("Printing: " + superObjects.name + " @ " + superObjects.mapNum);
             }
         }
+
 
         em.draw(g2d);
 

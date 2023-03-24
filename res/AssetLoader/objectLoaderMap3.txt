@@ -1,0 +1,18 @@
+#mapNum 3
+
+RouteSign 348 0
+
+Tree 109 172
+Tree 141 172
+Tree 173 172
+Tree 205 172
+Tree 237 172
+
+
+Tree 461 172
+Tree 493 172
+Tree 525 172
+Tree 557 172
+Tree 589 172
+Tree 621 172
+Tree 653 172

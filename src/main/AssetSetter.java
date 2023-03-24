@@ -17,60 +17,31 @@ public class AssetSetter {
     }
 
     public void setObjectFromFile() {
-        if (gp.curMap == 0) {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoader.txt")))) {
-                int i = 0;
-                String line;
-                currentMapNum = 0;
-                while ((line = reader.readLine()) != null) {
-                    if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
-                        String[] parts = line.split(" ");
-                        if (parts.length == 2 && parts[0].equals("mapNum")) {
-                            // Set the current map number to the value following the header
-                            currentMapNum = Integer.parseInt(parts[1]);
-                        } else {
-                            // Pass the current map number as a parameter to setObject()
-                            String objName = parts[0];
-                            int worldX = Integer.parseInt(parts[1]) * gp.scale;
-                            int worldY = Integer.parseInt(parts[2]) * gp.scale;
-                            setObject(i, objName, worldX, worldY, currentMapNum);
-                            i++;
-                        }
-                    }
+        loadObjects("/AssetLoader/objectLoaderMap0.txt", 0);
+        loadObjects("/AssetLoader/objectLoaderMap3.txt", 3);
+    }
+
+    private void loadObjects(String filePath, int mapNumber) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filePath)))) {
+            int i = 0;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
+                    String[] parts = line.split(" ");
+                    String objName = parts[0];
+                    int worldX = Integer.parseInt(parts[1]) * gp.scale;
+                    int worldY = Integer.parseInt(parts[2]) * gp.scale;
+                    setObject(i, objName, worldX, worldY, mapNumber);
+                    i++;
                 }
-                System.out.println("Objects successfully loaded.");
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
             }
-        } else if (gp.curMap == 3){
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/objectLoaderHouseTest.txt")))) {
-                int i = 0;
-                String line;
-                currentMapNum = 0;
-                while ((line = reader.readLine()) != null) {
-                    if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
-                        String[] parts = line.split(" ");
-                        if (parts.length == 2 && parts[0].equals("mapNum")) {
-                            // Set the current map number to the value following the header
-                            currentMapNum = Integer.parseInt(parts[1]);
-                        } else {
-                            // Pass the current map number as a parameter to setObject()
-                            String objName = parts[0];
-                            int worldX = Integer.parseInt(parts[1]) * gp.scale;
-                            int worldY = Integer.parseInt(parts[2]) * gp.scale;
-                            setObject(i, objName, worldX, worldY, currentMapNum);
-                            i++;
-                        }
-                    }
-                }
-                System.out.println("Objects successfully loaded.");
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
+            System.out.println("Objects successfully loaded.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
 
 
     private void setObject(int index, String objName, int worldX, int worldY, int mapNum) {
@@ -86,6 +57,8 @@ public class AssetSetter {
             case "FenceEnclosure" -> gp.obj[mapNum][index] = new OBJ_FenceEnclosure(gp);
 
         }
+        System.out.println("Setting object: " + objName + " at (" + worldX/gp.scale + ", " + worldY/gp.scale + ") on map " + mapNum);
+        //System.out.println(objName + " " + mapNum + " " +  index);
         if (gp.obj[mapNum][index] != null) {
             gp.obj[mapNum][index].worldX = worldX;
             gp.obj[mapNum][index].worldY = worldY;
