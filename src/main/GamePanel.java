@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
 import object.SuperObject;
@@ -8,7 +9,6 @@ import tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player = new Player(this, keyH);
     public SuperObject[][] obj = new SuperObject[maxMap][250];
+    public Entity npc[][] = new Entity[maxMap][10];
 
 
     public GamePanel() {
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         aSet.setObjectFromFile();
+        aSet.setNPC();
         if (sm.playMusic) {
             playMusic(0);
             System.out.println("Game music successfully loaded.");
@@ -96,6 +98,13 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (!paused) {
             player.update();
+
+            for(int i = 0; i < npc[1].length; i++){
+                if(npc[curMap][i] != null){
+                    npc[curMap][i].update();
+                }
+            }
+
             em.update();
 
         }
@@ -109,18 +118,13 @@ public class GamePanel extends JPanel implements Runnable {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         //debug
-        long drawStart = 0;
-        if (keyH.checkDrawTime) {
-            drawStart = System.nanoTime();
-        }
+        long drawStart = keyH.checkDrawTime ? System.nanoTime() : 0;
 
         // Draw the game objects
         tileManager.draw(g2d);
 
         ArrayList<SuperObject> doorLHList = new ArrayList<>();
         ArrayList<SuperObject> doorHList = new ArrayList<>();
-        ArrayList<SuperObject> houseList = new ArrayList<>();
-        ArrayList<SuperObject> largeHouseList = new ArrayList<>();
         for (SuperObject[] superObjects : obj) {
             if (superObjects != null && superObjects.length > 0) {
                 for (SuperObject superObject : superObjects) {
@@ -134,12 +138,15 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
-        for (SuperObject doorLH : doorLHList) {
-            doorLH.draw(g2d, this);
+        doorLHList.forEach(doorLH -> doorLH.draw(g2d, this));
+        doorHList.forEach(doorH -> doorH.draw(g2d, this));
+
+        for (int i = 0; i < npc[1].length; i++) {
+            if (npc[curMap][i] != null) {
+                npc[curMap][i].draw(g2d);
+            }
         }
-        for (SuperObject doorH : doorHList) {
-            doorH.draw(g2d, this);
-        }
+
         player.draw(g2d);
 
         // Draw the remaining game objects
@@ -150,9 +157,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-
         em.draw(g2d);
-
 
         if (eHandler.transState != 0) {
             eHandler.draw(g2d);

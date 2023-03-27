@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 public class Player extends Entity {
 
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenX;
@@ -21,7 +20,7 @@ public class Player extends Entity {
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
@@ -81,7 +80,7 @@ public class Player extends Entity {
         }
         System.out.println("Player successfully loaded.");
     }
-
+    private int npcIndex;
     public void update() {
         adjustPlayerHitboxes();
         dirKeyPressed = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
@@ -100,6 +99,8 @@ public class Player extends Entity {
 
             gp.cc.checkObject(this, true);
 
+            npcIndex = gp.cc.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
             gp.eHandler.checkEvent();
 
             if (!collisionOn) {
@@ -127,6 +128,13 @@ public class Player extends Entity {
             }
         } else {
             spriteNum = 0;
+        }
+    }
+
+    public void interactNPC(int i){
+
+        if (i != 999){
+            System.out.println("Currently colliding with NPC "+ npcIndex);
         }
     }
 
