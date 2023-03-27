@@ -3,6 +3,8 @@ package main;
 
 import entity.Entity;
 
+import java.awt.*;
+
 public class CollisionScanner {
 
     private final GamePanel gp;
@@ -78,6 +80,7 @@ public class CollisionScanner {
     }
 
     int bumpCounter;
+
     public int checkObject(Entity entity, boolean player) {
 
         int index = 999;
@@ -159,12 +162,13 @@ public class CollisionScanner {
                         break;
                 }
 
-                    int xDistance = Math.abs(gp.player.worldX - prevCollisionX);
-                    int yDistance = Math.abs(gp.player.worldY - prevCollisionY);
-                    int distance = Math.max(xDistance, yDistance);
-                    if (distance > gp.player.speed) {
-                        canCollide = true;
-                    }
+
+                int xDistance = Math.abs(gp.player.worldX - prevCollisionX);
+                int yDistance = Math.abs(gp.player.worldY - prevCollisionY);
+                int distance = Math.max(xDistance, yDistance);
+                if (distance > gp.player.speed) {
+                    canCollide = true;
+                }
 
                 entity.hitBoxArea.x = entity.hitBoxAreaDefaultX;
                 entity.hitBoxArea.y = entity.hitBoxAreaDefaultY;
@@ -179,6 +183,106 @@ public class CollisionScanner {
             }
         }
         return index;
+    }
+
+    public int checkEntity(Entity entity, Entity[][] target) {
+        int index = 999;
+        for (int i = 0; i < target[1].length; i++) {
+            Entity targetEntity = target[gp.curMap][i];
+            if (targetEntity == null) {
+                continue;
+            }
+            Rectangle entityHitBox = new Rectangle(entity.worldX + entity.hitBoxArea.x, entity.worldY + entity.hitBoxArea.y, entity.hitBoxArea.width, entity.hitBoxArea.height);
+            Rectangle targetHitBox1 = new Rectangle(targetEntity.worldX + targetEntity.hitBoxArea.x, targetEntity.worldY + targetEntity.hitBoxArea.y, targetEntity.hitBoxArea.width, targetEntity.hitBoxArea.height);
+            Rectangle targetHitBox2 = new Rectangle(targetEntity.worldX + targetEntity.hitBoxArea1.x, targetEntity.worldY + targetEntity.hitBoxArea1.y, targetEntity.hitBoxArea1.width, targetEntity.hitBoxArea1.height);
+            switch (entity.direction) {
+                case "up":
+                    entityHitBox.y -= entity.speed;
+                    if (entityHitBox.intersects(targetHitBox1) || entityHitBox.intersects(targetHitBox2)) {
+                        handleCollision(entity);
+                        index = i;
+                    }
+                    break;
+                case "down":
+                    entityHitBox.y += entity.speed;
+                    if (entityHitBox.intersects(targetHitBox1) || entityHitBox.intersects(targetHitBox2)) {
+                        handleCollision(entity);
+                        index = i;
+                    }
+                    break;
+                case "left":
+                    entityHitBox.x -= entity.speed;
+                    if (entityHitBox.intersects(targetHitBox1) || entityHitBox.intersects(targetHitBox2)) {
+                        handleCollision(entity);
+                        index = i;
+                    }
+                    break;
+                case "right":
+                    entityHitBox.x += entity.speed;
+                    if (entityHitBox.intersects(targetHitBox1) || entityHitBox.intersects(targetHitBox2)) {
+                        handleCollision(entity);
+                        index = i;
+                    }
+                    break;
+            }
+            resetHitBoxes(entity, targetEntity);
+        }
+        return index;
+    }
+
+    private void handleCollision(Entity entity) {
+        entity.collisionOn = true;
+        prevCollisionX = gp.player.worldX;
+        prevCollisionY = gp.player.worldY;
+        checkInCollision();
+        canCollide = false;
+        int xDistance = Math.abs(gp.player.worldX - prevCollisionX);
+        int yDistance = Math.abs(gp.player.worldY - prevCollisionY);
+        if (Math.max(xDistance, yDistance) >= gp.player.speed) {
+            canCollide = true;
+        }
+    }
+
+    private void resetHitBoxes(Entity entity, Entity targetEntity) {
+        entity.hitBoxArea.x = entity.hitBoxAreaDefaultX;
+        entity.hitBoxArea.y = entity.hitBoxAreaDefaultY;
+        targetEntity.hitBoxArea.x = targetEntity.hitBoxAreaDefaultX;
+        targetEntity.hitBoxArea.y = targetEntity.hitBoxAreaDefaultY;
+    }
+
+
+    public void checkPlayer(Entity entity){
+        Entity targetEntity = gp.player;
+        Rectangle entityHitBox = new Rectangle(entity.worldX + entity.hitBoxArea.x, entity.worldY + entity.hitBoxArea.y, entity.hitBoxArea.width, entity.hitBoxArea.height);
+        Rectangle playerHitBox1 = new Rectangle(targetEntity.worldX + targetEntity.hitBoxArea.x, targetEntity.worldY + targetEntity.hitBoxArea.y, targetEntity.hitBoxArea.width, targetEntity.hitBoxArea.height);
+        Rectangle playerHitBox2 = new Rectangle(targetEntity.worldX + targetEntity.hitBoxArea1.x, targetEntity.worldY + targetEntity.hitBoxArea1.y, targetEntity.hitBoxArea1.width, targetEntity.hitBoxArea1.height);
+        switch (entity.direction) {
+            case "up":
+                entityHitBox.y -= entity.speed;
+                if (entityHitBox.intersects(playerHitBox1) || entityHitBox.intersects(playerHitBox2)) {
+                    handleCollision(entity);
+                }
+                break;
+            case "down":
+                entityHitBox.y += entity.speed;
+                if (entityHitBox.intersects(playerHitBox1) || entityHitBox.intersects(playerHitBox2)) {
+                    handleCollision(entity);
+                }
+                break;
+            case "left":
+                entityHitBox.x -= entity.speed;
+                if (entityHitBox.intersects(playerHitBox1) || entityHitBox.intersects(playerHitBox2)) {
+                    handleCollision(entity);
+                }
+                break;
+            case "right":
+                entityHitBox.x += entity.speed;
+                if (entityHitBox.intersects(playerHitBox1) || entityHitBox.intersects(playerHitBox2)) {
+                    handleCollision(entity);
+                }
+                break;
+        }
+        resetHitBoxes(entity, targetEntity);
     }
 
     public void checkInCollision() {

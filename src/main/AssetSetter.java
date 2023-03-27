@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_FatBoy;
 import object.*;
 
 import java.io.BufferedReader;
@@ -17,12 +18,12 @@ public class AssetSetter {
     }
 
     public void setObjectFromFile() {
-        loadObjects("/AssetLoader/objectLoaderMap0.txt", 0);
-        loadObjects("/AssetLoader/objectLoaderMap3.txt", 3);
+        loadObjects("objectLoaderMap0.txt", 0);
+        loadObjects("objectLoaderMap3.txt", 3);
     }
 
-    private void loadObjects(String filePath, int mapNumber) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filePath)))) {
+    private void loadObjects(String filePath, int mapNum) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/" + filePath)))) {
             int i = 0;
             String line;
             while ((line = reader.readLine()) != null) {
@@ -31,11 +32,11 @@ public class AssetSetter {
                     String objName = parts[0];
                     int worldX = Integer.parseInt(parts[1]) * gp.scale;
                     int worldY = Integer.parseInt(parts[2]) * gp.scale;
-                    setObject(i, objName, worldX, worldY, mapNumber);
+                    setObject(i, objName, worldX, worldY, mapNum);
                     i++;
                 }
             }
-            System.out.println("Objects successfully loaded.");
+            System.out.println("Map "+ mapNum + " objects successfully loaded.");
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -57,8 +58,7 @@ public class AssetSetter {
             case "FenceEnclosure" -> gp.obj[mapNum][index] = new OBJ_FenceEnclosure(gp);
 
         }
-        System.out.println("Setting object: " + objName + " at (" + worldX/gp.scale + ", " + worldY/gp.scale + ") on map " + mapNum);
-        //System.out.println(objName + " " + mapNum + " " +  index);
+        //System.out.println("Setting object: " + objName + " at (" + worldX/gp.scale + ", " + worldY/gp.scale + ") on map " + mapNum);
         if (gp.obj[mapNum][index] != null) {
             gp.obj[mapNum][index].worldX = worldX;
             gp.obj[mapNum][index].worldY = worldY;
@@ -69,4 +69,11 @@ public class AssetSetter {
         }
     }
 
+    public void setNPC(){
+
+        int mapNum = 0;
+        gp.npc[mapNum][0] =  new NPC_FatBoy(gp);
+        gp.npc[mapNum][0].worldX = 21 * gp.tileSize;
+        gp.npc[mapNum][0].worldY = 33 * gp.tileSize;
+    }
 }
