@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         aSet.setObjectFromFile();
-        aSet.setNPC();
+        aSet.setNPCFromFile();
         if (sm.playMusic) {
             playMusic(0);
             System.out.println("Game music successfully loaded.");

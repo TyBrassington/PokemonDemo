@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public class EventHandler {
 
     GamePanel gp;
-    EventRect eventRect[][][], eventRect1[][][], eventRect2[][][];
+    EventRect eventRect[][][]; /*eventRect1[][][], eventRect2[][][];*/
     BufferedImage fadeToFromBlack;
     int prevEventX, prevEventY;
     boolean canTouchEvent = true;
@@ -29,7 +29,7 @@ public class EventHandler {
         this.gp = gp;
 
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
-        eventRect1 = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
+        //eventRect1 = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
         map = 0;
         x = 0;
         y = 0;
@@ -57,9 +57,9 @@ public class EventHandler {
         eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
         eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
 
-        eventRect1[map][x][y] = new EventRect().x(0).y(0).width(300).height(10);  //eventRect for path from twinleaf to route 201
+        /*eventRect1[map][x][y] = new EventRect().x(0).y(0).width(300).height(10);  //eventRect for path from twinleaf to route 201
         eventRect1[map][x][y].eventRect1DefaultX = eventRect1[map][x][y].x;
-        eventRect1[map][x][y].eventRect1DefaultY = eventRect1[map][x][y].y;
+        eventRect1[map][x][y].eventRect1DefaultY = eventRect1[map][x][y].y;*/
 
     }
 
@@ -94,7 +94,7 @@ public class EventHandler {
                 Timer timer = new Timer(600, evt -> gp.playSoundEffect(2));
                 timer.setRepeats(false);
                 timer.start();
-            } else if (hit(playersHouseDS, 140, 80, "down", 1)) {
+            } else if (hit(playersHouseDS, 140, 80, "down", 0)) {
                 transState = 1;
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
@@ -110,7 +110,7 @@ public class EventHandler {
                 timer.start();
                 timer1.setRepeats(false);
                 timer1.start();
-            } else if (hit(twinleafEXT, 90, 350, "any", 1)) {
+            } else if (hit(twinleafEXT, 90, 350, "any", 0)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
@@ -121,7 +121,7 @@ public class EventHandler {
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
-            } else if (hit(route201, 0, 0, "any", 1)) {
+            } else if (hit(route201, 0, 0, "any", 0)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
@@ -176,7 +176,7 @@ public class EventHandler {
                     }
                 }
                 case 1 -> {
-                    eventRect1[map][eventY][eventX].x += eventX * gp.scale;
+                    /*eventRect1[map][eventY][eventX].x += eventX * gp.scale;
                     eventRect1[map][eventY][eventX].y += eventY * gp.scale;
 
                     if (gp.player.hitBoxArea.intersects(eventRect1[map][eventY][eventX])) {
@@ -186,7 +186,7 @@ public class EventHandler {
                             prevEventX = gp.player.worldX;
                             prevEventY = gp.player.worldY;
                         }
-                    }
+                    }*/
                 }
             }
 
@@ -195,8 +195,8 @@ public class EventHandler {
 
             eventRect[map][eventY][eventX].x = eventRect[map][eventY][eventX].eventRectDefaultX;
             eventRect[map][eventY][eventX].y = eventRect[map][eventY][eventX].eventRectDefaultY;
-            eventRect1[map][eventY][eventX].x = eventRect1[map][eventY][eventX].eventRect1DefaultX;
-            eventRect1[map][eventY][eventX].y = eventRect1[map][eventY][eventX].eventRect1DefaultY;
+/*            eventRect1[map][eventY][eventX].x = eventRect1[map][eventY][eventX].eventRect1DefaultX;
+            eventRect1[map][eventY][eventX].y = eventRect1[map][eventY][eventX].eventRect1DefaultY;*/
         }
 
         return hit;

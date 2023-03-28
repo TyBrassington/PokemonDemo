@@ -56,21 +56,12 @@ public class Entity {
         //Movement randomized and enabled
         if (!collisionOn) {
             switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
+                case "up"-> worldY -= speed;
+                case "down"-> worldY += speed;
+                case "left"-> worldX -= speed;
+                case "right"-> worldX += speed;
             }
         }
-
         spriteCounter++;
         int maxSpriteCounter = isRunning ? 10 : 12;
         if (spriteCounter > maxSpriteCounter) {
@@ -92,6 +83,6 @@ public class Entity {
             default -> throw new IllegalArgumentException("Invalid direction: " + direction);
         }
 
-            g2d.drawImage(image, screenX, screenY, hitBoxArea.width, hitBoxArea.height, null);
+            g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
         }
 }

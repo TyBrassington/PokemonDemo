@@ -12,7 +12,7 @@ public class NPC_FatBoy extends Entity {
 
         direction = "down";
         speed = 1 * gp.scale;
-        hitBoxArea = new Rectangle(0, 0, 21 * gp.scale, 27 * gp.scale);
+        hitBoxArea = new Rectangle(0, 0, 21 * gp.scale, 20 * gp.scale);
         hitBoxArea1 = new Rectangle();
 
         getNPCImages();

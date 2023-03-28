@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_FatBoy;
+import entity.NPC_YellowBoy;
 import object.*;
 
 import java.io.BufferedReader;
@@ -20,6 +21,10 @@ public class AssetSetter {
     public void setObjectFromFile() {
         loadObjects("objectLoaderMap0.txt", 0);
         loadObjects("objectLoaderMap3.txt", 3);
+    }
+
+    public void setNPCFromFile() {
+        loadNPCS("npcLoaderMap0.txt", 0);
     }
 
     private void loadObjects(String filePath, int mapNum) {
@@ -69,11 +74,40 @@ public class AssetSetter {
         }
     }
 
-    public void setNPC(){
+    public void setNPC(int index, String npcName, int worldX, int worldY, int mapNum){
+        switch (npcName) {
+            case "FatBoy" -> gp.npc[mapNum][index] = new NPC_FatBoy(gp);
+            case "YellowBoy" -> gp.npc[mapNum][index] = new NPC_YellowBoy(gp);
 
-        int mapNum = 0;
-        gp.npc[mapNum][0] =  new NPC_FatBoy(gp);
-        gp.npc[mapNum][0].worldX = 21 * gp.tileSize;
-        gp.npc[mapNum][0].worldY = 33 * gp.tileSize;
+        }
+
+        if (gp.npc[mapNum][index] != null) {
+            gp.npc[mapNum][index].worldX = worldX;
+            gp.npc[mapNum][index].worldY = worldY;
+        } else {
+            //Handle the case where gp.obj[mapNum][index] is null
+            System.out.println("Unknown NPC type: " + npcName);
+        }
+    }
+
+    private void loadNPCS(String filePath, int mapNum) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/AssetLoader/" + filePath)))) {
+            int i = 0;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty() && !line.trim().startsWith("#")) { //Skip any line starting with #
+                    String[] parts = line.split(" ");
+                    String npcName = parts[0];
+                    int worldX = Integer.parseInt(parts[1]) * gp.scale;
+                    int worldY = Integer.parseInt(parts[2]) * gp.scale;
+                    setNPC(i, npcName, worldX, worldY, mapNum);
+                    i++;
+                }
+            }
+            System.out.println("Map "+ mapNum + " NPCS successfully loaded.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }
