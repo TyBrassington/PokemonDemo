@@ -5,28 +5,22 @@ import main.GamePanel;
 import java.awt.*;
 import java.util.Random;
 
-public class NPC_FatBoy extends Entity {
+public class NPC_PlayersMom extends Entity {
 
-    public NPC_FatBoy(GamePanel gp) {
+    public NPC_PlayersMom(GamePanel gp) {
         super(gp);
 
         direction = "down";
         speed = 1 * gp.scale;
-        hitBoxArea = new Rectangle(0, 0, 21 * gp.scale, 20 * gp.scale);
+        hitBoxArea = new Rectangle(2 * gp.scale, 0, 15 * gp.scale, 20 * gp.scale);
         hitBoxArea1 = new Rectangle();
 
-        getNPCImages("fatBoy");
-    }
-
-    public void getNPCImages(String fileName) {
-        down0 = setup("/npc/" + fileName + "Down0");
-        up0 = setup("/npc/" + fileName + "Up0");
-        left0 = setup("/npc/" + fileName + "Left0");
-        right0 = setup("/npc/" + fileName + "Right0");
+        getNPCImages("playersMom");
     }
 
     private static final String[] dirs = {"up", "down", "left", "right"};
-    public void setBehaviour(){
+
+    public void setBehaviour() {
         behavLockCount++;
         if (behavLockCount == 60) {
             if (new Random().nextInt(10) >= 3) {
@@ -36,7 +30,8 @@ public class NPC_FatBoy extends Entity {
         }
     }
 
-    public void update(){
+
+    public void update() {
         setBehaviour();
 
         collisionOn = false;

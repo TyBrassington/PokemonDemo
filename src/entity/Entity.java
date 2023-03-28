@@ -52,7 +52,6 @@ public class Entity {
         gp.cc.checkObject(this, false);
         gp.cc.checkPlayer(this);
 
-
         //Movement randomized and enabled
         if (!collisionOn) {
             switch (direction) {
@@ -68,6 +67,21 @@ public class Entity {
             spriteNum = (spriteNum + 1) % 3;
             spriteCounter = 0;
         }
+    }
+
+    public void getNPCImages(String fileName) {
+        down0 = setup("/npc/" + fileName + "Down0");
+        down1 = setup("/npc/" + fileName + "Down1");
+        down2 = setup("/npc/" + fileName + "Down2");
+        up0 = setup("/npc/" + fileName + "Up0");
+        up1 = setup("/npc/" + fileName + "Up1");
+        up2 = setup("/npc/" + fileName + "Up2");
+        left0 = setup("/npc/" + fileName + "Left0");
+        left1 = setup("/npc/" + fileName + "Left1");
+        left2 = setup("/npc/" + fileName + "Left2");
+        right0 = setup("/npc/" + fileName + "Right0");
+        right1 = setup("/npc/" + fileName + "Right1");
+        right2 = setup("/npc/" + fileName + "Right2");
     }
 
     public void draw(Graphics2D g2d) {

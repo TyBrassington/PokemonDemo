@@ -19,7 +19,7 @@ public class OBJ_Sign extends SuperObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        hitBoxArea = new Rectangle(new Rectangle(6*gp.scale, 12*gp.scale, 22, 30));
+        hitBoxArea = new Rectangle(new Rectangle(4*gp.scale, 12*gp.scale, 33, 30));
         hitBoxAreaDefaultX = hitBoxArea.x;
         hitBoxAreaDefaultY = hitBoxArea.y;
         collision = true;

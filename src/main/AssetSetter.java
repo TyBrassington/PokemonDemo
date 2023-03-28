@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_FatBoy;
+import entity.NPC_PlayersMom;
 import entity.NPC_YellowBoy;
 import object.*;
 
@@ -25,6 +26,7 @@ public class AssetSetter {
 
     public void setNPCFromFile() {
         loadNPCS("npcLoaderMap0.txt", 0);
+        loadNPCS("npcLoaderMap1.txt", 1);
     }
 
     private void loadObjects(String filePath, int mapNum) {
@@ -78,7 +80,7 @@ public class AssetSetter {
         switch (npcName) {
             case "FatBoy" -> gp.npc[mapNum][index] = new NPC_FatBoy(gp);
             case "YellowBoy" -> gp.npc[mapNum][index] = new NPC_YellowBoy(gp);
-
+            case "PlayersMom" -> gp.npc[mapNum][index] = new NPC_PlayersMom(gp);
         }
 
         if (gp.npc[mapNum][index] != null) {

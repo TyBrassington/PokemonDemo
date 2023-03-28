@@ -230,27 +230,6 @@ public class CollisionScanner {
         return index;
     }
 
-    private void handleCollision(Entity entity) {
-        entity.collisionOn = true;
-        prevCollisionX = gp.player.worldX;
-        prevCollisionY = gp.player.worldY;
-        checkInCollision();
-        canCollide = false;
-        int xDistance = Math.abs(gp.player.worldX - prevCollisionX);
-        int yDistance = Math.abs(gp.player.worldY - prevCollisionY);
-        if (Math.max(xDistance, yDistance) >= gp.player.speed) {
-            canCollide = true;
-        }
-    }
-
-    private void resetHitBoxes(Entity entity, Entity targetEntity) {
-        entity.hitBoxArea.x = entity.hitBoxAreaDefaultX;
-        entity.hitBoxArea.y = entity.hitBoxAreaDefaultY;
-        targetEntity.hitBoxArea.x = targetEntity.hitBoxAreaDefaultX;
-        targetEntity.hitBoxArea.y = targetEntity.hitBoxAreaDefaultY;
-    }
-
-
     public void checkPlayer(Entity entity){
         Entity targetEntity = gp.player;
         Rectangle entityHitBox = new Rectangle(entity.worldX + entity.hitBoxArea.x, entity.worldY + entity.hitBoxArea.y, entity.hitBoxArea.width, entity.hitBoxArea.height);
@@ -285,6 +264,26 @@ public class CollisionScanner {
         resetHitBoxes(entity, targetEntity);
     }
 
+    private void handleCollision(Entity entity) {
+        entity.collisionOn = true;
+        prevCollisionX = gp.player.worldX;
+        prevCollisionY = gp.player.worldY;
+        checkInCollision();
+        canCollide = false;
+        int xDistance = Math.abs(gp.player.worldX - prevCollisionX);
+        int yDistance = Math.abs(gp.player.worldY - prevCollisionY);
+        if (Math.max(xDistance, yDistance) >= gp.player.speed) {
+            canCollide = true;
+        }
+    }
+
+    private void resetHitBoxes(Entity entity, Entity targetEntity) {
+        entity.hitBoxArea.x = entity.hitBoxAreaDefaultX;
+        entity.hitBoxArea.y = entity.hitBoxAreaDefaultY;
+        targetEntity.hitBoxArea.x = targetEntity.hitBoxAreaDefaultX;
+        targetEntity.hitBoxArea.y = targetEntity.hitBoxAreaDefaultY;
+    }
+    
     public void checkInCollision() {
         if (canCollide) {
             gp.playSoundEffect(4);

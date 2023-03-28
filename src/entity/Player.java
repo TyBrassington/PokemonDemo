@@ -46,7 +46,7 @@ public class Player extends Entity {
     }
 
     public void adjustPlayerHitboxes() {
-        if (!isRunning || (isRunning && !dirKeyPressed)) {
+        if (!isRunning || (isRunning && !keyH.leftPressed && !keyH.rightPressed)) {
             hitBoxArea = new Rectangle(3 * gp.scale, 0 * gp.scale, 11 * gp.scale, 24 * gp.scale); //(3,8,11,16)
             hitBoxArea1 = new Rectangle(3 * gp.scale, 8 * gp.scale, 11 * gp.scale, 15 * gp.scale);
         } else {
@@ -147,13 +147,13 @@ public class Player extends Entity {
             g2d.drawImage(image, screenX - (1 * gp.scale), screenY, 21 * gp.scale, 26 * gp.scale, null);
         } else g2d.drawImage(image, screenX, screenY, 17 * gp.scale, 25 * gp.scale, null);
 
-/*
+
         //DRAW PLAYER HITBOX
         g2d.setColor(new Color(255, 0, 0, 120));
         g2d.fillRect(screenX + hitBoxArea.x, screenY + hitBoxArea.y, hitBoxArea.width, hitBoxArea.height);
         g2d.setColor(new Color(0, 21, 255, 120));
         g2d.fillRect(screenX + hitBoxArea1.x, screenY + hitBoxArea1.y, hitBoxArea1.width, hitBoxArea1.height);
-*/
+
     }
 }
 
