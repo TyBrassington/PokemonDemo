@@ -2,11 +2,12 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, keyPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, spacePressed, keyPressed;
     boolean checkDrawTime;
 
     public KeyHandler(GamePanel gp) {
@@ -37,12 +38,22 @@ public class KeyHandler implements KeyListener {
             checkDrawTime = !checkDrawTime;
         }
         if (code == KeyEvent.VK_ESCAPE) {
-            gp.paused = !gp.paused;
+            gp.gameState = (gp.gameState + 1) % 3;
+            System.out.println(gp.gameState);
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = true;
+            if (gp.gameState == gp.dialogueState) {
+                gp.gameState = gp.playState;
+            }
+        }
+        if (code == KeyEvent.VK_F1) {
+            gp.toggleDebug = !gp.toggleDebug;
         }
         if (code == KeyEvent.VK_SHIFT && !shiftPressed) {
             gp.player.isRunning = !gp.player.isRunning;
             shiftPressed = true;
-            if (gp.player.isRunning){
+            if (gp.player.isRunning) {
                 gp.player.speed = 2 * gp.scale;
             } else gp.player.speed = 1 * gp.scale;
         }
@@ -66,6 +77,9 @@ public class KeyHandler implements KeyListener {
         keyPressed = false;
         if (code == KeyEvent.VK_SHIFT) {
             shiftPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
         }
     }
 }

@@ -28,14 +28,16 @@ public class GamePanel extends JPanel implements Runnable {
     public int curMap = 0; //0 -> Twinleaf Exterior | 1 -> Test
 
     boolean paused;
+    public boolean toggleDebug;
 
     int FPS = 60;
 
     TileManager tileManager = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
     Thread gameThread;
     public CollisionScanner cc = new CollisionScanner(this);
     public AssetSetter aSet = new AssetSetter(this);
+    public UI ui = new UI(this);
 
     public EventHandler eHandler = new EventHandler(this);
     EnvironmentManager em = new EnvironmentManager(this);
@@ -44,6 +46,13 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public SuperObject[][] obj = new SuperObject[maxMap][250];
     public Entity npc[][] = new Entity[maxMap][10];
+
+    public int gameState;
+    public final int playState = 0;
+    public  final int pauseState = 1;
+    public final int dialogueState = 2;
+
+    public boolean dialogueDone = true;
 
 
     public GamePanel() {
@@ -62,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
             playMusic(0);
             System.out.println("Game music successfully loaded.");
         }
+        gameState = playState;
         em.setup();
     }
 
@@ -96,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (!paused) {
+        if (gameState == playState) {
             player.update();
 
             for(int i = 0; i < npc[1].length; i++){
@@ -106,9 +116,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             em.update();
-
         }
-        eHandler.update(); //outside of if statements so the game freezes while transition occurs
+        eHandler.update(); //outside of if statements so the rest of game freezes while transition occurs
     }
 
     @Override
@@ -162,7 +171,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (eHandler.transState != 0) {
             eHandler.draw(g2d);
         }
-
+        ui.draw(g2d);
         if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
             long timeElapsed = drawEnd - drawStart;

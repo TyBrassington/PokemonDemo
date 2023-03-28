@@ -16,6 +16,7 @@ public class NPC_FatBoy extends Entity {
         hitBoxArea1 = new Rectangle();
 
         getNPCImages("fatBoy");
+        setDialogue();
     }
 
     public void getNPCImages(String fileName) {
@@ -24,6 +25,12 @@ public class NPC_FatBoy extends Entity {
         left0 = setup("/npc/" + fileName + "Left0");
         right0 = setup("/npc/" + fileName + "Right0");
     }
+
+    public void setDialogue(){
+        dialogues[0] = "Technology just blows me away !";
+        dialogues[1] = "I mean, now you can play with people\naround the world... wirelessly !";
+    }
+
 
     private static final String[] dirs = {"up", "down", "left", "right"};
     public void setBehaviour(){
@@ -36,6 +43,22 @@ public class NPC_FatBoy extends Entity {
         }
     }
 
+    public void speak() {
+        gp.dialogueDone = false;
+        if (dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+            gp.dialogueDone = true;
+        }
+        gp.ui.curDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
+    }
     public void update(){
         setBehaviour();
 

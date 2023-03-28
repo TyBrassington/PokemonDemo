@@ -24,6 +24,8 @@ public class Entity {
     public boolean collisionOn = false;
     public int behavLockCount;
     public boolean isRunning;
+    String dialogues[] = new String[20];
+    int dialogueIndex;
 
     public Entity(GamePanel gp){
         this.gp = gp;
@@ -39,6 +41,23 @@ public class Entity {
             e.printStackTrace();
         }
         return image;
+    }
+
+    public void speak() {
+        if (dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+            System.out.println("Dialogue done");
+            gp.gameState = gp.playState;
+        }
+        gp.ui.curDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
     }
 
     public void setBehaviour(){

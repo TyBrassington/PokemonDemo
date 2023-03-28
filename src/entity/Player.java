@@ -134,8 +134,15 @@ public class Player extends Entity {
     public void interactNPC(int i){
 
         if (i != 999){
-            System.out.println("Currently colliding with NPC "+ npcIndex);
+            if (gp.keyH.spacePressed) {
+                isRunning = false;
+                gp.player.speed = 1 * gp.scale;
+                spriteNum = 0; //to avoid pause mid walk
+                gp.gameState = gp.dialogueState;
+                gp.npc[gp.curMap][i].speak();
+            }
         }
+        gp.keyH.spacePressed = false;
     }
 
     public void draw(Graphics2D g2d) {
@@ -149,10 +156,10 @@ public class Player extends Entity {
 
 
         //DRAW PLAYER HITBOX
-        g2d.setColor(new Color(255, 0, 0, 120));
+/*        g2d.setColor(new Color(255, 0, 0, 120));
         g2d.fillRect(screenX + hitBoxArea.x, screenY + hitBoxArea.y, hitBoxArea.width, hitBoxArea.height);
         g2d.setColor(new Color(0, 21, 255, 120));
-        g2d.fillRect(screenX + hitBoxArea1.x, screenY + hitBoxArea1.y, hitBoxArea1.width, hitBoxArea1.height);
+        g2d.fillRect(screenX + hitBoxArea1.x, screenY + hitBoxArea1.y, hitBoxArea1.width, hitBoxArea1.height);*/
 
     }
 }
