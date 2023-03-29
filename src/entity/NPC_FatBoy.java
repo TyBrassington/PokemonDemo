@@ -44,10 +44,10 @@ public class NPC_FatBoy extends Entity {
     }
 
     public void speak() {
-        gp.dialogueDone = false;
+        gp.subdialogueDone = false;
         if (dialogues[dialogueIndex] == null) {
             dialogueIndex = 0;
-            gp.dialogueDone = true;
+            gp.subdialogueDone = true;
         }
         gp.ui.curDialogue = dialogues[dialogueIndex];
         dialogueIndex++;

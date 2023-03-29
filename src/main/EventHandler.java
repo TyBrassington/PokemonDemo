@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public class EventHandler {
 
     GamePanel gp;
-    EventRect eventRect[][][], eventRect1[][][], eventRect2[][][];
+    EventRect eventRect[][][];// eventRect1[][][], eventRect2[][][];
     BufferedImage fadeToFromBlack;
     int prevEventX, prevEventY;
     boolean canTouchEvent = true;
@@ -29,7 +29,7 @@ public class EventHandler {
         this.gp = gp;
 
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
-        eventRect1 = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];
+        /*eventRect1 = new EventRect[gp.maxMap][gp.maxWorldCol * gp.tileSize][gp.maxWorldRow * gp.tileSize];*/
         map = 0;
         x = 0;
         y = 0;
@@ -57,9 +57,11 @@ public class EventHandler {
         eventRect[map][x][y].eventRectDefaultX = eventRect[map][x][y].x;
         eventRect[map][x][y].eventRectDefaultY = eventRect[map][x][y].y;
 
+/*
         eventRect1[map][x][y] = new EventRect().x(0).y(0).width(300).height(10);  //eventRect for path from twinleaf to route 201
         eventRect1[map][x][y].eventRect1DefaultX = eventRect1[map][x][y].x;
         eventRect1[map][x][y].eventRect1DefaultY = eventRect1[map][x][y].y;
+*/
 
     }
 
@@ -110,7 +112,7 @@ public class EventHandler {
                 timer.start();
                 timer1.setRepeats(false);
                 timer1.start();
-            } else if (hit(twinleafEXT, 90, 350, "any", 1)) {
+            } else if (hit(twinleafEXT, 90, 350, "any", 0)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
@@ -121,7 +123,7 @@ public class EventHandler {
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
-            } else if (hit(route201, 0, 0, "any", 1)) {
+            } else if (hit(route201, 0, 0, "any", 0)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
@@ -175,7 +177,7 @@ public class EventHandler {
                         }
                     }
                 }
-                case 1 -> {
+                /*case 1 -> {
                     eventRect1[map][eventY][eventX].x += eventX * gp.scale;
                     eventRect1[map][eventY][eventX].y += eventY * gp.scale;
 
@@ -187,7 +189,7 @@ public class EventHandler {
                             prevEventY = gp.player.worldY;
                         }
                     }
-                }
+                }*/
             }
 
             gp.player.hitBoxArea.x = gp.player.hitBoxAreaDefaultX;
@@ -195,8 +197,8 @@ public class EventHandler {
 
             eventRect[map][eventY][eventX].x = eventRect[map][eventY][eventX].eventRectDefaultX;
             eventRect[map][eventY][eventX].y = eventRect[map][eventY][eventX].eventRectDefaultY;
-            eventRect1[map][eventY][eventX].x = eventRect1[map][eventY][eventX].eventRect1DefaultX;
-            eventRect1[map][eventY][eventX].y = eventRect1[map][eventY][eventX].eventRect1DefaultY;
+/*            eventRect1[map][eventY][eventX].x = eventRect1[map][eventY][eventX].eventRect1DefaultX;
+            eventRect1[map][eventY][eventX].y = eventRect1[map][eventY][eventX].eventRect1DefaultY;*/
         }
 
         return hit;
@@ -228,7 +230,7 @@ public class EventHandler {
                 //Do nothing
             }
             case startTrans -> {
-                gp.paused = true;
+                gp.gameState = gp.pauseState;
                 filterAlpha = Math.min(filterAlpha + 0.05f, 1f);
                 transState = (filterAlpha == 1f) ? midTrans : startTrans;
             }
@@ -241,7 +243,7 @@ public class EventHandler {
             case endTrans -> {
                 filterAlpha = Math.max(filterAlpha - 0.05f, 0f);
                 transState = (filterAlpha == 0f) ? noTrans : endTrans;
-                gp.paused = false;
+                gp.gameState = gp.playState;
             }
 
         }

@@ -52,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     public  final int pauseState = 1;
     public final int dialogueState = 2;
 
-    public boolean dialogueDone = true;
+    public boolean subdialogueDone = true;
 
 
     public GamePanel() {

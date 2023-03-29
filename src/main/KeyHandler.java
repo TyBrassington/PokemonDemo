@@ -43,8 +43,11 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_SPACE) {
             spacePressed = true;
-            if (gp.gameState == gp.dialogueState) {
-                gp.gameState = gp.playState;
+            if (gp.subdialogueDone) {
+                gp.ui.curCharIndex = 0;
+                if (gp.gameState == gp.dialogueState) {
+                    gp.gameState = gp.playState;
+                }
             }
         }
         if (code == KeyEvent.VK_F1) {
