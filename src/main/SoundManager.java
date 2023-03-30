@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SoundManager {
 
@@ -15,16 +17,18 @@ public class SoundManager {
 
     public boolean isSoundEffect;
     public boolean isBumpSound;
+    public List<Clip> musicClips = new ArrayList<>();
 
-    public void setFile(int i) {
+    public Clip setFile(int i) {
+        Clip clip = null;
         try (InputStream is = getClass().getResourceAsStream("/AssetLoader/audioLoader.txt");
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             URL soundURL = br.lines()
                     .filter(line -> line.startsWith(i + " "))
                     .map(line -> {
                         String[] parts = line.split(" ");
-                        isSoundEffect = Integer.parseInt(parts[0]) != 0;
-                        isBumpSound = Integer.parseInt(parts[0]) == 4;
+                        boolean isSoundEffect = Integer.parseInt(parts[0]) != 0 && Integer.parseInt(parts[0]) != 5;
+                        boolean isBumpSound = Integer.parseInt(parts[0]) == 4;
                         String fileName = parts[1] + ".wav";
                         return getClass().getResource("/audio/" + fileName);
                     })
@@ -35,14 +39,21 @@ public class SoundManager {
             clip.open(ais);
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(volume);
+            if (!isSoundEffect) {
+                musicClips.add(clip);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return clip;
     }
 
-    public void play() {
+
+    public void play(Clip clip) {
         clip.start();
+        System.out.println(clip);
     }
+
 
     public void pause() {
         if (clip != null) {
@@ -58,28 +69,22 @@ public class SoundManager {
         }
     }
 
-    public void loop() {
+    public void loop(Clip clip) {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public void stop() {
-        if (clip != null) {
-            System.out.println(clip);
-            clip.loop(0);
+        for (Clip clip : musicClips) {
+            clip.loop(-1);
             clip.stop();
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(gainControl.getMinimum());
+            clip.flush();
+            clip.close();
         }
+        musicClips.clear();
     }
 
-    public void setSEVolume(float seVolume) {
-        if (isSoundEffect) {
-            volume = seVolume;
-            if (clip != null) {
-                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(isBumpSound ? seVolume - 10.0f : seVolume); //if the sound is the bump sound, set the volume 10.0 decibels lower than seVolume
-            }
-        }
+    public void setSEVolume(float volume) {
+        this.volume = !isBumpSound ? volume : volume - 10.0f;
     }
 
 }

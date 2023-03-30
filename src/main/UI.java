@@ -17,7 +17,7 @@ public class UI {
     public String curDialogue = "";
     public int curDialogueIndex;
     public int curCharIndex;
-    public int rollingTextDelay = 50;
+    public int rollingTextDelay = 5;
     Timer timer = new Timer(rollingTextDelay, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

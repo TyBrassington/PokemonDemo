@@ -6,6 +6,7 @@ import environment.EnvironmentManager;
 import object.SuperObject;
 import tile.TileManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int gameState;
     public final int playState = 0;
-    public  final int pauseState = 1;
+    public final int pauseState = 1;
     public final int dialogueState = 2;
 
     public boolean subdialogueDone = true;
@@ -111,8 +112,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == playState) {
             player.update();
 
-            for(int i = 0; i < npc[1].length; i++){
-                if(npc[curMap][i] != null){
+            for (int i = 0; i < npc[1].length; i++) {
+                if (npc[curMap][i] != null) {
                     npc[curMap][i].update();
                 }
             }
@@ -185,34 +186,29 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-
     public void playMusic(int i) {
-        sm.setFile(i);
-        sm.play();
-        sm.loop();
+        sm.setSEVolume(-40.0f);
+        Clip soundEffectClip = sm.setFile(i);
+        sm.play(soundEffectClip);
+        sm.loop(soundEffectClip);
     }
 
-    public void pauseMusic() {
-        sm.pause();
-    }
-
-    public void resumeMusic() {
-        sm.resume();
-    }
-
-    public void stopMusic(int i) {
-        if (curMap != 1 || curMap != 2) {
-            sm.setFile(i);
-            sm.stop();
-            System.out.println("Music stopped");
+    public void stopMusic() {
+        for (Clip clip : sm.musicClips) {
+            if (clip.getFramePosition() > 0 && clip.isActive()) {
+                sm.stop();
+                sm.musicClips.remove(clip);
+                System.out.println("Music stopped");
+                break;
+            }
         }
     }
 
     public synchronized void playSoundEffect(int i) {
-        sm.setFile(i);
-        if (i != 0) {
-            sm.setSEVolume(-20.0f);
-            sm.play();
+        sm.setSEVolume(-20.0f);
+        Clip soundEffectClip = sm.setFile(i);
+        if (i != 0 && i != 5) {
+            sm.play(soundEffectClip);
         }
 
     }

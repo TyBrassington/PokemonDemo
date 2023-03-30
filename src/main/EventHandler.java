@@ -1,5 +1,6 @@
 package main;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -81,7 +82,6 @@ public class EventHandler {
         if (distance > gp.tileSize / 2) {
             canTouchEvent = true;
         }
-
         if (canTouchEvent) {
             if (hit(twinleafEXT, 460, 471, "up", 0)) {
 
@@ -113,11 +113,10 @@ public class EventHandler {
                 timer1.start();
             } else if (hit(twinleafEXT, 90, 350, "any", 0)) {
                 transState = 1;
-                gp.stopMusic(0);
+                gp.stopMusic();
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(route201, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
-                    gp.sm.setSEVolume(-40.0f);
                     gp.playMusic(5);
 
                 });
@@ -125,11 +124,11 @@ public class EventHandler {
                 transTimer.start();
             } else if (hit(route201, 0, 0, "any", 0)) {
                 transState = 1;
-                gp.stopMusic(5);
+                gp.stopMusic();
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(twinleafEXT, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
-                    gp.sm.setSEVolume(-40.0f);
+                    Clip soundEffectClip = gp.sm.setFile(0);
                     gp.playMusic(0);
                 });
                 transTimer.setRepeats(false);
@@ -147,7 +146,6 @@ public class EventHandler {
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(playersHouseDS, 143, 31); //playerhouseUS to playerHouseDS
-                    gp.sm.setSEVolume(-40.0f);
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
