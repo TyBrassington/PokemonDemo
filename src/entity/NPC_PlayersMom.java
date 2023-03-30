@@ -12,14 +12,16 @@ public class NPC_PlayersMom extends Entity {
 
         direction = "down";
         speed = 1 * gp.scale;
-        hitBoxArea = new Rectangle(2 * gp.scale, 0, 15 * gp.scale, 20 * gp.scale);
+        hitBoxArea = new Rectangle(3 * gp.scale, 2 * gp.scale, 13 * gp.scale, 18 * gp.scale);
+        hitBoxAreaDefaultX = hitBoxArea.x;
+        hitBoxAreaDefaultY = hitBoxArea.y;
         hitBoxArea1 = new Rectangle();
 
         getNPCImages("playersMom");
         setDialogue();
     }
 
-    public void setDialogue(){
+    public void setDialogue() {
         dialogues[0] = "Mom:  Lucas !";
         dialogues[1] = "Barry came calling for you\na little while ago.";
         dialogues[2] = "I don't know what it was about, but\nhe said it was an emergency.";
@@ -42,6 +44,8 @@ public class NPC_PlayersMom extends Entity {
 
     public void update() {
         setBehaviour();
+        hitBoxAreaDefaultX = hitBoxArea.x;
+        hitBoxAreaDefaultY = hitBoxArea.y;
 
         collisionOn = false;
         gp.cc.checkTile(this);

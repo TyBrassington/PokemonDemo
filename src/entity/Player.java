@@ -150,6 +150,7 @@ public class Player extends Entity {
                 gp.player.speed = 1 * gp.scale;
                 spriteNum = 0; //to avoid pause mid walk
                 gp.gameState = gp.dialogueState;
+                gp.playSoundEffect(6);
                 gp.npc[gp.curMap][i].speak();
             }
         }

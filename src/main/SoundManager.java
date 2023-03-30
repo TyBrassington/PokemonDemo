@@ -51,7 +51,6 @@ public class SoundManager {
 
     public void play(Clip clip) {
         clip.start();
-        System.out.println(clip);
     }
 
 

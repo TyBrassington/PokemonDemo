@@ -13,11 +13,11 @@ public class UI {
 
     GamePanel gp;
     Font pokemon_font;
-    BufferedImage dialogueBox;
+    BufferedImage dialogueBox, dialogueArrow;
     public String curDialogue = "";
     public int curDialogueIndex;
     public int curCharIndex;
-    public int rollingTextDelay = 5;
+    public int rollingTextDelay = 1; //5 for the sake of testing
     Timer timer = new Timer(rollingTextDelay, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -30,13 +30,17 @@ public class UI {
         pokemon_font = new Font("Pokémon DP Pro Regular", Font.PLAIN, 47);
         try {
             dialogueBox = ImageIO.read(getClass().getResourceAsStream("/ui/dialogueBox.png"));
+            dialogueArrow = ImageIO.read(getClass().getResourceAsStream("/ui/dialogueArrow.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 /*        setInitDialogues();
         switchInitDialogue();*/
     }
-
+    int[] offsetValues = {-2, -4, -6, -4, -2, 0};
+    int offsetIndex = 0;
+    int offset = offsetValues[offsetIndex];
+    int frameCounter = 0;
     public void draw (Graphics2D g2d){
         g2d.setFont(pokemon_font);
 
@@ -44,8 +48,16 @@ public class UI {
         } else if(gp.gameState == gp.pauseState){
             drawPauseScreen();
         } else if (gp.gameState == gp.dialogueState){
+
             drawDialogueScreen();
             g2d.drawImage(dialogueBox,9 ,gp.screenHeight - dialogueBox.getHeight()*gp.scale - 7, dialogueBox.getWidth() * gp.scale, dialogueBox.getHeight()* gp.scale, null);
+            if(gp.subdialogueDone) {
+                g2d.drawImage(dialogueArrow, gp.screenWidth-45, gp.screenHeight - 54 + offset, dialogueArrow.getWidth(), dialogueArrow.getHeight(), null);
+            }
+            if (++frameCounter >= 20) {
+                frameCounter = 0;
+                offset = offsetValues[++offsetIndex % offsetValues.length];
+            }
             int y = 491;
             int yShadow = 494;
             if (curCharIndex > curDialogue.length()){
@@ -68,6 +80,7 @@ public class UI {
 
                 y += 48;
                 yShadow += 48;
+                frameCounter++;
             }
         }
     }
