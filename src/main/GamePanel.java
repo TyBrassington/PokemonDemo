@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldRow = 50;
 
     public final int maxMap = 10;
-    public int curMap = 0; //0 -> Twinleaf Exterior | 1 -> Test
+    public int curMap = 2; //0 -> Twinleaf Exterior | 1 -> Test
 
     boolean paused;
     public boolean toggleDebug;
@@ -53,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 2;
 
     public boolean subdialogueDone = true;
+    public boolean initDialogueDone = false;
 
 
     public GamePanel() {
@@ -73,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
         gameState = playState;
         em.setup();
+        //ui.curDialogue = "That concludes our special report,\n\"Search for the Red GYARADOS!\"";
     }
 
     public void startGameThread() {
@@ -198,8 +200,9 @@ public class GamePanel extends JPanel implements Runnable {
         sm.resume();
     }
 
-    public void stopMusic() {
+    public void stopMusic(int i) {
         if (curMap != 1 || curMap != 2) {
+            sm.setFile(i);
             sm.stop();
             System.out.println("Music stopped");
         }

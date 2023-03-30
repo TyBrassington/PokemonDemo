@@ -44,10 +44,10 @@ public class Entity {
     }
 
     public void speak() {
+        gp.subdialogueDone = false;
         if (dialogues[dialogueIndex] == null) {
             dialogueIndex = 0;
-            System.out.println("Dialogue done");
-            gp.gameState = gp.playState;
+            gp.subdialogueDone = true;
         }
         gp.ui.curDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
@@ -115,7 +115,8 @@ public class Entity {
             case "right" -> image = spriteNum == 0 ? right0 : spriteNum == 1 ? right1 : right2;
             default -> throw new IllegalArgumentException("Invalid direction: " + direction);
         }
-
+        if (gp.curMap != 2) {
             g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
+        }
         }
 }

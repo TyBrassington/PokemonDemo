@@ -24,7 +24,7 @@ public class DebugUI {
                 g2d.drawString(lighting.dayStateLabel, 23, 553);
                 g2d.drawString(lighting.dayStateLabel, 20, 553);
                 g2d.drawString(lighting.dayStateLabel, 23, 550);
-                g2d.setColor(new Color(82, 82,90));
+                g2d.setColor(Color.white);
                 g2d.drawString(lighting.dayStateLabel, 20, 550);
             }
 
@@ -45,7 +45,7 @@ public class DebugUI {
             g2d.drawString(mapName, 740 - mapNameWidth, 500);
             g2d.drawString(mapName, 740 - mapNameWidth, 503);
 
-            g2d.setColor(new Color(82, 82,90));
+            g2d.setColor(Color.white);
             g2d.drawString(coordinates, 737 - coordinatesWidth, 550);
 
             g2d.drawString(mapName, 737 - mapNameWidth, 500);

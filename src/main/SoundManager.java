@@ -64,7 +64,9 @@ public class SoundManager {
 
     public void stop() {
         if (clip != null) {
+            System.out.println(clip);
             clip.loop(0);
+            clip.stop();
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(gainControl.getMinimum());
         }

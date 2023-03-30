@@ -38,11 +38,17 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
 
-        worldX = ((gp.tileSize * 23));
-        worldY = ((gp.tileSize * 24) + (gp.tileSize * 25)) / 2;
+        if (gp.curMap == 2) {
+            worldX = 48 * gp.scale;
+            worldY = 60 * gp.scale;
+            direction = "up";
+        } else {
+            worldX = ((gp.tileSize * 23));
+            worldY = ((gp.tileSize * 24) + (gp.tileSize * 25)) / 2;
+            direction = "down";
+        }
         speed = 1 * gp.scale; //temp usually 1*gp.scale
         isRunning = false;
-        direction = "down";
     }
 
     public void adjustPlayerHitboxes() {
@@ -84,6 +90,10 @@ public class Player extends Entity {
     public void update() {
         adjustPlayerHitboxes();
         dirKeyPressed = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
+        if (!gp.initDialogueDone && gp.curMap == 2){
+            interactNPC(npcIndex); //Interact with pseudo npc as soon as game loads to mimic real game
+        } else gp.initDialogueDone = true;
+
         if (dirKeyPressed) {
             if (keyH.upPressed) {
                 direction = "up";
@@ -134,7 +144,8 @@ public class Player extends Entity {
     public void interactNPC(int i){
 
         if (i != 999){
-            if (gp.keyH.spacePressed) {
+
+            if (gp.keyH.spacePressed || !gp.initDialogueDone) {
                 isRunning = false;
                 gp.player.speed = 1 * gp.scale;
                 spriteNum = 0; //to avoid pause mid walk

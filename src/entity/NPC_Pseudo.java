@@ -5,27 +5,19 @@ import main.GamePanel;
 import java.awt.*;
 import java.util.Random;
 
-public class NPC_PlayersMom extends Entity {
+public class NPC_Pseudo extends Entity {
 
-    public NPC_PlayersMom(GamePanel gp) {
+    public NPC_Pseudo(GamePanel gp) {
         super(gp);
 
         direction = "down";
-        speed = 1 * gp.scale;
-        hitBoxArea = new Rectangle(2 * gp.scale, 0, 15 * gp.scale, 20 * gp.scale);
+        speed = 0;
+        hitBoxArea = new Rectangle(0, 0, 17 * gp.scale, 22 * gp.scale);
         hitBoxArea1 = new Rectangle();
 
-        getNPCImages("playersMom");
+        getNPCImages("yellowBoy");
         setDialogue();
     }
-
-    public void setDialogue(){
-        dialogues[0] = "Mom:  Lucas !";
-        dialogues[1] = "Barry came calling for you\na little while ago.";
-        dialogues[2] = "I don't know what it was about, but\nhe said it was an emergency.";
-
-    }
-
 
     private static final String[] dirs = {"up", "down", "left", "right"};
 
@@ -44,8 +36,18 @@ public class NPC_PlayersMom extends Entity {
         setBehaviour();
 
         collisionOn = false;
-        gp.cc.checkTile(this);
-        gp.cc.checkObject(this, false);
-        gp.cc.checkPlayer(this);
+        if (dialogues[dialogueIndex] == null) {
+            hitBoxArea = new Rectangle();
+            gp.initDialogueDone = true;
+        }
+    }
+
+
+
+    public void setDialogue(){
+        dialogues[0] = "That concludes our special report,\n\"Search for the Red GYARADOS!\"";
+        dialogues[1] = "Brought to you by JubilifeTV on\nNationwide Net!";
+        dialogues[2] = "See you next week, same time,\nsame channel!";
+
     }
 }

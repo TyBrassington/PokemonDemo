@@ -15,8 +15,9 @@ public class UI {
     Font pokemon_font;
     BufferedImage dialogueBox;
     public String curDialogue = "";
+    public int curDialogueIndex;
     public int curCharIndex;
-    public int rollingTextDelay = 30;
+    public int rollingTextDelay = 50;
     Timer timer = new Timer(rollingTextDelay, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -32,6 +33,8 @@ public class UI {
         } catch (IOException e) {
             e.printStackTrace();
         }
+/*        setInitDialogues();
+        switchInitDialogue();*/
     }
 
     public void draw (Graphics2D g2d){
@@ -69,6 +72,32 @@ public class UI {
         }
     }
 
+   /* public void switchInitDialogue(){
+        if (dialogues[curDialogueIndex] == null) {
+            System.out.println("REACHED");
+            gp.initDialogueDone = true;
+
+            if (gp.gameState != gp.playState) {
+                gp.gameState = gp.playState;
+            }
+        } else {
+            gp.subdialogueDone = false;
+        }
+        if(!gp.initDialogueDone){
+            System.out.println(curDialogueIndex);
+
+            curDialogue = dialogues[curDialogueIndex];
+            curDialogueIndex++;
+        }
+        System.out.println(curDialogue);
+    }
+    String dialogues[] = new String[20];
+    public void setInitDialogues(){
+        dialogues[0] = "That concludes our special report,\n\"Search for the Red GYARADOS!\"";
+        dialogues[1] = "Brought to you be JubilifeTV on\nNationwide Net!";
+        dialogues[2] = "See you next week, same time,\nsame channel!";
+
+    }*/
     public void drawPauseScreen(){
     }
 

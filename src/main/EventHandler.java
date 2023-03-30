@@ -86,7 +86,6 @@ public class EventHandler {
             if (hit(twinleafEXT, 460, 471, "up", 0)) {
 
                 transState = 1;
-                gp.stopMusic();
                 gp.playSoundEffect(1);
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(playersHouseDS, 80, 116); //twinleafEXT to playerhouseDS
@@ -114,18 +113,19 @@ public class EventHandler {
                 timer1.start();
             } else if (hit(twinleafEXT, 90, 350, "any", 0)) {
                 transState = 1;
-                gp.stopMusic();
+                gp.stopMusic(0);
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(route201, 30, 30); //twinleafEXT to Route 201 (placeholder currently)
                     gp.sm.setSEVolume(-40.0f);
                     gp.playMusic(5);
+
                 });
                 transTimer.setRepeats(false);
                 transTimer.start();
             } else if (hit(route201, 0, 0, "any", 0)) {
                 transState = 1;
-                gp.stopMusic();
+                gp.stopMusic(5);
                 gp.playSoundEffect(3);
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(twinleafEXT, 390, 120); //Route 201 (placeholder currently) to twinleafEXT
