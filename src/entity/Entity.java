@@ -24,8 +24,8 @@ public class Entity {
     public boolean collisionOn = false;
     public int behavLockCount;
     public boolean isRunning;
-    String dialogues[] = new String[20];
-    int dialogueIndex;
+    public String dialogues[] = new String[20];
+    public int dialogueIndex;
 
     public Entity(GamePanel gp){
         this.gp = gp;
@@ -118,5 +118,7 @@ public class Entity {
         if (gp.curMap != 2) {
             g2d.drawImage(image, screenX, screenY, image.getWidth() * gp.scale, image.getHeight() * gp.scale, null);
         }
+       /* g2d.setColor(new Color(255, 0, 0, 120));
+        g2d.fillRect(screenX + hitBoxArea.x, screenY + hitBoxArea.y, hitBoxArea.width, hitBoxArea.height);*/
         }
 }

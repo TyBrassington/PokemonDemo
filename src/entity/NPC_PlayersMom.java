@@ -28,14 +28,34 @@ public class NPC_PlayersMom extends Entity {
 
     }
 
+    public void speak() {
+        gp.subdialogueDone = false;
+        if (dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+            gp.subdialogueDone = true;
+            gp.eHandler.map1Event0Done = true;
+            gp.gameState = gp.playState;
+        }
+        gp.ui.curDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
+    }
 
     private static final String[] dirs = {"up", "down", "left", "right"};
+
+    private static final Random random = new Random();
 
     public void setBehaviour() {
         behavLockCount++;
         if (behavLockCount == 60) {
-            if (new Random().nextInt(10) >= 3) {
-                direction = dirs[new Random().nextInt(dirs.length)];
+            if (random.nextInt(10) >= 3) {
+                direction = dirs[random.nextInt(dirs.length)];
             }
             behavLockCount = 0;
         }
@@ -51,5 +71,46 @@ public class NPC_PlayersMom extends Entity {
         gp.cc.checkTile(this);
         gp.cc.checkObject(this, false);
         gp.cc.checkPlayer(this);
+
+        if (!gp.eHandler.map1Event0DonePrelim) {
+            if (worldX < 143 * gp.scale) {
+                direction = "right";
+                worldX += speed;
+            } else if (worldY > 49 * gp.scale) {
+                direction = "up";
+                worldY -= speed;
+            } else {
+                gp.eHandler.map1Event0DonePrelim = true;
+            }
+            spriteCounter++;
+            int maxSpriteCounter = 12;
+            if (spriteCounter > maxSpriteCounter) {
+                spriteNum = (spriteNum + 1) % 3;
+                spriteCounter = 0;
+            }
+        } else if (!gp.eHandler.map1Event0Done && gp.eHandler.map1Event0DonePrelim) {
+            gp.eHandler.map1Event0();
+        }
+        if (gp.eHandler.map1Event0Done && gp.eHandler.map1Event0DonePrelim) {
+            if (worldY < 88 * gp.scale) {
+                direction = "down";
+                worldY += speed;
+                spriteCounter++;
+                int maxSpriteCounter = 10;
+                if (spriteCounter > maxSpriteCounter) {
+                    spriteNum = (spriteNum + 1) % 3;
+                    spriteCounter = 0;
+                }
+            } else if (worldX > 95 * gp.scale) {
+                direction = "left";
+                worldX -= speed;
+                spriteCounter++;
+                int maxSpriteCounter = 12;
+                if (spriteCounter > maxSpriteCounter) {
+                    spriteNum = (spriteNum + 1) % 3;
+                    spriteCounter = 0;
+                }
+            } else spriteNum = 0;
+        }
     }
 }

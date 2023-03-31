@@ -1,7 +1,8 @@
-0 TwinLeafDay_EXT
+0 TwinleafNight_EXT
 1 door_enter
 2 door_close
 3 door_exit
 4 player_bump
 5 Route201_EXT
 6 abButton
+7 TwinleafDay_EXT

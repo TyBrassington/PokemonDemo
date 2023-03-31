@@ -111,7 +111,7 @@ public class EventHandler {
                 timer.start();
                 timer1.setRepeats(false);
                 timer1.start();
-            } else if (hit(twinleafEXT, 90, 350, "any", 0)) {
+            } else if (hit(twinleafEXT, 90, 390, "any", 0)) {
                 transState = 1;
                 gp.stopMusic();
                 gp.playSoundEffect(3);
@@ -147,9 +147,29 @@ public class EventHandler {
                 Timer transTimer = new Timer(600, evt -> {
                     teleport(playersHouseDS, 143, 31); //playerhouseUS to playerHouseDS
                 });
+
                 transTimer.setRepeats(false);
                 transTimer.start();
+
             }
+        }
+    }
+
+    public boolean map1Event0DonePrelim = false;
+    public boolean map1Event0Done = false;
+    int i;
+
+    public void map1Event0() {
+        gp.player.direction = "down";
+
+        System.out.println("Called " + i + " times");
+        i++;
+        if (map1Event0DonePrelim) {
+            gp.gameState = gp.dialogueState;
+            gp.npc[1][0].speak();
+            gp.playSoundEffect(6);
+            gp.npc[1][0].direction = "up";
+
         }
     }
 

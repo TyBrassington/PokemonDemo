@@ -117,7 +117,6 @@ public class GamePanel extends JPanel implements Runnable {
                     npc[curMap][i].update();
                 }
             }
-
             em.update();
         }
         eHandler.update(); //outside of if statements so the rest of game freezes while transition occurs
@@ -141,7 +140,6 @@ public class GamePanel extends JPanel implements Runnable {
             if (superObjects != null && superObjects.length > 0) {
                 for (SuperObject superObject : superObjects) {
                     if (superObject != null && superObject.name.equals("DoorH") && superObject.mapNum == curMap) {
-
                         doorHList.add(superObject);
                     }
                     if (superObject != null && superObject.name.equals("DoorLH") && superObject.mapNum == curMap) {
@@ -205,7 +203,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public synchronized void playSoundEffect(int i) {
-        sm.setSEVolume(-20.0f);
+        sm.setSEVolume(-30.0f);
         Clip soundEffectClip = sm.setFile(i);
         if (i != 0 && i != 5) {
             sm.play(soundEffectClip);
