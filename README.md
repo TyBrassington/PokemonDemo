@@ -17,24 +17,28 @@ This is created using only native Java libraries.
 > Note: Please ensure your Java SDK is installed and properly configured
 
 ### Features
-Twinleaf Town Map: Custom tile-based map with walkable and non-walkable regions.
+**Twinleaf Town Map:** Custom tile-based map with walkable and non-walkable regions.
+
 
 <img width="578" alt="image" src="https://github.com/user-attachments/assets/4a7bbb79-1491-43cd-bb75-d0535f11a58f" />
 
-Player Controls: Movement with collision detection, animations, and running toggle.
 
-NPC Interactions: Scripted dialogues with rolling text and dialogue arrows.
+**Player Controls:** Movement with collision detection, animations, and running toggle.
+
+**NPC Interactions: **Scripted dialogues with rolling text and dialogue arrows.
 > Note: To trigger, NPC interaction, hold movement key into them and press space simulateously
+
 
 <img width="578" alt="image" src="https://github.com/user-attachments/assets/01153f74-3889-46fc-96e2-0115c2664a9b" />
 
-Event System: Custom triggers for events like map transitions, cutscenes, and sounds.
 
-Map Transitions: Teleportation between indoor and outdoor scenes with fade effects.
+**Event System:** Custom triggers for events like map transitions, cutscenes, and sounds.
+
+**Map Transitions:** Teleportation between indoor and outdoor scenes with fade effects.
 > Note: The map transition trigger tile is intentionally placed only in the center of the path bottleneck for debugging purposes.
 > To trigger it, walk straight up the middle of the dirt path until you collide with the tile.
 
-Day/Night Cycle: Visual filters and lighting effects that simulate time of day (day length to 10 seconds for demo purposes).
+**Day/Night Cycle:** Visual filters and lighting effects that simulate time of day (day length to 10 seconds for demo purposes).
 
 Day:
 
@@ -45,9 +49,9 @@ Night:
 <img width="578" alt="image" src="https://github.com/user-attachments/assets/e8e8123a-4367-42b3-8a58-6f76ff0c3116" />
 
 
-Audio System: Background music, transition audio, sound effects for interactions.
+**Audio System:** Background music, transition audio, sound effects for interactions.
 
-Debug Tools: Debug UI for tile viewing, hitboxes, and live scene data.
+**Debug Tools:** Debug UI for tile viewing, hitboxes, and live scene data.
 
 ### Known Limitations
 
