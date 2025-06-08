@@ -37,8 +37,11 @@ Map Transitions: Teleportation between indoor and outdoor scenes with fade effec
 Day/Night Cycle: Visual filters and lighting effects that simulate time of day (day length to 10 seconds for demo purposes).
 
 Day:
+
 <img width="578" alt="image" src="https://github.com/user-attachments/assets/4034f57a-4cc5-4b96-87e9-dff64ebe0e56" />
+
 Night:
+
 <img width="578" alt="image" src="https://github.com/user-attachments/assets/e8e8123a-4367-42b3-8a58-6f76ff0c3116" />
 
 
